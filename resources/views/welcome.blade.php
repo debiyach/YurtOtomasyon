@@ -1,1 +1,1 @@
-Yusuf Yılmaz Mübarek Bir İnsan Müsveddesidir.
+Ömer Faruk GÖL.
