@@ -18,3 +18,19 @@
     >Şifre
     >Çalıştığı Kurum ID si
 
+- Kurum Kullanıcılarının yetkilendirme tablosunda bulunması gerekenler
+
+    >Kullanıcının Users tablosundaki ID değeri (user_id)
+    >Odaları düzenleyebilir. (is_room)
+    >Yemekhane Sayfasına erişebilir ve düzenleyebilir. (is_restaurant)
+    >Öğrencilerin tatil işlemlerini halledebilir. (is_holiday)
+    >Öğrencilerin suçlarını yönetebilir. (is_criminal)
+    >Çamaşırhane sayfasını yönetebilir. (is_laundry)
+    >Öğrencilerin aidatlarını kontrol edebilir. (is_rental)
+
+    -- Yetki Sınıfı --
+
+        >Öğrenciyse (is_student)
+        >Adminse (is_admin)
+        >Yurt Müdürüyse (is_super_admin)
+        
