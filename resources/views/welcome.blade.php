@@ -1,1 +1,1 @@
-Furkan Çevik
+Furkan Çevik ses gelmiom
