@@ -1,0 +1,20 @@
+-- Database --
+
+- Yurt Kurumları tablosunda bulunması gerekenler.
+    
+    >Kurum Adı
+    >Kurum Mail 
+    >Kurum Telefonu
+    >Kurum FAX no
+    >Kurum Adresi
+    >Kurum Aktifliği
+    >Kurum Fotoğrafları (JSON array şeklinde tutulacak)
+
+- Kurum Users tablosunda bulunması gerekenler
+
+    >Kullanıcı Adı
+    >Kullanıcı Mail
+    >Mail Doğrulama
+    >Şifre
+    >Çalıştığı Kurum ID si
+
