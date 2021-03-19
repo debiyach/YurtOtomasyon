@@ -1,1 +1,1 @@
-Tarık için değişiklik yaptım!
+Tarığa değişiklik
