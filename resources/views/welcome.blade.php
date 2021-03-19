@@ -1,1 +1,1 @@
-Furkan Çevik ses gelmiom
+Tarık için değişiklik yaptım!
