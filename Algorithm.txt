@@ -3,30 +3,118 @@
 - Yurt Kurumları tablosunda bulunması gerekenler.
     
     >Kurum Adı
-    >Kurum Mail 
+    >Kurum Mail
+    >Kurum Şifre    //eklenecek 
     >Kurum Telefonu
     >Kurum FAX no
     >Kurum Adresi
+    >Kurum Bina adeti       //eklenecek
+    >Kurum Bina Oda sayısı      //eklenecek
+    >Kurum Oda Yatak sayısı     //eklenecek
     >Kurum Aktifliği
+    >Kurumun Bulunduğu Şehir    //Eklenecek
+    >Yemekhane Firma    (json)  //Eklenecek
+    >Kurum Yönetici Adı     //eklenecek
     >Kurum Fotoğrafları (JSON array şeklinde tutulacak)
 
-- Kurum Users tablosunda bulunması gerekenler
+- Kurum Personel tablosunda bulunması gerekenler
 
-    >Kullanıcı Adı
-    >Kullanıcı Mail
-    >Mail Doğrulama
-    >Şifre
     >Çalıştığı Kurum ID si
+    >Personel İd        //eklenecek
+    >Personel Adı       // Personel adı olarak güncellenecek
+    >Kullanıcı Mail
+    >Mail Doğrulama     //Kaldırılacak
+    >Şifre
+    >Maaşı      //eklenecek
+
+
+
+
+
+
+EKLENECEKLER
+
+- Öğrenciler Tablosundakiler   //Eklenecek
+
+    >Öğrenci id
+    >Öğrenci Adı
+    >Öğrenci Soyadı
+    >Öğrenci Tc No  //Eklenecek
+    >öğrenci Telefon
+    >Öğrenci Şehri
+    >Öğrenci Yurt Kurumu id
+    >Öğrenci Odası
+    >Öğrenci Yatak Numarası
+    >Öğrenci Foto
+    >Aidat  (json)
+    >Depozito (json)
+    >Yemekhane Bakiye (json)
+    >İzin  (json)
+    >Aktif (Her 12 saatte bir chrome çalışacak eğer aktiflik 0 ise Öğrencinin kapladığı alan pasife alınacak)
+
+-Yurt Gelir - Giderleri Tablosu
+
+    -Giderİd
+    -Kurumid
+    -Aciklama
+    -Durum
+    -Miktar
+    -Tarih
+
+
+
+- Aidat Tablosu
+   
+    >aidat id 
+    >öğrenci id
+    >Kurum id
+
+- Transfer tablosu
+    
+    >transfer id 
+    >BulunduguKurumİd
+    >GidecegiKurumİd
+    >tarih
+    >Kullanici id
+    >OnayDurumu
+
+- İzin Tablosu
+    >izin id
+    >Kurum id
+    >type 
+    >Kullanıcı id
+    >Aciklama
+    >izinSuresi
+
+-- Log Kayit numaraları
+
+    >id
+    >log ismi
+
+--log kayıtlari
+
+    >id 
+    >Kurum id
+    >Type
+    >Kullanıcı id 
+    >Log id 
+
+
+END-EKLENECEKLER
+
 
 - Kurum Kullanıcılarının yetkilendirme tablosunda bulunması gerekenler
 
-    >Kullanıcının Users tablosundaki ID değeri (user_id)
-    >Odaları düzenleyebilir. (is_room)
-    >Yemekhane Sayfasına erişebilir ve düzenleyebilir. (is_restaurant)
-    >Öğrencilerin tatil işlemlerini halledebilir. (is_holiday)
-    >Öğrencilerin suçlarını yönetebilir. (is_criminal)
-    >Çamaşırhane sayfasını yönetebilir. (is_laundry)
-    >Öğrencilerin aidatlarını kontrol edebilir. (is_rental)
+        >Kullanıcının Users tablosundaki ID değeri (user_id)
+        >Odaları düzenleyebilir. (is_room)
+        >Yemekhane Sayfasına erişebilir ve düzenleyebilir. (is_restaurant)
+        >Öğrencilerin tatil işlemlerini halledebilir. (is_holiday)
+        >Öğrencilerin suçlarını yönetebilir. (is_criminal)
+        >Çamaşırhane sayfasını yönetebilir. (is_laundry)
+        >Öğrencilerin aidatlarını kontrol edebilir. (is_rental)
+
+
+
 
     -- Yetki Sınıfı --
 
