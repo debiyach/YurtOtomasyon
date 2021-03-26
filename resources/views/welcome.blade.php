@@ -1,1 +1,0 @@
-Tarığa değişiklik
