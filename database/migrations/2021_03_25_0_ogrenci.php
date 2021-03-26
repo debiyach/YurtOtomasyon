@@ -15,7 +15,7 @@ class Ogrenci extends Migration
     {
         Schema::create('ogrenci', function (Blueprint $table) {
             $table->id();
-            $table->integer('kurumId');
+            $table->unsignedBigInteger('kurumId');
             $table->string('ad',60);
             $table->string('soyad',60);
             $table->integer("tcNo")->unique();
@@ -30,6 +30,9 @@ class Ogrenci extends Migration
             $table->boolean('aktif');
             $table->json('yemekhaneBakiyesi');
             $table->timestamps();
+
+
+            $table->foreign('kurumId')->references('id')->on('kurum')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
