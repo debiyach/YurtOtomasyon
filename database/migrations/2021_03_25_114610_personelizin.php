@@ -15,13 +15,16 @@ class Personelizin extends Migration
     {
         Schema::create('personelizin', function (Blueprint $table) {
             $table->id();
-            $table->integer('personelId');
-            $table->integer('kurumId');
+            $table->unsignedBigInteger('personelId');
+            $table->unsignedBigInteger('kurumId');
             $table->string('aciklama');
             $table->enum('onayDurumu',[null,"Reddedildi","Kabul Edildi"])->default(null);
             $table->time('izinBaslangic');
             $table->time('izinBitis');
             $table->timestamps();
+
+            $table->foreign('kurumId')->references('id')->on('kurum')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('personelId')->references('id')->on('personel')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

@@ -15,10 +15,14 @@ class Personelislemkayit extends Migration
     {
         Schema::create('personelislem', function (Blueprint $table) {
             $table->id();
-            $table->integer('personelId');
-            $table->integer('kurumId');
-            $table->integer('logId');
+            $table->unsignedBigInteger('personelId');
+            $table->unsignedBigInteger('kurumId');
+            $table->unsignedBigInteger('logId');
             $table->timestamps();
+
+            $table->foreign('personelId')->references('id')->on('personel')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('kurumId')->references('id')->on('kurum')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('logId')->references('id')->on('islemcesitleri')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

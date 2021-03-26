@@ -15,11 +15,13 @@ class Kurumgelirgider extends Migration
     {
         Schema::create('kurumgelirgider', function (Blueprint $table) {
             $table->id();
-            $table->integer('kurumId');
+            $table->unsignedBigInteger('kurumId');
             $table->string('aciklama');
             $table->enum('tip',["Gelir","Gider"]);
             $table->integer('tutar');
             $table->timestamps();
+
+            $table->foreign('kurumId')->references('id')->on('kurum')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

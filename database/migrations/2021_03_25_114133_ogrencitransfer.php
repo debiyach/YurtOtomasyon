@@ -15,13 +15,17 @@ class Ogrencitransfer extends Migration
     {
         Schema::create('ogrencitransfer', function (Blueprint $table) {
             $table->id();
-            $table->integer('ogrenciId');
-            $table->integer('bulunduguKurumId');
-            $table->integer('gidecegiKurumId');
+            $table->unsignedBigInteger('ogrenciId');
+            $table->unsignedBigInteger('bulunduguKurumId');
+            $table->unsignedBigInteger('gidecegiKurumId');
             $table->time('istekTarihi');
             $table->time('islemTarihi');
             $table->boolean('onayDurumu');
             $table->timestamps();
+
+            $table->foreign('ogrenciId')->references('id')->on('ogrenci')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('bulunduguKurumId')->references('id')->on('kurum')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('gidecegiKurumId')->references('id')->on('kurum')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

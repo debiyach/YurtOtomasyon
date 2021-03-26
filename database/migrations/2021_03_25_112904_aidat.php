@@ -15,9 +15,12 @@ class Aidat extends Migration
     {
         Schema::create('aidat', function (Blueprint $table) {
             $table->id();
-            $table->integer('ogrenciId');
-            $table->integer('kurumId');
+            $table->unsignedBigInteger('ogrenciId');
+            $table->unsignedBigInteger('kurumId');
             $table->timestamps();
+
+            $table->foreign('ogrenciId')->references('id')->on('ogrenci')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('kurumId')->references('id')->on('kurum')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

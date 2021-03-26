@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,15 +18,16 @@ class Kurum extends Migration
             $table->id();
             $table->string("kurumAdi");
             $table->string("mail");
-            $table->integer('telNo');
+            $table->string('telNo');
             $table->string("faxNo");
             $table->string('adres');
             $table->integer('binaSayisi');
-            $table->integer('odaSayisi');
+            $table->integer('katSayisi');
+            $table->integer('odaSayisi')->comment('Bir kattaki oda sayısı');
             $table->integer('odaYatakSayisi');
             $table->boolean('aktiflik');
             $table->string('sehir',50);
-            $table->json('yemekhaneFirma');
+            $table->string('yemekhaneFirma');
             $table->string('yöneticiAdi');
             $table->json('fotograflar');
             $table->timestamps();

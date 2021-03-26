@@ -1,14 +1,14 @@
 -- Database --
 
 - Yurt Kurumları tablosunda bulunması gerekenler.
-    
+
     >Kurum Adı
     >Kurum Mail
     >Kurum Telefonu
     >Kurum FAX no
     >Kurum Adresi
     >Kurum Bina adeti       //eklenecek
-    >Kurum Oda sayısı      //eklenecek
+    >Kurum Oda sayısı      //eklenecek //Kattaki
     >Kurum Oda Yatak sayısı     //eklenecek
     >Kurum Aktifliği
     >Kurumun Bulunduğu Şehir    //Eklenecek
@@ -64,14 +64,14 @@ EKLENECEKLER
 
 
 - Aidat Tablosu
-   
-    >aidat id 
+
+    >aidat id
     >öğrenci id
     >Kurum id
 
 - Transfer tablosu
-    
-    >transfer id 
+
+    >transfer id
     >BulunduguKurumİd
     >GidecegiKurumİd
     >tarih
@@ -92,11 +92,11 @@ EKLENECEKLER
 
 --log kayıtlari
 
-    >id 
+    >id
     >Kurum id
     >Type
-    >Kullanıcı id 
-    >Log id 
+    >Kullanıcı id
+    >Log id
 
 
 END-EKLENECEKLER
@@ -124,4 +124,3 @@ END-EKLENECEKLER
 
 
 
-        

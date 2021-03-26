@@ -15,10 +15,14 @@ class Ogrencilog extends Migration
     {
         Schema::create('ogrenciLog', function (Blueprint $table) {
             $table->id();
-            $table->integer('ogrenciId');
-            $table->integer('kurumId');
-            $table->integer('logId');
+            $table->unsignedBigInteger('ogrenciId');
+            $table->unsignedBigInteger('kurumId');
+            $table->unsignedBigInteger('logId');
             $table->timestamps();
+
+            $table->foreign('ogrenciId')->references('id')->on('ogrenci')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('kurumId')->references('id')->on('kurum')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('logId')->references('id')->on('islemcesitleri')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

@@ -15,13 +15,16 @@ class Ogrenciizin extends Migration
     {
         Schema::create('ogrenciizin', function (Blueprint $table) {
             $table->id();
-            $table->integer('kurumId');
-            $table->integer('kullaniciId');
+            $table->unsignedBigInteger('kurumId');
+            $table->unsignedBigInteger('ogrenciId');
             $table->string('aciklama');
             $table->enum('onayDurumu',[null,"Reddedildi","Kabul Edildi"])->default(null);
             $table->time('izinBaslangic');
             $table->time('izinBitis');
             $table->timestamps();
+
+            $table->foreign('kurumId')->references('id')->on('kurum')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('ogrenciId')->references('id')->on('ogrenci')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
