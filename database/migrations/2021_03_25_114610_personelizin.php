@@ -18,7 +18,7 @@ class Personelizin extends Migration
             $table->integer('personelId');
             $table->integer('kurumId');
             $table->string('aciklama');
-            $table->enum('onayDurumu',[null,false,true])->default(null);
+            $table->enum('onayDurumu',[null,"Reddedildi","Kabul Edildi"])->default(null);
             $table->time('izinBaslangic');
             $table->time('izinBitis');
             $table->timestamps();
