@@ -1,1 +1,1 @@
-Furkan Çevik ses gelmiom
+Tarığa değişiklik
