@@ -4,12 +4,11 @@
     
     >Kurum Adı
     >Kurum Mail
-    >Kurum Şifre    //eklenecek 
     >Kurum Telefonu
     >Kurum FAX no
     >Kurum Adresi
     >Kurum Bina adeti       //eklenecek
-    >Kurum Bina Oda sayısı      //eklenecek
+    >Kurum Oda sayısı      //eklenecek
     >Kurum Oda Yatak sayısı     //eklenecek
     >Kurum Aktifliği
     >Kurumun Bulunduğu Şehir    //Eklenecek
@@ -23,8 +22,9 @@
     >Personel İd        //eklenecek
     >Personel Adı       // Personel adı olarak güncellenecek
     >Kullanıcı Mail
-    >Mail Doğrulama     //Kaldırılacak
+    >tel No //eklendi
     >Şifre
+    >Yetki //eklendi
     >Maaşı      //eklenecek
 
 
@@ -81,7 +81,6 @@ EKLENECEKLER
 - İzin Tablosu
     >izin id
     >Kurum id
-    >type 
     >Kullanıcı id
     >Aciklama
     >izinSuresi
@@ -121,4 +120,8 @@ END-EKLENECEKLER
         >Öğrenciyse (is_student)
         >Adminse (is_admin)
         >Yurt Müdürüyse (is_super_admin)
+
+
+
+
         
