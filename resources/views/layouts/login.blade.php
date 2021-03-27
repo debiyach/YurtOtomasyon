@@ -11,6 +11,7 @@
     <link href="{{asset("assets/vendor/fonts/circular-std/style.css")}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset("assets/libs/css/style.css")}}">
     <link rel="stylesheet" href="{{asset("assets/vendor/fonts/fontawesome/css/fontawesome-all.css")}}">
+    <link rel="stylesheet" href="{{asset("assets/vendor/bootstrap/css/minespecial.css")}}">
     @yield('headTag')
     <style>
     html,
@@ -38,6 +39,5 @@
 
     <script src="{{asset("assets/vendor/jquery/jquery-3.3.1.min.js")}}"></script>
     <script src="{{asset("assets/vendor/bootstrap/js/bootstrap.bundle.js")}}"></script>
-    @yield('script')
 </body>
 </html>
