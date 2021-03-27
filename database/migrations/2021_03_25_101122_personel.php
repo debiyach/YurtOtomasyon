@@ -23,7 +23,7 @@ class Personel extends Migration
             $table->string('telNo')->unique();
             $table->string('evAdresi',50);
             $table->string('mail')->unique();
-            $table->string('sifre', 20);
+            $table->string('sifre');
             $table->enum('tip', ['Personel', 'Müdür']);
             $table->json('yetki');
             $table->json('maas')->comment('Maaş ödemesi ve maaş miktarı tutulacak.');

@@ -28,7 +28,7 @@ class PersonelFactory extends Factory
             'cinsiyet' => (rand(0, 1) == 1) ? 'Kız' : 'Erkek',
             "tcNo" => rand(10000000000, 99999999999),
             'telNo' => $this->faker->phoneNumber,
-            'sehir' => $this->faker->city,
+            'evAdresi' => $this->faker->address,
             'mail' => $this->faker->email,
             'sifre' => \Hash::make('123456'),
             'tip' => (rand(0, 1) == 1) ? 'Personel' : 'Müdür',

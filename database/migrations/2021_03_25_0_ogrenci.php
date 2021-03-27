@@ -19,7 +19,7 @@ class Ogrenci extends Migration
             $table->string('ad',60);
             $table->string('soyad',60);
             $table->string('mail')->unique();
-            $table->string('sifre', 20);
+            $table->string('sifre');
             $table->enum('cinsiyet',['Kız','Erkek']);
             $table->string("tcNo")->unique();
             $table->string('telNo')->unique();

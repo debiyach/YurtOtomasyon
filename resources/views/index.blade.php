@@ -19,4 +19,4 @@
 
 
 @endsection
-@section('title','Yusuf Yurt Giriş')
+@section('title','Yurt Giriş')

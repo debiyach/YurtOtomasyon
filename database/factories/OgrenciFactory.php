@@ -32,6 +32,7 @@ class OgrenciFactory extends Factory
             'sifre' => \Hash::make('123456'),
             'odaNo' => rand(1, 10),
             'yatakNo' => rand(1, 35),
+            'katNo' => rand(3,7),
             'cinsiyet' => (rand(0, 1) == 1) ? 'Kız' : 'Erkek',
             'foto' => $this->faker->imageUrl($width = 640, $height = 480),
             'aidat' => json_encode(['yurtUcreti' => rand(250, 650), 'odemeDurumu' => (rand(0, 1) == 1) ? true : false]),

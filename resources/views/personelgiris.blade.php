@@ -18,12 +18,12 @@
 
                     <div class="form-group">
                         <label for="inputEmail">Email</label>
-                        <input id="inputEmail" type="email" required class="form-control">
+                        <input name="email" type="email" required class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="inputPassword">Sifre</label>
-                        <input id="inputPassword" type="password" required class="form-control">
+                        <input name="password" type="password" required class="form-control">
                     </div>
                     <input id="submit" type="submit" class="form-control" value="GİRİŞ">
                 </form>
