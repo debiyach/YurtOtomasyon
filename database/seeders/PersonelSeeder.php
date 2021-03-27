@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class KurumSeeder extends Seeder
+class PersonelSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class KurumSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Kurum::factory(100)->create();
+        \App\Models\Personel::factory(100)->create();
     }
 }

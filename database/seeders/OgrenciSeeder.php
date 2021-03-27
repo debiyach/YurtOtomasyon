@@ -13,6 +13,6 @@ class OgrenciSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Ogrenci::factory(100)->create();
     }
 }

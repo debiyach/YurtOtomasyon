@@ -18,17 +18,20 @@ class Ogrenci extends Migration
             $table->unsignedBigInteger('kurumId');
             $table->string('ad',60);
             $table->string('soyad',60);
-            $table->integer("tcNo")->unique();
-            $table->integer('telNo')->unique();
-            $table->string('sehir',50);
+            $table->string('mail')->unique();
+            $table->string('sifre', 20);
+            $table->enum('cinsiyet',['Kız','Erkek']);
+            $table->string("tcNo")->unique();
+            $table->string('telNo')->unique();
+            $table->string('evAdresi',50);
             $table->integer('odaNo');
+            $table->integer('katNo');
             $table->integer('yatakNo');
-            $table->json('foto');
+            $table->string('foto');
             $table->json('aidat');
             $table->json('depozito');
-            $table->json('izin');
+            $table->string('izin');
             $table->boolean('aktif');
-            $table->json('yemekhaneBakiyesi');
             $table->timestamps();
 
 

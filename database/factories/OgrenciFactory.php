@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Model;
+use App\Models\Ogrenci;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OgrenciFactory extends Factory
@@ -12,7 +12,7 @@ class OgrenciFactory extends Factory
      *
      * @var string
      */
-    protected $model = Model::class;
+    protected $model = Ogrenci::class;
 
     /**
      * Define the model's default state.
@@ -21,21 +21,23 @@ class OgrenciFactory extends Factory
      */
     public function definition()
     {
-        /*return [
-            'kurumId' => $this->faker->name
-        'ad'
-        'soyad'
-        "tcNo"
-        'telNo'
-        'sehir'
-        'odaNo'
-        'yatakNo'
-        'foto'
-        'aidat'
-        'depozito'
-        'izin'
-        'aktif'
-        'yemekhaneBakiyesi'
-        ];*/
+        return [
+            'kurumId' => rand(1, 100),
+            'ad' => $this->faker->firstName,
+            'soyad' => $this->faker->lastName,
+            "tcNo" => rand(10000000000,99999999999),
+            'telNo' => $this->faker->phoneNumber,
+            'evAdresi' => $this->faker->address,
+            'mail'=>$this->faker->email,
+            'sifre' => \Hash::make('123456'),
+            'odaNo' => rand(1, 10),
+            'yatakNo' => rand(1, 35),
+            'cinsiyet' => (rand(0, 1) == 1) ? 'Kız' : 'Erkek',
+            'foto' => $this->faker->imageUrl($width = 640, $height = 480),
+            'aidat' => json_encode(['yurtUcreti' => rand(250, 650), 'odemeDurumu' => (rand(0, 1) == 1) ? true : false]),
+            'depozito' => json_encode(['depozitoUcreti' => rand(550, 950), 'odemeDurumu' => (rand(0, 1) == 1) ? true : false]),
+            'izin' => (rand(0, 1) == 1) ? true : false,
+            'aktif' => (rand(0, 1) == 1) ? true : false
+        ];
     }
 }

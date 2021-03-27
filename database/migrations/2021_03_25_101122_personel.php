@@ -18,12 +18,15 @@ class Personel extends Migration
             $table->unsignedBigInteger('kurumId');
             $table->string("ad", 60);
             $table->string('soyad', 60);
-            $table->integer('telNo')->unique();
+            $table->enum('cinsiyet',['Kız','Erkek']);
+            $table->string("tcNo")->unique();
+            $table->string('telNo')->unique();
+            $table->string('evAdresi',50);
             $table->string('mail')->unique();
             $table->string('sifre', 20);
             $table->enum('tip', ['Personel', 'Müdür']);
             $table->json('yetki');
-            $table->integer('maas');
+            $table->json('maas')->comment('Maaş ödemesi ve maaş miktarı tutulacak.');
             $table->timestamps();
 
             $table->foreign('kurumId')->references('id')->on('kurum')->onUpdate('cascade')->onDelete('cascade');

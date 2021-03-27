@@ -21,6 +21,7 @@ class Kurum extends Migration
             $table->string('telNo');
             $table->string("faxNo");
             $table->string('adres');
+            $table->enum('yurtCinsiyet',['Kız','Erkek']);
             $table->integer('binaSayisi');
             $table->integer('katSayisi');
             $table->integer('odaSayisi')->comment('Bir kattaki oda sayısı');
@@ -30,6 +31,7 @@ class Kurum extends Migration
             $table->string('yemekhaneFirma');
             $table->string('yöneticiAdi');
             $table->json('fotograflar');
+            $table->json('yemekhaneBakiyesi');
             $table->timestamps();
         });
     }

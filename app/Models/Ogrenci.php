@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OgrenciModels extends Model
+class Ogrenci extends Model
 {
+    protected $table = 'ogrenci';
     use HasFactory;
 }

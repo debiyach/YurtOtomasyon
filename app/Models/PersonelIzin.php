@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PersonelIzinModels extends Model
+class PersonelIzin extends Model
 {
+    protected $table  = 'personelizin';
     use HasFactory;
+
 }

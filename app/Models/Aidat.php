@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AidatModels extends Model
+class Aidat extends Model
 {
+    protected $table = 'aidat';
     use HasFactory;
 }
