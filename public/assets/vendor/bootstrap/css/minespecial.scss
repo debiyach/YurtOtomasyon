@@ -1,0 +1,48 @@
+.girissecim{
+    .card{
+        .card-header{
+            .girisbaslik{
+                
+                font-size: 36px;
+                font-weight: bolder;
+                color: rgba($color: black, $alpha: 0.5);
+                transition: color 500ms;
+                &:hover{
+                    color:rgba($color: black, $alpha: 1.0)
+                }
+                
+            }
+        }
+    
+        .card-body{
+            .girisbuton{
+                padding:15px 26px;
+                border: black solid 1px;
+                color:black;
+                display:block;
+                margin-top: 20px;
+                transition: color 500ms,border 500ms, background-color 500ms;
+                &:hover{
+                    color:whitesmoke;
+                    background-color:#ff407b;
+                }
+            }
+            form{
+                input[type='submit']{
+                    cursor:pointer;
+                    padding:9px 26px;
+                    border: black solid 1px;
+                    color:black;
+                    display:block;
+                    margin-top: 20px;
+                    transition: color 500ms,border 500ms, background-color 500ms;
+                    &:hover{
+                        color:whitesmoke;
+                        background-color:#ff407b;
+                    }
+                }
+            }
+        }
+    }
+}
+

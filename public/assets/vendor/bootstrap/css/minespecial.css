@@ -1,0 +1,43 @@
+.girissecim .card .card-header .girisbaslik {
+  font-size: 36px;
+  font-weight: bolder;
+  color: rgba(0, 0, 0, 0.5);
+  -webkit-transition: color 500ms;
+  transition: color 500ms;
+}
+
+.girissecim .card .card-header .girisbaslik:hover {
+  color: black;
+}
+
+.girissecim .card .card-body .girisbuton {
+  padding: 15px 26px;
+  border: black solid 1px;
+  color: black;
+  display: block;
+  margin-top: 20px;
+  -webkit-transition: color 500ms,border 500ms, background-color 500ms;
+  transition: color 500ms,border 500ms, background-color 500ms;
+}
+
+.girissecim .card .card-body .girisbuton:hover {
+  color: whitesmoke;
+  background-color: #ff407b;
+}
+
+.girissecim .card .card-body form input[type='submit'] {
+  cursor: pointer;
+  padding: 9px 26px;
+  border: black solid 1px;
+  color: black;
+  display: block;
+  margin-top: 20px;
+  -webkit-transition: color 500ms,border 500ms, background-color 500ms;
+  transition: color 500ms,border 500ms, background-color 500ms;
+}
+
+.girissecim .card .card-body form input[type='submit']:hover {
+  color: whitesmoke;
+  background-color: #ff407b;
+}
+/*# sourceMappingURL=minespecial.css.map */
