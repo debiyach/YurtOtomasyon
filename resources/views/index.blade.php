@@ -6,14 +6,14 @@
     <div class="card">
         <div class="card-header text-center">
             <a href="#" class="girisbaslik">YURT SİSTEM GİRİŞ</a>
-            <span class="splash-description">Lütfen bir giriş seçiniz</span>
+            <span class="splash-description">Lütfen Bir Giriş Seçiniz!</span>
         </div>
-        
+
         <div class="card-body">
-            <a href="#" class="btn girisbuton">OGRENCİ GİRİŞ</a>
-            <a href="#" class="btn girisbuton">PERSONEL GİRİŞ</a>
+            <a href="{{route('ogrenciGiris')}}" class="btn girisbuton">Öğrenci Giriş</a>
+            <a href="{{route('personelGiris')}}" class="btn girisbuton">Personel Giriş</a>
         </div>
-    
+
     </div>
 </div>
 

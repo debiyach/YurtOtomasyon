@@ -12,8 +12,13 @@
     <link rel="stylesheet" href="{{asset("assets/libs/css/style.css")}}">
     <link rel="stylesheet" href="{{asset("assets/vendor/fonts/fontawesome/css/fontawesome-all.css")}}">
     <link rel="stylesheet" href="{{asset("assets/vendor/bootstrap/css/minespecial.css")}}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,900;1,400;1,500&display=swap" rel="stylesheet">
     @yield('headTag')
     <style>
+        *{
+            font-family: 'Montserrat', sans-serif;
+        }
     html,
     body {
         height: 100%;

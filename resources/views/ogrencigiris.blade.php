@@ -9,27 +9,29 @@
             <a href="#" class="girisbaslik">ÖĞRENCİ GİRİŞ EKRANI</a>
             <span class="splash-description">Lütfen boş bırakmayın!</span>
         </div>
-        
+
         <div class="card-body">
-            
-            <form action="#">
-                
+            @include('layouts.errors')
+            <form action="{{route('ogrenciLogin')}}" method="POST">
+
+                @csrf
+
                 <div class="form-group">
                     <label for="inputEmail">Email</label>
 
-                    <input id="inputEmail" type="email" required class="form-control">
+                    <input name="email" type="email" required class="form-control">
                 </div>
-               
+
                 <div class="form-group">
                     <label for="inputPassword">Sifre</label>
-                    <input id="inputPassword" type="password" required class="form-control">
+                    <input name="password" type="password" required class="form-control">
                 </div>
-                
+
                     <input id="submit" type="submit" class="form-control" value="GİRİŞ">
             </form>
 
         </div>
-    
+
     </div>
 
 </div>

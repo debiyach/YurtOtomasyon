@@ -2,13 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 
-
+## Anasayfa ##
 Route::get('/', function () {
-    return response(\App\Models\Kurum::find(95)->getStudents,'200');
+    return view('index');
 });
-Route::get('/ogrenci', function () {
+Route::get('/ogrenci-giris', function () {
     return view('ogrencigiris');
-});
-Route::get('/personel', function () {
+})->name('ogrenciGiris');
+Route::get('/personel-giris', function () {
     return view('personelgiris');
-});
+})->name('personelGiris');
+## End Anasayfa ##
+
+## Login İşlemleri ##
+
+Route::post('/personel-login','LoginController@personelLogin')->name('personelLogin');
+Route::post('/ogrenci-login','LoginController@ogrenciLogin')->name('ogrenciLogin');
+
+## End Login İşlemleri ##
