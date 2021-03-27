@@ -1,6 +1,7 @@
-<!doctype html>
+
+    <!doctype html>
 <html>
- 
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -39,7 +40,7 @@
     <div class="splash-container">
         @yield('content')
     </div>
-  
+
 
 
     <script src="{{asset("assets/vendor/jquery/jquery-3.3.1.min.js")}}"></script>

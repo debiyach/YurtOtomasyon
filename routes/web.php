@@ -44,7 +44,7 @@ Route::group(['middleware'=>'ogrenci','as' => 'ogrenci.','prefix'=>'ogrenci'],fu
 
 Route::get('/', function () {
     return view('index');
-})->middleware('girisKontrol');
+})->name('girisKontrol')->middleware('girisKontrol');
 Route::get('/ogrenci-giris', function () {
     return view('ogrencigiris');
 })->name('ogrenciGiris')->middleware('girisKontrol');

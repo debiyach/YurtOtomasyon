@@ -16,9 +16,9 @@ class MudurMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session()->get('personelGiris')->tip == "Müdür")
+        if(session()->get('personel') != null && session()->get('personel')->tip == "Müdür")
             return $next($request);
         else
-            return redirect()->abort(403);
+            return redirect()->route('girisKontrol');
     }
 }

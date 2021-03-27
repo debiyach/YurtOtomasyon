@@ -16,9 +16,9 @@ class PersonelMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session()->get('personelGiris')->tip == "Personel")
+        if(session()->get('personel') != null && session()->get('personel')->tip == "Personel")
             return $next($request);
         else
-            return redirect()->abort(403);
+            return redirect()->route('girisKontrol');
     }
 }

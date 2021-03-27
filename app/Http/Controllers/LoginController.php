@@ -22,7 +22,7 @@ class LoginController extends Controller
         $personel = Personel::where('mail','=',$request->email)->first(); // mail adresinin varlığını kontrol ediyoruz.
         if ($personel){
             if(Hash::check($request->password,$personel->sifre)){ // şifreleri kontrol ediyoruz.
-                $request->session()->put('personelGiris',$personel); // sessiona atıyoruz.
+                $request->session()->put('personel',$personel); // sessiona atıyoruz.
                 if ($personel->tip == 'Müdür')
                     return redirect()->route('mudur.index');
                 else
@@ -46,7 +46,7 @@ class LoginController extends Controller
         $ogrenci = Ogrenci::where('mail','=',$request->email)->first(); // mail adresinin varlığını kontrol ediyoruz.
         if ($ogrenci){
             if(Hash::check($request->password,$ogrenci->sifre)){ // şifreleri kontrol ediyoruz.
-                $request->session()->put('ogrenciGiris',$ogrenci); // sessiona atıyoruz.
+                $request->session()->put('ogrenci',$ogrenci); // sessiona atıyoruz.
                 return redirect()->route('ogrenci.index');
             }else return back()->withErrors(['Geçersiz parola!']);
 

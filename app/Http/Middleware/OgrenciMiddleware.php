@@ -16,9 +16,9 @@ class OgrenciMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session()->get('ogrenciGiris'))
+        if(session()->get('ogrenci') != null && session()->get('ogrenci'))
             return $next($request);
         else
-            return redirect()->abort(403);
+            return redirect()->route('girisKontrol');
     }
 }

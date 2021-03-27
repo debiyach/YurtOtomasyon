@@ -16,11 +16,11 @@ class GirisKontrolMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session()->get('personelGiris')->tip == "Müdür")
+        if(session()->get('personel') != null && session()->get('personel')->tip == "Müdür")
             return redirect()->route('mudur.index');
-        elseif(session()->get('personelGiris')->tip == "Personel")
+        elseif(session()->get('personel') != null && session()->get('personel')->tip == "Personel")
             return redirect()->route('personel.index');
-        elseif(session()->get('ogrenciGiris'))
+        elseif(session()->get('ogrenci') != null && session()->get('ogrenci'))
             return redirect()->route('ogrenci.index');
         else
             return $next($request);
