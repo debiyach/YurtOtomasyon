@@ -12,7 +12,7 @@ Route::get('/test', function () {
 ## Müdür Route İşlemleri ##
 
 Route::group(['middleware'=>'mudur','as' => 'mudur.','prefix'=>'mudur'],function(){
-    Route::get('/',function (){ return view('personel.index');})->name('index');
+    Route::get('/',function (){ return view('mudur.index');})->name('index');
 });
 
 ## End Müdür Route İşlemleri ##
