@@ -7,11 +7,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>@yield('title','Yurt otomasyon')</title>
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
-<link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-<link rel="stylesheet" href="assets/libs/css/style.css">
-<link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
-<link rel="stylesheet" href="assets/libs/css/mine.css">
+<link rel="stylesheet" href="{{asset("assets/vendor/bootstrap/css/bootstrap.min.css")}}">
+<link rel="stylesheet" href="{{asset("assets/vendor/fonts/circular-std/style.css")}}">
+<link rel="stylesheet" href="{{asset("assets/libs/css/style.css")}}">
+<link rel="stylesheet" href="{{asset("assets/vendor/fonts/fontawesome/css/fontawesome-all.css")}}">
+<link rel="stylesheet" href="{{asset("assets/libs/css/mine.css")}}">
+
+
+
+
 
 </head>
 
@@ -26,7 +30,7 @@
         <div class="dashboard-header ">
             <nav class="navbar navbar-expand-lg bg-white fixed-top  ">
                 <div class="col-12  text-center">
-                    <h2 class="yurtAdi ">ogrenci yurdu adı</h2>
+                    <h2 class="yurtAdi">@yield('yurtAdi',)</h2>
                     
                 </div>
                 
