@@ -22,7 +22,7 @@
 
 .girissecim .card .card-body .girisbuton:hover {
   color: whitesmoke;
-  background-color: #ff407b;
+  background-color: #007bff;
 }
 
 .girissecim .card .card-body form input[type='submit'] {
@@ -38,6 +38,6 @@
 
 .girissecim .card .card-body form input[type='submit']:hover {
   color: whitesmoke;
-  background-color: #ff407b;
+  background-color: #007bff;
 }
 /*# sourceMappingURL=minespecial.css.map */

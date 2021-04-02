@@ -59,6 +59,11 @@ Route::get('/personel-giris', function () {
 Route::post('/personel-login', 'LoginController@personelLogin')->name('personelLogin');
 Route::post('/ogrenci-login', 'LoginController@ogrenciLogin')->name('ogrenciLogin');
 
+Route::post('/ogrenci', 'LoginController@ogrenciLogin')->name('ogrenciLogin');
 ## End Login İşlemleri ##
 
 
+ ## Tema denemeleri için basit giriş 
+Route::get('/basitogrenci', 'LoginController@basitogrenci');
+Route::get('/basitpersonel', 'LoginController@basitpersonel');
+Route::get('/basitmudur', 'LoginController@basitmudur');

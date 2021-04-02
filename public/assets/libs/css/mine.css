@@ -1,0 +1,21 @@
+.dashboard-main-wrapper{
+    height: 100vh !important;
+}
+
+.dashboard-wrapper{
+    height: 100% !important;
+}
+.yurtAdi{
+    color:#007bff;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+
+
+
+@media screen and (max-width: 766px) {
+    .nav-left-sidebar{
+        height:40% !important;
+    }
+  }
