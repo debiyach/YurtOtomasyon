@@ -12,7 +12,11 @@ Route::get('/test', function () {
 ## Müdür Route İşlemleri ##
 
 Route::group(['middleware'=>'mudur','as' => 'mudur.','prefix'=>'mudur'],function(){
-    Route::get('/',function (){ return view('mudur.index');})->name('index');
+    Route::get('/',function (){return view('mudur.index');})->name('index');
+    Route::get('/cikis-yap',function (){ 
+        session()->remove('personel');
+        return view('index');
+    })->name('logout');
 });
 
 ## End Müdür Route İşlemleri ##
@@ -23,6 +27,10 @@ Route::group(['middleware'=>'mudur','as' => 'mudur.','prefix'=>'mudur'],function
 
 Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel'],function(){
     Route::get('/',function (){ return view('personel.index');})->name('index');
+    Route::get('/cikis-yap',function (){ 
+        session()->remove('personel');
+        return view('index');
+    })->name('logout');
 });
 
 ## End Personel Route İşlemleri ##
@@ -33,6 +41,10 @@ Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel']
 
 Route::group(['middleware'=>'ogrenci','as' => 'ogrenci.','prefix'=>'ogrenci'],function(){
     Route::get('/',function (){ return view('ogrenci.index');})->name('index');
+    Route::get('/cikis-yap',function (){ 
+        session()->remove('ogrenci');
+        return view('index');
+    })->name('logout');
 });
 
 ## End Öğrenci Route İşlemleri ##
