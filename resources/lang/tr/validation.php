@@ -137,7 +137,6 @@ return [
             'rule-name' => 'Özelleşmiş Mesaj',
         ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Özelleştirilmiş niteleyici isimleri

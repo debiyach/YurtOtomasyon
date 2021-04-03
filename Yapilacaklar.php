@@ -5,4 +5,5 @@ $yapilacaklar = [
     'Cinsiyetlere göre tablolar düzenlenecek, Tablolar = [Kurum,Ogrenci,Personel]',
     'Yurt yataklar ve odalar tablosu oluşturulacak. Aynı kişi iki odada veya yatakta görünemeyecek.'
 ];
+
 $yapilanlar = [];

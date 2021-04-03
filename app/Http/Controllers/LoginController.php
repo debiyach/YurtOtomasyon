@@ -32,17 +32,7 @@ class LoginController extends Controller
         }else return back()->withErrors(['Bu mail adresine bağlı hesap bulunmamaktadır!']);
 
     }
-    
-    //  Template denemesi için kalsın bu burada.
-    public function basitogrenci(){
-        return view('ogrenci.index');
-    }
-    public function basitpersonel(){
-        return view('personel.index');
-    }
-    public function basitmudur(){
-        return view('mudur.index');
-    }
+
 
 
     public function ogrenciLogin(Request $request)
