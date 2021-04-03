@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Personel extends Model
 {
     protected $table = 'personel';
+    protected $fillable = ['ad','soyad','telNo','apiToken','yetki'];
     use HasFactory;
 }

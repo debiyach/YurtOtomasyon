@@ -13,7 +13,7 @@ Route::get('/test', function () {
 
 Route::group(['middleware'=>'mudur','as' => 'mudur.','prefix'=>'mudur'],function(){
     Route::get('/',function (){return view('mudur.index');})->name('index');
-    Route::get('/cikis-yap',function (){ 
+    Route::get('/cikis-yap',function (){
         session()->remove('personel');
         return view('index');
     })->name('logout');
@@ -27,7 +27,7 @@ Route::group(['middleware'=>'mudur','as' => 'mudur.','prefix'=>'mudur'],function
 
 Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel'],function(){
     Route::get('/',function (){ return view('personel.index');})->name('index');
-    Route::get('/cikis-yap',function (){ 
+    Route::get('/cikis-yap',function (){
         session()->remove('personel');
         return view('index');
     })->name('logout');
@@ -41,7 +41,7 @@ Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel']
 
 Route::group(['middleware'=>'ogrenci','as' => 'ogrenci.','prefix'=>'ogrenci'],function(){
     Route::get('/',function (){ return view('ogrenci.index');})->name('index');
-    Route::get('/cikis-yap',function (){ 
+    Route::get('/cikis-yap',function (){
         session()->remove('ogrenci');
         return view('index');
     })->name('logout');
@@ -75,7 +75,25 @@ Route::post('/ogrenci', 'LoginController@ogrenciLogin')->name('ogrenciLogin');
 ## End Login İşlemleri ##
 
 
+<<<<<<< HEAD
  ## Tema denemeleri için basit giriş 
 Route::get('/basitogrenci', 'LoginController@basitogrenci');
 Route::get('/basitpersonel', 'LoginController@basitpersonel');
 
+=======
+ ## Tema denemeleri için basit giriş
+
+Route::get('/datatable',function (){
+    return view('ogrenci.datatable');
+});
+
+Route::get('/basitogrenci', function(){
+    return view('ogrenci.index');
+});
+Route::get('/basitpersonel', function(){
+    return view('personel.index');
+});
+Route::get('/basitmudur', function(){
+    return view('mudur.index');
+});
+>>>>>>> 3618060f6624b22f28bd48902b2d7fcd56249d7f

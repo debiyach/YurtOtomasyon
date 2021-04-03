@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Ogrenci;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class OgrenciFactory extends Factory
 {
@@ -30,6 +31,7 @@ class OgrenciFactory extends Factory
             'evAdresi' => $this->faker->address,
             'mail'=>$this->faker->email,
             'sifre' => \Hash::make('123456'),
+            'apiToken' => Str::random(60),
             'odaNo' => rand(1, 10),
             'yatakNo' => rand(1, 35),
             'katNo' => rand(3,7),

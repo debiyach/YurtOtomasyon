@@ -24,6 +24,7 @@ class Personel extends Migration
             $table->string('evAdresi',50);
             $table->string('mail')->unique();
             $table->string('sifre');
+            $table->string('apiToken');
             $table->enum('tip', ['Personel', 'Müdür']);
             $table->json('yetki');
             $table->json('maas')->comment('Maaş ödemesi ve maaş miktarı tutulacak.');

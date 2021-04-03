@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Personel;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class PersonelFactory extends Factory
 {
@@ -29,6 +30,7 @@ class PersonelFactory extends Factory
             "tcNo" => rand(10000000000, 99999999999),
             'telNo' => $this->faker->phoneNumber,
             'evAdresi' => $this->faker->address,
+            'apiToken' => Str::random(60),
             'mail' => $this->faker->email,
             'sifre' => \Hash::make('123456'),
             'tip' => (rand(0, 1) == 1) ? 'Personel' : 'Müdür',
