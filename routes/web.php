@@ -78,5 +78,4 @@ Route::post('/ogrenci', 'LoginController@ogrenciLogin')->name('ogrenciLogin');
  ## Tema denemeleri için basit giriş 
 Route::get('/basitogrenci', 'LoginController@basitogrenci');
 Route::get('/basitpersonel', 'LoginController@basitpersonel');
-Route::get('/basitmudur', 'LoginController@basitmudur');
 

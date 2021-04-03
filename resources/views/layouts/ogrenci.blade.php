@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="{{asset("assets/vendor/fonts/fontawesome/css/fontawesome-all.css")}}">
 <link rel="stylesheet" href="{{asset("assets/libs/css/mine.css")}}">
 
+
+
 </head>
 
 <body>
