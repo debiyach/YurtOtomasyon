@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'girisKontrol' => \App\Http\Middleware\GirisKontrolMiddleware::class,
         'mudur' => \App\Http\Middleware\MudurMiddleware::class,
         'personel' => \App\Http\Middleware\PersonelMiddleware::class,
-        'ogrenci' => \App\Http\Middleware\OgrenciMiddleware::class
+        'ogrenci' => \App\Http\Middleware\OgrenciMiddleware::class,
+        'ApiLogin' => \App\Http\Middleware\ApiLogin::class
     ];
 }

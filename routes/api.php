@@ -16,5 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/ogrenci/login','Ogrenci\AuthLoginController@authLoginOgrenci');
 Route::post('/personel/login','Ogrenci\AuthLoginController@authLoginPersonel');
 
+Route::group(['middleware'=>'ApiLogin'],function(){
+    Route::apiResource('ogrenci','Api\OgrenciApiController');
+});
 
-//Route::apiResource('ogrenci','Api\OgrenciApiController');
