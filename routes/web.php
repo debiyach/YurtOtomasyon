@@ -76,6 +76,11 @@ Route::post('/ogrenci', 'LoginController@ogrenciLogin')->name('ogrenciLogin');
 
 
  ## Tema denemeleri için basit giriş
+
+Route::get('/datatable',function (){
+    return view('ogrenci.datatable');
+});
+
 Route::get('/basitogrenci', function(){
     return view('ogrenci.index');
 });
