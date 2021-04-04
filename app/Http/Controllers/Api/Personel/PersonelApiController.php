@@ -50,15 +50,19 @@ class PersonelApiController extends ApiController
         $personel->maas = json_encode([]);
         $personel->created_at = now();
         $personel->updated_at = now();
-        $result = $personel->save();
+        $mailData = [
+            "password" => $newPassword,
+            "title" => "Peronelimiz {$request->ad} {$personel->soyad}",
+            "body" => "Burası body alanı"
+        ];
+        $result = Mail::to('test@otomasyon.com')->send(new SendPasswordMail($mailData));
         if ($result){
-            $mailData = [
-                "password" => $newPassword,
-                "title" => "Peronelimiz {$request->ad} {$personel->soyad}",
-                "body" => "Burası body alanı"
-            ];
-            Mail::to('test@otomasyon.com')->send(new SendPasswordMail($mailData));
-            return $this->apiResponse(ResultType::Success, $personel, 'Kullanıcı başarıyla eklendi!', 201);
+            return $personel->save()
+                ?
+                $this->apiResponse(ResultType::Success, $personel, 'Kullanıcı başarıyla eklendi!', 201)
+                :
+                $this->apiResponse(ResultType::Error, null, 'Personel eklenme sırasında hata oluştu!', 404);
+
         }
         else
             return $this->apiResponse(ResultType::Error, null, 'Personel eklenme sırasında hata oluştu!', 404);
