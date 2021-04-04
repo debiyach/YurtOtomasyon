@@ -1,4 +1,4 @@
-@extends('layouts.mudur');
+@extends('layouts.mudur')
 
 @section('content')
     naber

@@ -85,8 +85,8 @@ Route::get('/basitogrenci', function(){
     return view('ogrenci.hesapayarlari');
 });
 Route::get('/basitpersonel', function(){
-    return view('personel.hesapayarlari');
+    return view('personel.ogrenciekle');
 });
 Route::get('/basitmudur', function(){
-    return view('mudur.hesapayarlari');
+    return view('mudur.ogrenciekle');
 });
