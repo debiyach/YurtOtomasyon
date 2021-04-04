@@ -78,7 +78,7 @@
                                         </li>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link"><i class="far fa-times-circle "></i>Çıkış</a>
+                                        <a href="{{ route('personel.logout') }}" class="nav-link"><i class="far fa-times-circle "></i>Çıkış</a>
                                     </li>
                                 </ul>
                             </div>
@@ -91,15 +91,15 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="fas fa-user-plus"></i>Yeni Öğrenci Kayıt</a>
+                            <a href="{{ route('personel.ogrenciEkle') }}"  class="nav-link @if (Request::segment(2) == "ogrenci-ekle") active @endif"><i class="fas fa-user-plus"></i>Yeni Öğrenci Kayıt</a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="fas fa-exclamation"></i>İstek / Şikayet Takip</a>
+                            <a href="{{ route('personel.istekSikayet') }}" class="nav-link"><i class="fas fa-exclamation"></i>İstek / Şikayet Takip</a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="far fa-calendar-alt "></i>İzin Talep</a>
+                            <a href="{{ route('personel.izinTalep') }}" class="nav-link"><i class="far fa-calendar-alt "></i>İzin Talep</a>
                         </li>
 
                     </ul>

@@ -1,5 +1,5 @@
 @extends('layouts.mudur')
 
 @section('content')
-    naber
+@include('layouts.components.hesapayarlari')
 @endsection
