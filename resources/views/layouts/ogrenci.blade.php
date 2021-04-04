@@ -67,7 +67,7 @@
                             <ul>
                                 <li class="nav-item ">
                                     <div class="baslik">Mail</div>
-                                    <div>ogrenci@gmail.com</div>
+                                    <div>{{ session()->get('ogrenci')->mail }}</div>
                                 </li>
                                 <li class="nav-item ">
                                     <div class="baslik">Yetki</div>
@@ -95,7 +95,7 @@
                                     
                                     <li class="nav-item">
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link"><i class="fas fa-cogs"></i>Hesap Ayarları Düzenle</a>
+                                            <a href="{{ route('ogrenci.hesapAyarlari') }}" class="nav-link"><i class="fas fa-cogs"></i>Hesap Ayarları Düzenle</a>
                                         </li>
                                     </li>
                                     <li class="nav-item">
@@ -112,11 +112,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="far fa-calendar-alt "></i>İzin Talep</a>
+                            <a href="{{ route('ogrenci.izinTalep') }}" class="nav-link"><i class="far fa-calendar-alt "></i>İzin Talep</a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="far fa-calendar-alt "></i>İstek/Şikayet Talep</a>
+                            <a href="{{ route('ogrenci.istekTalep') }}" class="nav-link"><i class="far fa-calendar-alt "></i>İstek/Şikayet Talep</a>
                         </li>
                        
 

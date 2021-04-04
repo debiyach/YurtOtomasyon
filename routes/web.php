@@ -32,6 +32,10 @@ Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel']
         return view('index');
     })->name('logout');
     Route::get('/hesap-ayarlari',fn() => view('personel.accountsettings'))->name('hesapAyarlari');
+    Route::get('/ogrenci-ekle',fn() => view('personel.insertstudent'))->name('ogrenciEkle');
+    Route::get('/istek-sikayet',fn() => view('personel.isteksikayet'))->name('istekSikayet');
+    Route::get('/izin-talep',fn() => view('personel.izintalep'))->name('izinTalep');
+    
 });
 
 ## End Personel Route İşlemleri ##
@@ -46,6 +50,9 @@ Route::group(['middleware'=>'ogrenci','as' => 'ogrenci.','prefix'=>'ogrenci'],fu
         session()->remove('ogrenci');
         return view('index');
     })->name('logout');
+    Route::get('/izin-talep',fn() => view('ogrenci.izintalep'))->name('izinTalep');
+    Route::get('/hesap-ayarlari',fn() => view('ogrenci.accountsettings'))->name('hesapAyarlari');
+    Route::get('/istek-talep',fn() => view('ogrenci.istektalep'))->name('istekTalep');
 });
 
 ## End Öğrenci Route İşlemleri ##
@@ -86,7 +93,7 @@ Route::get('/basitogrenci', function(){
     return view('ogrenci.hesapayarlari');
 });
 Route::get('/basitpersonel', function(){
-    return view('personel.ogrenciekle');
+    return view('personel.insertstudent');
 });
 Route::get('/basitmudur', function(){
     return view('mudur.ogrenciekle');
