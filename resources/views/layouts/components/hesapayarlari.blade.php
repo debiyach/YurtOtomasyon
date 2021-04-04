@@ -1,6 +1,7 @@
 @extends('layouts.personel');
 
 @section('content')
+    
 <form>
 
     <div class="form-group">
@@ -22,7 +23,7 @@
       <label for="adres">Ev Adresi</label>
       <input type="text" class="form-control" id="adres">
     </div>
-   
+
 
     <button type="submit" class="btn btn-primary">Güncelle</button>
 
