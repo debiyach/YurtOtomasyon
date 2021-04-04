@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Ogrenciizin extends Migration
+class Ogrenciisteksikayet extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class Ogrenciizin extends Migration
      */
     public function up()
     {
-        Schema::create('ogrenciizin', function (Blueprint $table) {
+        Schema::create('ogrenciisteksikayet', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kurumId');
             $table->unsignedBigInteger('ogrenciId');
             $table->string('aciklama');
-            $table->enum('onayDurumu',[null,"Reddedildi","Kabul Edildi"])->default(null);
-            $table->time('izinBaslangic');
-            $table->time('izinBitis');
+            $table->enum('tip',['İzin','Şikayet','İstek','Arıza Bildirimi']);
+            $table->enum('onayDurumu',["Bekleniyor","Reddedildi","Kabul Edildi"])->default("Bekleniyor");
+            $table->time('izinBaslangic')->nullable();
+            $table->time('izinBitis')->nullable();
             $table->timestamps();
 
             $table->foreign('kurumId')->references('id')->on('kurum')->cascadeOnDelete()->cascadeOnUpdate();

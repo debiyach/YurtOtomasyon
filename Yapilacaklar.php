@@ -3,11 +3,13 @@
 
 /* TARIK ŞUNLARIN SONUNA VİRGÜL (,) KOY !!!! */
 
+
 $yapilacaklar = [
     'Aynı kişi iki odada veya yatakta görünemeyecek.',
     'datatables öğrenilecek-yusuf',
     'veri girisi ömer',
-    'Personel resmi width 64px çekilsin.'
+    'Personel resmi width 64px çekilsin.',
+    'Öğrenci tablosuna bina no eklenecek'
 ];
 
 $yapilanlar = ['login islemleri yapılandırıldı-idea',

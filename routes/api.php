@@ -17,6 +17,16 @@ Route::post('/ogrenci/login','Ogrenci\AuthLoginController@authLoginOgrenci');
 Route::post('/personel/login','Ogrenci\AuthLoginController@authLoginPersonel');
 
 Route::group(['middleware'=>'ApiLogin'],function(){
-    Route::apiResource('ogrenci','Api\OgrenciApiController');
+
+    Route::apiResources([
+        'ogrenci'=>'Api\Ogrenci\OgrenciApiController',
+        'personel' => 'Api\Personel\PersonelApiController'
+    ]);
+
+    ##
+
+    ## Öğrenci şifre değiştirme endpoint.
+    Route::put('/ogrenci/change-password/{id}','Api\Ogrenci\OgrenciApiController@studentChangePassword');
+    Route::put('/personel/change-password/{id}','Api\Personel\PersonelApiController@personelChangePassword');
 });
 

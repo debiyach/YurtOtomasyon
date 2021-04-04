@@ -18,16 +18,25 @@ class ApiLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        $request->validate([
+
+
+
+        $req = \Validator::make($request->header(),[
             'apiToken' => 'required'
         ]);
 
-        $ogrenci = Ogrenci::where('apiToken',$request->apiToken)->first();
-        $personel = Personel::where('apiToken',$request->apiToken)->first();
+        if ($req){
+            $ogrenci = Ogrenci::where('apiToken',$request->header('apiToken'))->first();
+            $personel = Personel::where('apiToken',$request->header('apiToken'))->first();
 
-        if ($personel || $ogrenci)
-            return $next($request);
-        else return response(['success'=>false,'message'=>'Geçersiz token!'],200);
+            if ($personel || $ogrenci)
+                return $next($request);
+            else return response(['success'=>false,'message'=>'Geçersiz token!'],200);
+        }else
+            return response(['success'=> false,'message'=>'apiToken gereklidir!']);
+
+
+
 
     }
 }
