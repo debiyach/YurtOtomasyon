@@ -11,7 +11,7 @@
             </div>
 
             <div class="card-body">
-                @include('layouts.system.errors')
+                @include('layouts.components.errors')
                 <form action="{{route('personelLogin')}}" method="POST">
 
                     @csrf

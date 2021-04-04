@@ -31,6 +31,7 @@ Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel']
         session()->remove('personel');
         return view('index');
     })->name('logout');
+    Route::get('/hesap-ayarlari',fn() => view('personel.accountsettings'))->name('hesapAyarlari');
 });
 
 ## End Personel Route İşlemleri ##

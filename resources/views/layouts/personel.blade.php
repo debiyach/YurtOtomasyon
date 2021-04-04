@@ -22,33 +22,8 @@
 <div class="dashboard-main-wrapper">
     <!-- ============================================================== -->
     <!-- navbar -->
-    
 
 
-    <!-- ============================================================== -->
-
-
-    {{-- <div class="dashboard-header">
-        <nav class="navbar navbar-expand-lg bg-white fixed-top  ">
-            <div class="col-12  text-center">
-                <h2 class="yurtAdi ">ogrenci yurdu adı</h2>
-
-            </div>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-        </nav>
-    </div> --}}
-
-    <!-- ============================================================== -->
-    <!-- end navbar -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- left sidebar -->
-    <!-- ============================================================== -->
     <div class="nav-left-sidebar  sidebar-dark">
         <div class="menu-list">
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -59,43 +34,47 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav flex-column">
-                        
+
                         <div class="user">
                             <div class="user-photo">
-                                <img src="https://st.depositphotos.com/2101611/3925/v/950/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg" alt="profil">
+                                <img src="https://st.depositphotos.com/2101611/3925/v/950/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg" width="100" alt="profil">
                             </div>
                             <ul>
                                 <li class="nav-item ">
+                                    <div class="baslik">Ad - Soyad</div>
+                                    <div>{{session()->get('personel')->ad . ' ' . session()->get('personel')->soyad}}</div>
+                                </li>
+                                <li class="nav-item ">
                                     <div class="baslik">Mail</div>
-                                    <div>personel@gmail.com</div>
+                                    <div>{{session()->get('personel')->mail}}</div>
                                 </li>
                                 <li class="nav-item ">
                                     <div class="baslik">Yetki</div>
-                                    <div>Personel</div>
+                                    <div>{{session()->get('personel')->tip}}</div>
                                 </li>
                                 <li class="nav-item ">
                                     <div class="baslik">Kurum</div>
-                                    <div>Nusrat</div>
+                                    <div>{{session()->get('personel')->kurumId}}</div>
                                 </li>
                             </ul>
                         </div>
-                        
+
                         <li class="nav-divider">
                             Hesap
                         </li>
 
                         <li class="nav-item ">
-                            
+
                             <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">
                                 <i class="fa fa-fw fa-user-circle"></i>Hesap Ayarları <span class="badge badge-success"></span>
                             </a>
-                        
+
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
-                                    
+
                                     <li class="nav-item">
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link"><i class="fas fa-cogs"></i>Hesap Ayarları Düzenle</a>
+                                            <a href="{{route('personel.hesapAyarlari')}}" class="nav-link"><i class="fas fa-cogs"></i>Hesap Ayarları Düzenle</a>
                                         </li>
                                     </li>
                                     <li class="nav-item">
@@ -103,9 +82,9 @@
                                     </li>
                                 </ul>
                             </div>
-                            
-                            
-                        </li> 
+
+
+                        </li>
 
                         <li class="nav-divider">
                             Menu
@@ -118,7 +97,7 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link"><i class="fas fa-exclamation"></i>İstek / Şikayet Takip</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a href="#" class="nav-link"><i class="far fa-calendar-alt "></i>İzin Talep</a>
                         </li>
@@ -138,7 +117,7 @@
 
 
     <div class="dashboard-wrapper  d-flex flex-column justify-content-between">
-        
+
         <div class="container-fluid dashboard-content">
             @yield('content')
         </div>
