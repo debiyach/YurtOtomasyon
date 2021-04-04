@@ -1,0 +1,39 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel ile geliştirilmiş WEB Yurt Otomasyonu",
+        "description": "Bu proje KYK benzeri Yurt Otomasyonu olarak hazırlanmaktadır. By Debiyach",
+        "termsOfService": "http://localhost:8000/api/terms",
+        "contact": {
+            "email": "debiyach@debiyach.com"
+        },
+        "version": "0.0.2"
+    },
+    "paths": {
+        "/api/ogrenci": {
+            "get": {
+                "tags": [
+                    "ogrenci"
+                ],
+                "summary": "Bütün öğrencileri listeler",
+                "operationId": "App\\Http\\Controllers\\Api\\Ogrenci\\OgrenciApiController::index",
+                "responses": {
+                    "200": {
+                        "description": "Açıklama yok"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Ogrenci": {
+                "title": "Ogrenci",
+                "description": "Ogrenci model"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
