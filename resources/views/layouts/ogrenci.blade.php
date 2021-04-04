@@ -99,7 +99,7 @@
                                         </li>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link"><i class="far fa-times-circle "></i>Çıkış</a>
+                                        <a href="{{ route('ogrenci.logout') }}" class="nav-link"><i class="far fa-times-circle "></i>Çıkış</a>
                                     </li>
                                 </ul>
                             </div>
