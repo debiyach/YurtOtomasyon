@@ -75,12 +75,6 @@ Route::post('/ogrenci', 'LoginController@ogrenciLogin')->name('ogrenciLogin');
 ## End Login İşlemleri ##
 
 
-<<<<<<< HEAD
- ## Tema denemeleri için basit giriş 
-Route::get('/basitogrenci', 'LoginController@basitogrenci');
-Route::get('/basitpersonel', 'LoginController@basitpersonel');
-
-=======
  ## Tema denemeleri için basit giriş
 
 Route::get('/datatable',function (){
@@ -88,12 +82,11 @@ Route::get('/datatable',function (){
 });
 
 Route::get('/basitogrenci', function(){
-    return view('ogrenci.index');
+    return view('ogrenci.hesapayarlari');
 });
 Route::get('/basitpersonel', function(){
-    return view('personel.index');
+    return view('personel.hesapayarlari');
 });
 Route::get('/basitmudur', function(){
-    return view('mudur.index');
+    return view('mudur.hesapayarlari');
 });
->>>>>>> 3618060f6624b22f28bd48902b2d7fcd56249d7f

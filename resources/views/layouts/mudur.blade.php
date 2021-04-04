@@ -13,10 +13,6 @@
 <link rel="stylesheet" href="{{asset("assets/vendor/fonts/fontawesome/css/fontawesome-all.css")}}">
 <link rel="stylesheet" href="{{asset("assets/libs/css/mine.css")}}">
 
-
-
-
-
 </head>
 
 <body>
@@ -26,20 +22,27 @@
 <div class="dashboard-main-wrapper">
     <!-- ============================================================== -->
     <!-- navbar -->
-    <!-- ============================================================== -->
-        <div class="dashboard-header ">
-            <nav class="navbar navbar-expand-lg bg-white fixed-top  ">
-                <div class="col-12  text-center">
-                    <h2 class="yurtAdi">@yield('yurtAdi',)</h2>
-                    
-                </div>
-                
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    
 
-            </nav>
-        </div>
+
+    <!-- ============================================================== -->
+
+
+    {{-- <div class="dashboard-header">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top  ">
+            <div class="col-12  text-center">
+                <h2 class="yurtAdi ">ogrenci yurdu adı</h2>
+
+            </div>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        </nav>
+    </div> --}}
+
     <!-- ============================================================== -->
     <!-- end navbar -->
     <!-- ============================================================== -->
@@ -49,86 +52,82 @@
     <div class="nav-left-sidebar  sidebar-dark">
         <div class="menu-list">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="d-xl-none d-lg-none" href="#">Panel</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav flex-column">
+                        
+                        <div class="user">
+                            <div class="user-photo">
+                                <img src="https://st.depositphotos.com/2101611/3925/v/950/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg" alt="profil">
+                            </div>
+                            <ul>
+                                <li class="nav-item ">
+                                    <div class="baslik">Mail</div>
+                                    <div>mudur@gmail.com</div>
+                                </li>
+                                <li class="nav-item ">
+                                    <div class="baslik">Yetki</div>
+                                    <div>Mudur</div>
+                                </li>
+                                <li class="nav-item ">
+                                    <div class="baslik">Kurum</div>
+                                    <div>Nusrat</div>
+                                </li>
+                            </ul>
+                        </div>
+                        
                         <li class="nav-divider">
-                            Menu
+                            Hesap
                         </li>
-                        {{-- <li class="nav-item ">
-                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
+
+                        <li class="nav-item ">
+                            
+                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">
+                                <i class="fa fa-fw fa-user-circle"></i>Hesap Ayarları <span class="badge badge-success"></span>
+                            </a>
+                        
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
+                                    
                                     <li class="nav-item">
-                                        <a class="nav-link" href="index.html" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-2" aria-controls="submenu-1-2">E-Commerce</a>
-                                        <div id="submenu-1-2" class="collapse submenu" style="">
-                                            <ul class="nav flex-column">
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="../index.html">E Commerce Dashboard</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="../ecommerce-product.html">Product List</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="../ecommerce-product-single.html">Product Single</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="../ecommerce-product-checkout.html">Product Checkout</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link"><i class="fas fa-cogs"></i>Hesap Ayarları Düzenle</a>
+                                        </li>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="../dashboard-finance.html">Finance</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="../dashboard-sales.html">Sales</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-1" aria-controls="submenu-1-1">Infulencer</a>
-                                        <div id="submenu-1-1" class="collapse submenu" style="">
-                                            <ul class="nav flex-column">
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="../dashboard-influencer.html">Influencer</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="../influencer-finder.html">Influencer Finder</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="../influencer-profile.html">Influencer Profile</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <a href="#" class="nav-link"><i class="far fa-times-circle "></i>Çıkış</a>
                                     </li>
                                 </ul>
                             </div>
-                        </li> --}}
-                        
-                        
+                            
+                            
+                        </li> 
+
+                        <li class="nav-divider">
+                            Menu
+                        </li>
+
                         <li class="nav-item">
                             <a href="#" class="nav-link"><i class="fas fa-user-plus"></i>Yeni Öğrenci Kayıt</a>
                         </li>
-                        
+
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="fas fa-user-plus"></i>Yeni Personel Kayıt</a>
+                            <a href="#" class="nav-link"><i class="fas fa-address-card"></i>Yeni Personel Kayıt</a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="fas fa-exclamation"></i>İstek / Şikayet</a>
+                            <a href="#" class="nav-link"><i class="fas fa-calculator"></i>Yurt Gelir / Gider</a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="fas fa-calculator"></i>GELİR / GİDER</a>
+                            <a href="#" class="nav-link"><i class="fas fa-exclamation"></i>İstek / Şikayet Takip</a>
                         </li>
-                        
-                        <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="far fa-times-circle "></i>Çıkış</a>
-                        </li>
+                       
 
-                        
                     </ul>
                 </div>
             </nav>
@@ -141,56 +140,31 @@
     <!-- ============================================================== -->
     <!-- wrapper  -->
     <!-- ============================================================== -->
-   
-   
+
+
     <div class="dashboard-wrapper  d-flex flex-column justify-content-between">
+        
         <div class="container-fluid dashboard-content">
-            <div class="row">
-               
-                @yield('content')
-                
-            </div>
+            @yield('content')
         </div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <!-- ============================================================== -->
-        <!-- footer -->
-        <!-- ============================================================== -->
-        
-        
-        <div class="footer ">
+
+
+        <div class="footer">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                        Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                        <div class="text-md-right footer-links d-none d-sm-block">
-                            <a href="javascript: void(0);">About</a>
-                            <a href="javascript: void(0);">Support</a>
-                            <a href="javascript: void(0);">Contact Us</a>
-                        </div>
+                        2021 © Öğrenci Yurt Otomasyon Sistemi
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-        <!-- ============================================================== -->
-        <!-- end footer -->
-        <!-- ============================================================== -->
     </div>
+
+
+    <!-- ============================================================== -->
+    <!-- end footer -->
+    <!-- ============================================================== -->
+</div>
 </div>
 
 
@@ -202,6 +176,7 @@
 <script src="{{asset("assets/vendor/bootstrap/js/bootstrap.bundle.js")}}"></script>
 <script src="{{asset("assets/vendor/slimscroll/jquery.slimscroll.js")}}"></script>
 <script src="{{asset("assets/libs/js/main-js.js")}}"></script>
+@yield('script.datatable')
+@yield('script')
 </body>
-
 </html>
