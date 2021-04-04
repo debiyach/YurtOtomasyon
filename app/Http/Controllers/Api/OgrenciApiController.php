@@ -60,6 +60,6 @@ class OgrenciApiController extends Controller
      */
     public function destroy(Ogrenci $ogrenci)
     {
-        //
+        return $ogrenci->delete();
     }
 }
