@@ -82,11 +82,11 @@ Route::get('/datatable',function (){
 });
 
 Route::get('/basitogrenci', function(){
-    return view('ogrenci.index');
+    return view('ogrenci.hesapayarlari');
 });
 Route::get('/basitpersonel', function(){
-    return view('personel.index');
+    return view('personel.hesapayarlari');
 });
 Route::get('/basitmudur', function(){
-    return view('mudur.index');
+    return view('mudur.hesapayarlari');
 });
