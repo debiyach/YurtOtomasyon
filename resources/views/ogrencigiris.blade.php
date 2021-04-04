@@ -11,7 +11,7 @@
         </div>
 
         <div class="card-body">
-            @include('layouts.system.errors')
+            @include('layouts.components.errors')
             <form action="{{route('ogrenciLogin')}}" method="POST">
 
                 @csrf
@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label for="inputEmail">Email</label>
 
-                    <input name="email" type="email" required class="form-control">
+                    <input name="email" type="email" required class="form-control" autocomplete="off">
                 </div>
 
                 <div class="form-group">
