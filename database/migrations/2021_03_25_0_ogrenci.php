@@ -25,9 +25,9 @@ class Ogrenci extends Migration
             $table->string("tcNo")->unique();
             $table->string('telNo')->unique();
             $table->string('evAdresi',50);
-            $table->integer('odaNo');
-            $table->integer('katNo');
-            $table->integer('yatakNo');
+            $table->integer('odaNo')->nullable();
+            $table->integer('katNo')->nullable();
+            $table->integer('yatakNo')->nullable();
             $table->string('foto');
             $table->json('aidat');
             $table->json('depozito');

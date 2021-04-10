@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="{{asset("assets/libs/css/style.css")}}">
 <link rel="stylesheet" href="{{asset("assets/vendor/fonts/fontawesome/css/fontawesome-all.css")}}">
 <link rel="stylesheet" href="{{asset("assets/libs/css/mine.css")}}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 
@@ -91,6 +92,10 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="{{ route('personel.odaSayfasi') }}"  class="nav-link @if (Request::segment(2) == "oda-islemleri") active @endif"><i class="fas fa-user-plus"></i>Oda İşlemleri</a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="{{ route('personel.ogrenciEkle') }}"  class="nav-link @if (Request::segment(2) == "ogrenci-ekle") active @endif"><i class="fas fa-user-plus"></i>Yeni Öğrenci Kayıt</a>
                         </li>
 
@@ -150,6 +155,7 @@
 <script src="{{asset("assets/vendor/bootstrap/js/bootstrap.bundle.js")}}"></script>
 <script src="{{asset("assets/vendor/slimscroll/jquery.slimscroll.js")}}"></script>
 <script src="{{asset("assets/libs/js/main-js.js")}}"></script>
+<script src="{{asset("assets/libs/js/notify.js")}}"></script>
 @yield('script.datatable')
 @yield('script')
 </body>

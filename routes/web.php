@@ -31,11 +31,27 @@ Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel']
         session()->remove('personel');
         return view('index');
     })->name('logout');
+    Route::get('/oda-islemleri','Personel\OdaIslemleri@odaSayfasi')->name('odaSayfasi');
     Route::get('/hesap-ayarlari',fn() => view('personel.accountsettings'))->name('hesapAyarlari');
     Route::get('/ogrenci-ekle',fn() => view('personel.insertstudent'))->name('ogrenciEkle');
     Route::get('/istek-sikayet',fn() => view('personel.isteksikayet'))->name('istekSikayet');
     Route::get('/izin-talep',fn() => view('personel.izintalep'))->name('izinTalep');
-    
+
+    ## PERSONEL AJAX ##
+    Route::post('/ajax/bina-ekle','Personel\OdaIslemleri@binaEkle')->name('ajax.binaEkle');
+    Route::post('/ajax/kat-ekle','Personel\OdaIslemleri@katEkle')->name('ajax.katEkle');
+    Route::post('/ajax/oda-ekle','Personel\OdaIslemleri@odaEkle')->name('ajax.odaEkle');
+    Route::post('/ajax/yatak-ekle','Personel\OdaIslemleri@yatakEkle')->name('ajax.yatakEkle');
+    Route::post('/ajax/ogrenci-ekle','Personel\OdaIslemleri@ogrenciEkle')->name('ajax.ogrenciEkle');
+    Route::post('/ajax/ogrenci-yatak-kaldir','Personel\OdaIslemleri@ogrenciYatakKaldir')->name('ajax.ogrenciYatakKaldir');
+    Route::post('/ajax/yatak-kaldir','Personel\OdaIslemleri@yatakKaldir')->name('ajax.yatakKaldir');
+    Route::get('/ajax/bina-getir/{notEmpty?}','Personel\OdaIslemleri@binaGetir')->name('ajax.binaGetir');
+    Route::get('/ajax/ogrenci-getir','Personel\OdaIslemleri@ogrenciGetir')->name('ajax.ogrenciGetir');
+    Route::get('/ajax/oda-getir/','Personel\OdaIslemleri@odaGetir')->name('ajax.odaGetir');
+    Route::get('/ajax/kat-getir/{id?}','Personel\OdaIslemleri@katGetir')->name('ajax.katGetir');
+    Route::get('/ajax/yatak-getir/{id?}','Personel\OdaIslemleri@yatakGetir')->name('ajax.yatakGetir');
+
+    ## PERSONEL AJAX END ##
 });
 
 ## End Personel Route İşlemleri ##
