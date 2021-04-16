@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-//use App\Http\Controllers\deneme;
 
 Route::get('/test', function () {
     return view('test');
@@ -40,6 +39,10 @@ Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel']
     Route::get('/istek-sikayet',fn() => view('personel.isteksikayet'))->name('istekSikayet');
     Route::get('/izin-talep',fn() => view('personel.izintalep'))->name('izinTalep');
 
+
+
+
+
     ## PERSONEL AJAX ##
     Route::post('/ajax/bina-ekle','Personel\OdaIslemleri@binaEkle')->name('ajax.binaEkle');
     Route::post('/ajax/kat-ekle','Personel\OdaIslemleri@katEkle')->name('ajax.katEkle');
@@ -53,7 +56,6 @@ Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel']
     Route::get('/ajax/oda-getir/','Personel\OdaIslemleri@odaGetir')->name('ajax.odaGetir');
     Route::get('/ajax/kat-getir/{id?}','Personel\OdaIslemleri@katGetir')->name('ajax.katGetir');
     Route::get('/ajax/yatak-getir/{id?}','Personel\OdaIslemleri@yatakGetir')->name('ajax.yatakGetir');
-
     ## PERSONEL AJAX END ##
 });
 

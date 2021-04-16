@@ -1,4 +1,3 @@
-
 <div class="col-6 mt-3 offset-3">
 <form enctype="multipart/form-data">
 
@@ -15,21 +14,6 @@
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email" name="email" required class="form-control" id="email">
-    </div>
-
-    <div class="form-group">
-        <label for="email">Email Tekrar</label>
-        <input type="email" name="email" required class="form-control" id="email">
-    </div>
-
-    <div class="form-group">
-      <label for="sifre">Sifre</label>
-      <input type="password" class="form-control" name="sifre" required id="sifre">
-    </div>
-
-    <div class="form-group">
-      <label for="sifre">Sifre Tekrar</label>
-      <input type="password" class="form-control" name="sifre" required id="sifre">
     </div>
 
     <div class="form-group">
