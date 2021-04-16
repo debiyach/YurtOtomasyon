@@ -1,5 +1,5 @@
 
-<div class="col-6 offset-3">
+<div class="col-6 mt-3 offset-3">
 <form enctype="multipart/form-data">
 
     <div class="form-group">
@@ -45,21 +45,6 @@
     <div class="form-group">
       <label  for="adres">Ev Adresi</label>
       <input type="text" class="form-control" required name="adres" id="adres">
-    </div>
-
-    <div class="form-group">
-      <label for="odaNo">Oda No</label>
-      <input type="number" class="form-control" name="odaNo" required id="odaNo">
-    </div>
-
-    <div class="form-group">
-      <label for="katNo">Kat No</label>
-      <input type="number" class="form-control" name="katNo" required id="katNo">
-    </div>
-
-    <div class="form-group">
-      <label for="yatakNo">Yatak No</label>
-      <input type="number" class="form-control" name="yatakNo" required id="yatakNo">
     </div>
 
     <div class="form-group">

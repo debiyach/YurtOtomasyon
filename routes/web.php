@@ -1,11 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+//use App\Http\Controllers\deneme;
 
 Route::get('/test', function () {
     return view('test');
 })->name('test');
+
+Route::get('personel/tablolar', 'deneme@index');
+
 
 /* =========== !  =========== !  =========== !  =========== !  =========== !  =========== !  =========== ! */
 
