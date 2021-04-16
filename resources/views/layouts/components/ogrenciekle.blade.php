@@ -48,7 +48,11 @@
 
     <div class="form-group">
       <label  for="adres">Ev Adresi</label>
+<<<<<<< HEAD
       <input type="text" class="form-control" name="adres"  required  id="adres">
+=======
+      <input type="text" class="form-control" required name="adres" id="adres">
+>>>>>>> 82bd8e23e0f4a89d22de22e97ce49872dac3a455
     </div>
 
     <div class="form-group">
