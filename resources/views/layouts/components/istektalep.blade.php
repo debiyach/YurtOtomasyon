@@ -1,4 +1,8 @@
 
+<div class="col-12">
+    @include('layouts.components.errors')
+</div>
+
 <div class="col-6 offset-3">
 
     <form action="">

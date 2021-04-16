@@ -98,9 +98,12 @@
                         <li class="nav-item">
                             <a href="{{ route('personel.ogrenciEkle') }}"  class="nav-link @if (Request::segment(2) == "ogrenci-ekle") active @endif"><i class="fas fa-user-plus"></i>Yeni Öğrenci Kayıt</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('personel.personelEkle') }}"  class="nav-link @if (Request::segment(2) == "personel-ekle") active @endif"><i class="fas fa-user-plus"></i>Personel Kayıt</a>
+                        </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('personel.istekSikayet') }}" class="nav-link"><i class="fas fa-exclamation"></i>İstek / Şikayet Takip</a>
+                            <a href="{{ route('personel.istekTalepList') }}" class="nav-link"><i class="fas fa-exclamation"></i>İstek / Şikayet Takip</a>
                         </li>
 
                         <li class="nav-item">

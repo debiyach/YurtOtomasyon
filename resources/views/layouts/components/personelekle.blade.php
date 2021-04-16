@@ -40,6 +40,7 @@
       <label for="telNo">Telefon</label>
       <input type="tel" class="form-control" name="telNo" required placeholder="{533-333-3333}"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="telNo">
     </div>
+    
 
     <div class="form-group">
       <label for="tcNo">T.C No</label>
@@ -48,10 +49,27 @@
 
     <div class="form-group">
       <label  for="adres">Ev Adresi</label>
-      <input type="text" class="form-control" name="adres"  required  id="adres">
+      <input type="text" class="form-control" required name="adres" id="adres">
     </div>
 
-    <div class="form-group">
+    <label class="d-block">Yetkiler</label>
+
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="ogrenciEkleDuzenle" value="ogrenciekleDuzenle">
+      <label class="form-check-label" for="ogrenciEkleDuzenle">Ogrenci Ekle / Duzenle</label>
+    </div>
+    
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="ogrenciOdaIslemleri" value="ogrenciOdaIslemleri">
+      <label class="form-check-label" for="ogrenciOdaIslemleri">Ogrenci Oda İşlemleri</label>
+    </div>
+    
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="personelEkleDuzenle" value="personelEkleDuzenle">
+      <label class="form-check-label" for="personelEkleDuzenle">Personel Ekle / Duzenle</label>
+    </div>
+
+    <div class="form-group mt-3">
       <label for="resim">Resim</label>
       <input type="file" class="form-control" name="resim" required accept="image/*" id="resim">
     </div>
