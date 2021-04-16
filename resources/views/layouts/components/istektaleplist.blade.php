@@ -1,6 +1,6 @@
 
 <div class="col-6 offset-3">
-
+  
   <table class="table" id="myTable">
     <thead>
       <tr>

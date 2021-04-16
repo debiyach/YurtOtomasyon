@@ -1,5 +1,5 @@
 @extends('layouts.ogrenci')
 
 @section('content')
-@include('layouts.components.istektalep')
+    @include('layouts.components.istektalep')
 @endsection

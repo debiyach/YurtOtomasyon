@@ -1,4 +1,6 @@
 @extends('layouts.personel')
 @section('content')
-    @include('layouts.components.isteksikayet')
+
+    @include('layouts.components.istektaleplist')
+    
 @endsection

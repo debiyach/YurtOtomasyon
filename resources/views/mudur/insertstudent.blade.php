@@ -1,5 +1,5 @@
 @extends('layouts.mudur')
 
 @section('content')
-@include('layouts.components.ogrenciekle')
+    @include('layouts.components.ogrenciekle')
 @endsection

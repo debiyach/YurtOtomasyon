@@ -28,7 +28,7 @@
 
     <div class="form-group">
       <label  for="adres">Ev Adresi</label>
-      <input type="text" class="form-control" required name="adres" id="adres">
+      <input type="text" class="form-control" name="adres"  required  id="adres">
     </div>
 
     <div class="form-group">

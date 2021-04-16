@@ -24,7 +24,7 @@ Route::group(['middleware'=>'mudur','as' => 'mudur.','prefix'=>'mudur'],function
 ## End Müdür Route İşlemleri ##
 
 /* =========== !  =========== !  =========== !  =========== !  =========== !  =========== !  =========== ! */
-
+//Route::get('/personel/ogrencilistele',[Listeleme::class,'index']);
 ## Personel Route İşlemleri ##
 
 Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel'],function(){
@@ -36,8 +36,11 @@ Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel']
     Route::get('/oda-islemleri','Personel\OdaIslemleri@odaSayfasi')->name('odaSayfasi');
     Route::get('/hesap-ayarlari',fn() => view('personel.accountsettings'))->name('hesapAyarlari');
     Route::get('/ogrenci-ekle',fn() => view('personel.insertstudent'))->name('ogrenciEkle');
-    Route::get('/istek-sikayet',fn() => view('personel.isteksikayet'))->name('istekSikayet');
+    Route::get('/personel-ekle',fn() => view('personel.insertpersonel'))->name('personelEkle');
+    Route::get('/istek-talep-list',fn() => view('personel.istektaleplist'))->name('istekTalepList');
     Route::get('/izin-talep',fn() => view('personel.izintalep'))->name('izinTalep');
+    Route::get('/ogrenci-listele',fn() => view('personel.studentlist'))->name('ogrenciListele');
+
 
 
 
@@ -58,6 +61,7 @@ Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel']
     Route::get('/ajax/yatak-getir/{id?}','Personel\OdaIslemleri@yatakGetir')->name('ajax.yatakGetir');
     ## PERSONEL AJAX END ##
 });
+
 
 ## End Personel Route İşlemleri ##
 

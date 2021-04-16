@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Ogrenci;
+use App\Models\denemeler;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class OgrenciDataTable extends DataTable
+class denemelerDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,16 +21,16 @@ class OgrenciDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'ogrenci.action');
+            ->addColumn('action', 'denemeler.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Ogrenci $model
+     * @param \App\Models\denemeler $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Ogrenci $model)
+    public function query(denemeler $model)
     {
         return $model->newQuery();
     }
@@ -43,7 +43,7 @@ class OgrenciDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('ogrenci-table')
+                    ->setTableId('denemeler-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -84,6 +84,6 @@ class OgrenciDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Ogrenci_' . date('YmdHis');
+        return 'denemeler_' . date('YmdHis');
     }
 }
