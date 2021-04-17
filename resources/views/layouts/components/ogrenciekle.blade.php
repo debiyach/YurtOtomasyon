@@ -38,7 +38,7 @@
 
     <div class="form-group">
       <label for="telNo">Telefon</label>
-      <input type="tel" class="form-control" name="telNo" required placeholder="{533-333-3333}"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="telNo">
+      <input type="tel" class="form-control" name="telNo" required minlength="10" maxlength="10" placeholder="{533-333-3333}"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="telNo">
     </div>
 
     <div class="form-group">
@@ -48,11 +48,7 @@
 
     <div class="form-group">
       <label  for="adres">Ev Adresi</label>
-<<<<<<< HEAD
       <input type="text" class="form-control" name="adres"  required  id="adres">
-=======
-      <input type="text" class="form-control" required name="adres" id="adres">
->>>>>>> 82bd8e23e0f4a89d22de22e97ce49872dac3a455
     </div>
 
     <div class="form-group">

@@ -38,7 +38,7 @@
 
     <div class="form-group">
       <label for="telNo">Telefon</label>
-      <input type="tel" class="form-control" name="telNo" required placeholder="{533-333-3333}"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="telNo">
+      <input type="tel" class="form-control" name="telNo" required placeholder="{533-333-3333}" minlength="10" maxlength="10"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="telNo">
     </div>
     
 

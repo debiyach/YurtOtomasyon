@@ -66,7 +66,7 @@
 
                         <li class="nav-item ">
 
-                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">
+                            <a class="nav-link @if (Request::segment(2) == "hesap-ayarlari") active @endif" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">
                                 <i class="fa fa-fw fa-user-circle"></i>Hesap Ayarları <span class="badge badge-success"></span>
                             </a>
 
@@ -103,11 +103,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('personel.istekTalepList') }}" class="nav-link"><i class="fas fa-exclamation"></i>İstek / Şikayet Takip</a>
+                            <a href="{{ route('personel.istekTalepList') }}" class="nav-link @if (Request::segment(2) == "istek-talep-list") active @endif"><i class="fas fa-exclamation"></i>İstek / Şikayet Takip</a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('personel.izinTalep') }}" class="nav-link"><i class="far fa-calendar-alt "></i>İzin Talep</a>
+                            <a href="{{ route('personel.izinTalep') }}" class="nav-link @if (Request::segment(2) == "izin-talep") active @endif"><i class="far fa-calendar-alt "></i>İzin Talep</a>
                         </li>
 
                     </ul>
