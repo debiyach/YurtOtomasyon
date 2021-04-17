@@ -42,7 +42,9 @@ Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel']
     Route::get('/ogrenci-listele',fn() => view('personel.studentlist'))->name('ogrenciListele');
 
 
-
+    Route::group(['as'=>'ogrenci.','prefix'=>'ogrenci-islemleri'],function(){
+        Route::post('/ogrenci','Personel\OgrenciIslemleri\OgrenciEkle@ogrenciEkle')->name('ogrenciEkle');
+    });
 
 
 

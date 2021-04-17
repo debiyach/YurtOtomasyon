@@ -52,7 +52,7 @@
                 <div class="col-md-3 card bg-dark ml-3" v-for="(item,key) in changeYatak">
                     <div class="card-body" v-if="item.ogrenciId">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img :src="item.yatak_to_ogrenci.foto"
+                            <img :src="fotoYolu+item.yatak_to_ogrenci.foto"
                                  class="rounded-circle" width="150">
                             <div class="mt-3">
                                 <h4 class="text-white">{{ item.yatak_to_ogrenci.ad }} {{ item.yatak_to_ogrenci.soyad }}</h4>
@@ -262,7 +262,8 @@ export default {
             selectKat: false,
             changeYatak: false,
             ogrenciler: false,
-            yatakId: false
+            yatakId: false,
+            fotoYolu: 'http://localhost:8000/storage/ogrenci/profil/'
         }
     },
     methods: {
