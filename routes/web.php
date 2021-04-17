@@ -42,6 +42,12 @@ Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel']
     Route::get('/ogrenci-listele',fn() => view('personel.studentlist'))->name('ogrenciListele');
 
 
+    Route::group(['as'=>'ogrenci.','prefix'=>'ogrenci-islemleri'],function(){
+        Route::post('/ogrenci','Personel\OgrenciIslemleri\OgrenciEkle@ogrenciEkle')->name('ogrenciEkle');
+    });
+
+
+
     ## PERSONEL AJAX ##
     Route::post('/ajax/bina-ekle','Personel\OdaIslemleri@binaEkle')->name('ajax.binaEkle');
     Route::post('/ajax/kat-ekle','Personel\OdaIslemleri@katEkle')->name('ajax.katEkle');
@@ -55,7 +61,6 @@ Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel']
     Route::get('/ajax/oda-getir/','Personel\OdaIslemleri@odaGetir')->name('ajax.odaGetir');
     Route::get('/ajax/kat-getir/{id?}','Personel\OdaIslemleri@katGetir')->name('ajax.katGetir');
     Route::get('/ajax/yatak-getir/{id?}','Personel\OdaIslemleri@yatakGetir')->name('ajax.yatakGetir');
-
     ## PERSONEL AJAX END ##
 });
 

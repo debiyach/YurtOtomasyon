@@ -2131,7 +2131,8 @@ __webpack_require__.r(__webpack_exports__);
       selectKat: false,
       changeYatak: false,
       ogrenciler: false,
-      yatakId: false
+      yatakId: false,
+      fotoYolu: 'http://localhost:8000/storage/ogrenci/profil/'
     };
   },
   methods: {
@@ -20395,7 +20396,10 @@ var render = function() {
                     [
                       _c("img", {
                         staticClass: "rounded-circle",
-                        attrs: { src: item.yatak_to_ogrenci.foto, width: "150" }
+                        attrs: {
+                          src: _vm.fotoYolu + item.yatak_to_ogrenci.foto,
+                          width: "150"
+                        }
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "mt-3" }, [

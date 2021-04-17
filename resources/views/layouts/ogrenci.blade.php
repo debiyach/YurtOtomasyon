@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="{{asset("assets/libs/css/style.css")}}">
 <link rel="stylesheet" href="{{asset("assets/vendor/fonts/fontawesome/css/fontawesome-all.css")}}">
 <link rel="stylesheet" href="{{asset("assets/libs/css/mine.css")}}">
-
+    @yield('head.datatable')
 </head>
 
 <body>
@@ -22,7 +22,7 @@
 <div class="dashboard-main-wrapper">
     <!-- ============================================================== -->
     <!-- navbar -->
-    
+
 
 
     <!-- ============================================================== -->
@@ -59,7 +59,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav flex-column">
-                        
+
                         <div class="user">
                             <div class="user-photo">
                                 <img src="https://st.depositphotos.com/2101611/3925/v/950/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg" alt="profil">
@@ -79,7 +79,7 @@
                                 </li>
                             </ul>
                         </div>
-                        
+
                         <li class="nav-divider">
                             Hesap
                         </li>
@@ -89,10 +89,10 @@
                             <a class="nav-link @if (Request::segment(2) == "hesap-ayarlari") active @endif" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">
                                 <i class="fa fa-fw fa-user-circle"></i>Hesap Ayarları <span class="badge badge-success"></span>
                             </a>
-                        
+
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
-                                    
+
                                     <li class="nav-item">
                                         <li class="nav-item">
                                             <a href="{{ route('ogrenci.hesapAyarlari') }}" class="nav-link"><i class="fas fa-cogs"></i>Hesap Ayarları Düzenle</a>
@@ -103,9 +103,9 @@
                                     </li>
                                 </ul>
                             </div>
-                            
-                            
-                        </li> 
+
+
+                        </li>
 
                         <li class="nav-divider">
                             Menu
@@ -118,7 +118,7 @@
                         <li class="nav-item">
                             <a href="{{ route('ogrenci.istekTalep') }}" class="nav-link @if (Request::segment(2) == "istek-talep") active @endif"><i class="far fa-calendar-alt "></i>İstek/Şikayet Talep</a>
                         </li>
-                       
+
 
                     </ul>
                 </div>
@@ -135,7 +135,7 @@
 
 
     <div class="dashboard-wrapper  d-flex flex-column justify-content-between">
-        
+
         <div class="container-fluid dashboard-content">
             @yield('content')
         </div>
