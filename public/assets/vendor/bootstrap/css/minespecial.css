@@ -1,3 +1,14 @@
+.girissecim .card .geri {
+  position: absolute;
+  -webkit-transform: translate(-100%, 50%);
+          transform: translate(-100%, 50%);
+  padding-right: 5px;
+}
+
+.girissecim .card .geri:hover {
+  color: #007bff;
+}
+
 .girissecim .card .card-header .girisbaslik {
   font-size: 36px;
   font-weight: bolder;

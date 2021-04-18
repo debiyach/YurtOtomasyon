@@ -65,18 +65,12 @@
                                 <img src="https://st.depositphotos.com/2101611/3925/v/950/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg" alt="profil">
                             </div>
                             <ul>
+
                                 <li class="nav-item ">
-                                    <div class="baslik">Mail</div>
-                                    <div>{{ session()->get('ogrenci')->mail }}</div>
+                                    <div class="baslik">AD-SOYAD</div>
+                                    <div>{{ session()->get('ogrenci')->ad. ' ' .session()->get('ogrenci')->soyad }}</div>
                                 </li>
-                                <li class="nav-item ">
-                                    <div class="baslik">Yetki</div>
-                                    <div>Öğrenci</div>
-                                </li>
-                                <li class="nav-item ">
-                                    <div class="baslik">Kurum</div>
-                                    <div>Nusrat</div>
-                                </li>
+                                
                             </ul>
                         </div>
 
@@ -90,8 +84,27 @@
                                 <i class="fa fa-fw fa-user-circle"></i>Hesap Ayarları <span class="badge badge-success"></span>
                             </a>
 
-                            <div id="submenu-1" class="collapse submenu" style="">
+                            <div id="submenu-1" class="collapse submenu user2" style="">
                                 <ul class="nav flex-column">
+
+                                    <li class="nav-item">
+                                        <li class="nav-item">
+                                            <div class="baslik">Mail</div>
+                                            <div>{{ session()->get('ogrenci')->mail }}</div>
+                                        </li>
+                                    </li>
+                                    <li class="nav-item">
+                                        <li class="nav-item">
+                                            <div class="baslik">Yetki</div>
+                                            <div>Öğrenci</div>
+                                        </li>
+                                    </li>
+                                    <li class="nav-item">
+                                        <li class="nav-item">
+                                            <div class="baslik">Kurum</div>
+                                            <div>{{session()->get('ogrenci')->kurumId}}</div>
+                                        </li>
+                                    </li>
 
                                     <li class="nav-item">
                                         <li class="nav-item">
@@ -101,6 +114,9 @@
                                     <li class="nav-item">
                                         <a href="{{ route('ogrenci.logout') }}" class="nav-link"><i class="far fa-times-circle "></i>Çıkış</a>
                                     </li>
+
+                                    
+
                                 </ul>
                             </div>
 

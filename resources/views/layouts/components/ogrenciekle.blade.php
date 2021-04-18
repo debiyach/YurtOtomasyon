@@ -1,4 +1,4 @@
-<div class="col-6 mt-3 offset-3">
+<div class="col-md-6 mt-3 offset-md-3">
     @include('layouts.components.errors')
 
 <form enctype="multipart/form-data" method="POST" action="{{route('personel.ogrenci.ogrenciEkle')}}">

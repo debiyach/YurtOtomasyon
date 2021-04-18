@@ -19,6 +19,13 @@ Route::group(['middleware'=>'mudur','as' => 'mudur.','prefix'=>'mudur'],function
         session()->remove('personel');
         return view('index');
     })->name('logout');
+    Route::get('/hesap-ayarlari',fn() => view('mudur.accountsettings'))->name('hesapAyarlari');
+    Route::get('/personel-ekle',fn() => view('mudur.insertpersonel'))->name('personelEkle');
+    Route::get('/personel-listele',fn() => view('mudur.personellist'))->name('personelListele');
+    Route::get('/ogrenci-ekle',fn() => view('mudur.insertstudent'))->name('ogrenciEkle');
+    Route::get('/ogrenci-listele',fn() => view('mudur.studentlist'))->name('ogrenciListele');
+    Route::get('/istek-talep-list',fn() => view('mudur.istektaleplist'))->name('istekTalepList');
+
 });
 
 ## End Müdür Route İşlemleri ##
@@ -43,6 +50,7 @@ Route::group(['namespace'=>'Personel','middleware'=>'personel','as' => 'personel
     Route::get('/istek-talep-list',fn() => view('personel.istektaleplist'))->name('istekTalepList');
     Route::get('/izin-talep',fn() => view('personel.izintalep'))->name('izinTalep');
     Route::get('/ogrenci-listele',fn() => view('personel.studentlist'))->name('ogrenciListele');
+    Route::get('/personel-listele',fn() => view('personel.personelList'))->name('personelListele');
 
 
     Route::group(['prefix'=>'oda-islemleri','as'=>'odaIslemleri.'],function(){

@@ -1,5 +1,14 @@
 .girissecim{
     .card{
+
+        .geri{
+            position: absolute;
+            transform: translate(-100%,50%);
+            padding-right: 5px;
+            &:hover{
+                color:#007bff;
+            }
+        }
         .card-header{
             .girisbaslik{
                 

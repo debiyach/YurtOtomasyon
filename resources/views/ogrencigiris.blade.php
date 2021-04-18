@@ -5,7 +5,12 @@
 <div class="girissecim">
 
     <div class="card">
+        <a href="{{route('girisKontrol')}}" class="geri">
+            <i class="far fa-arrow-alt-circle-left fa-3x"></i>
+        </a>
+        
         <div class="card-header text-center">
+            
             <a href="#" class="girisbaslik">ÖĞRENCİ GİRİŞ EKRANI</a>
             <span class="splash-description">Lütfen boş bırakmayın!</span>
         </div>
