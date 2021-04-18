@@ -28,5 +28,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Katlar extends Model
 {
+    protected $fillable = ['kurumId','binaId','katAdi'];
     use HasFactory;
 }
