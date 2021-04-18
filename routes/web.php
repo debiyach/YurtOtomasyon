@@ -6,6 +6,11 @@ Route::get('/test', function () {
     return view('test');
 })->name('test');
 
+
+Route::post('linki','Personel\\Datatables\\TempTable@getStudents');
+Route::post('linki','Personel\\Datatables\\TempTablegetPersonels');
+
+
 Route::get('personel/d', fn()=> view('test'));
 
 
