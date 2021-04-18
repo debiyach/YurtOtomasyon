@@ -26,5 +26,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Binalar extends Model
 {
+    protected $fillable = ['binaAdi','kurumId','katAdi'];
     use HasFactory;
 }

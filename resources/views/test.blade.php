@@ -1,5 +1,6 @@
-@php
-    //session()->pull('ogrenciGiris');
-    dd(session()->get('personelGiris')->tip);
-
-    @endphp
+@isAddStudent
+  Öğrenci ekleyebilir.
+@endPerm
+@isAddPersonel
+Personel ekleyebilir.
+@endPerm

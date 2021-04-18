@@ -6,7 +6,12 @@ Route::get('/test', function () {
     return view('test');
 })->name('test');
 
-Route::get('personel/tablolar', 'deneme@index');
+
+Route::post('linki','Personel\\Datatables\\TempTable@getStudents');
+Route::post('linki','Personel\\Datatables\\TempTablegetPersonels');
+
+
+Route::get('personel/d', fn()=> view('test'));
 
 
 /* =========== !  =========== !  =========== !  =========== !  =========== !  =========== !  =========== ! */
@@ -35,13 +40,16 @@ Route::group(['middleware'=>'mudur','as' => 'mudur.','prefix'=>'mudur'],function
 //Route::get('/personel/ogrencilistele',[Listeleme::class,'index']);
 ## Personel Route İşlemleri ##
 
-Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel'],function(){
+Route::group(['namespace'=>'Personel','middleware'=>'personel','as' => 'personel.','prefix'=>'personel'],function(){
+
     Route::get('/',function (){ return view('personel.index');})->name('index');
     Route::get('/cikis-yap',function (){
         session()->remove('personel');
         return view('index');
     })->name('logout');
-    Route::get('/oda-islemleri','Personel\OdaIslemleri@odaSayfasi')->name('odaSayfasi');
+
+
+    Route::get('/oda-islemleri','OdaIslemleri@odaSayfasi')->name('odaSayfasi');
     Route::get('/hesap-ayarlari',fn() => view('personel.accountsettings'))->name('hesapAyarlari');
     Route::get('/ogrenci-ekle',fn() => view('personel.insertstudent'))->name('ogrenciEkle');
     Route::get('/personel-ekle',fn() => view('personel.insertpersonel'))->name('personelEkle');
@@ -51,26 +59,38 @@ Route::group(['middleware'=>'personel','as' => 'personel.','prefix'=>'personel']
     Route::get('/personel-listele',fn() => view('personel.personelList'))->name('personelListele');
 
 
-    Route::group(['as'=>'ogrenci.','prefix'=>'ogrenci-islemleri'],function(){
-        Route::post('/ogrenci','Personel\OgrenciIslemleri\OgrenciEkle@ogrenciEkle')->name('ogrenciEkle');
+    Route::group(['prefix'=>'oda-islemleri','as'=>'odaIslemleri.'],function(){
+        ## POST ##
+
+        Route::post('/bina-ekle','odaIslemleri@binaEkle')->name('binaEkle');
+        Route::post('/kat-ekle','odaIslemleri@katEkle')->name('katEkle');
+        Route::post('/oda-ekle','odaIslemleri@odaEkle')->name('odaEkle');
+        Route::post('/yatak-ekle','odaIslemleri@yatakEkle')->name('yatakEkle');
+
+        ## END POST ##
+
+        ##=========================================================================================##
+
+        ## GET ##
+
+        Route::get('/bina-getir','odaIslemleri@binaGetir')->name('binaGetir');
+        Route::get('/kat-getir/{id??}','odaIslemleri@katGetir')->name('katGetir');
+        Route::get('/oda-getir/{id??}','odaIslemleri@odaGetir')->name('odaGetir');
+        Route::get('/yatak-getir/{id??}','odaIslemleri@yatakGetir')->name('yatakGetir');
+        Route::get('/yatak-kaldir/{id??}','odaIslemleri@yatakKaldir')->name('yatakKaldir');
+
+        ## END GET ##
     });
 
 
 
-    ## PERSONEL AJAX ##
-    Route::post('/ajax/bina-ekle','Personel\OdaIslemleri@binaEkle')->name('ajax.binaEkle');
-    Route::post('/ajax/kat-ekle','Personel\OdaIslemleri@katEkle')->name('ajax.katEkle');
-    Route::post('/ajax/oda-ekle','Personel\OdaIslemleri@odaEkle')->name('ajax.odaEkle');
-    Route::post('/ajax/yatak-ekle','Personel\OdaIslemleri@yatakEkle')->name('ajax.yatakEkle');
-    Route::post('/ajax/ogrenci-ekle','Personel\OdaIslemleri@ogrenciEkle')->name('ajax.ogrenciEkle');
-    Route::post('/ajax/ogrenci-yatak-kaldir','Personel\OdaIslemleri@ogrenciYatakKaldir')->name('ajax.ogrenciYatakKaldir');
-    Route::post('/ajax/yatak-kaldir','Personel\OdaIslemleri@yatakKaldir')->name('ajax.yatakKaldir');
-    Route::get('/ajax/bina-getir/{notEmpty?}','Personel\OdaIslemleri@binaGetir')->name('ajax.binaGetir');
-    Route::get('/ajax/ogrenci-getir','Personel\OdaIslemleri@ogrenciGetir')->name('ajax.ogrenciGetir');
-    Route::get('/ajax/oda-getir/','Personel\OdaIslemleri@odaGetir')->name('ajax.odaGetir');
-    Route::get('/ajax/kat-getir/{id?}','Personel\OdaIslemleri@katGetir')->name('ajax.katGetir');
-    Route::get('/ajax/yatak-getir/{id?}','Personel\OdaIslemleri@yatakGetir')->name('ajax.yatakGetir');
-    ## PERSONEL AJAX END ##
+    Route::group(['as'=>'ogrenci.','prefix'=>'ogrenci-islemleri'],function(){
+        Route::post('/ogrenci','OgrenciIslemleri\OgrenciEkle@ogrenciEkle')->name('ogrenciEkle');
+    });
+
+
+
+
 });
 
 
