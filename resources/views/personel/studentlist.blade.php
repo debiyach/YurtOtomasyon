@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('layouts.components.ogrencilistele')
+    @include('layouts.components.ogrenci.ogrencilistele')
 
 @endsection
 

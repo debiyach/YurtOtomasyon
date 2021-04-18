@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('layouts.components.personellistele')
+    @include('layouts.components.personel.personellistele')
 
 @endsection
 

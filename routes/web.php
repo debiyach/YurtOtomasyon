@@ -19,6 +19,7 @@ Route::group(['middleware'=>'mudur','as' => 'mudur.','prefix'=>'mudur'],function
         session()->remove('personel');
         return view('index');
     })->name('logout');
+    
     Route::get('/hesap-ayarlari',fn() => view('mudur.accountsettings'))->name('hesapAyarlari');
     Route::get('/personel-ekle',fn() => view('mudur.insertpersonel'))->name('personelEkle');
     Route::get('/personel-listele',fn() => view('mudur.personellist'))->name('personelListele');

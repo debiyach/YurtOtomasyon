@@ -1,6 +1,6 @@
 @extends('layouts.personel')
 
 @section('content')
-    @include('layouts.components.ogrenciekle')
+    @include('layouts.components.ogrenci.ogrenciekle')
 
 @endsection

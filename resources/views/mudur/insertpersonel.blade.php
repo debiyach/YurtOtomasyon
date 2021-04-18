@@ -2,6 +2,6 @@
 
 @section('content')
     
-    @include('layouts.components.personelekle')
+    @include('layouts.components.personel.personelekle')
     
 @endsection
