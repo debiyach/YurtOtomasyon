@@ -11,6 +11,7 @@
     height: 100% !important;
 }
 
+
 /*   TOP HEADER DAKİ YURT ADININ RENGİ İDİ KENDİLERİ
 .yurtAdi{
     color:#007bff;
@@ -55,15 +56,85 @@
     }
 }
 
+.user2{
+    
+    ul{
+        padding: 12px;
+        list-style: none;
+        li{
+            margin-top: 5px;
+            &:first-child{
+                margin-top: 0; 
+            }
+            .baslik{
+                color:#7a80b4;
+                text-transform: uppercase;
+            }
+
+            div{
+                padding: 0px 12px;
+                color:white;
+            }
+        }
+    
+    }
+}
+
+
+.dataTables_paginate{
+    .fg-button{
+        color:#111;
+        cursor: pointer;
+        padding: 7.2px 14.4px;
+        border: 1px solid #111;
+        border-radius: 2px;
+        margin: 0 1px;
+        text-decoration: none;
+        &:hover{
+            background-color: #007bff;
+            color:white;  
+        }
+        &.ui-state-disabled{
+            &:hover{
+                background-color:white;
+                color:#111;
+                cursor: context-menu;  
+            }
+        }
+    }
+    span{
+        .fg-button{
+            color:#111;
+            cursor: pointer;
+            padding: 7.2px 14.4px;
+            border: 1px solid #111;
+            border-radius: 2px;
+            margin: 0 1px;
+            text-decoration: none;
+            &.ui-state-disabled{
+                background-color: #007bff;  
+                color:white;  
+            }
+        }
+    }
+    
+}
+
 
 
 
 
 
 @media screen and (max-width: 766px) {
-    .nav-left-sidebar{
-        height:50% !important;
+    
+    .dashboard-main-wrapper{
+        padding-top: 0 !important;
+        height: 100% !important;
     }
+    
+     .nav-left-sidebar{
+         height:50% !important;
+     }
     .user{
         .user-photo{
             img{

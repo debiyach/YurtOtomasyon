@@ -3,7 +3,7 @@
   @include('layouts.components.errors')
 </div>
 
-<div class="col-6 mt-3 offset-3">
+<div class="col-md-6 mt-3 offset-md-3">
 <form enctype="multipart/form-data">
 
     <div class="form-group">
@@ -66,7 +66,7 @@
       <input type="file" class="form-control" name="resim" value="{{old('resim')}}" required accept="image/*" id="resim">
     </div>
 
-    <button type="submit" class="btn btn-primary">Ekle</button>
+    <button type="submit" class="btn btn-primary col-12">Ekle</button>
 
   </form>
 </div>

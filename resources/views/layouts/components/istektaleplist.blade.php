@@ -1,6 +1,6 @@
 
 <div class="col-6 offset-3">
-  
+  istek talep listesi
   <table class="table" id="myTable">
     <thead>
       <tr>

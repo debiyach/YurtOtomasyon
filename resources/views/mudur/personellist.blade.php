@@ -1,7 +1,5 @@
 @extends('layouts.mudur')
 
 @section('content')
-    
-    @include('layouts.components.personelekle')
-    
+    @include('layouts.components.personellistele')
 @endsection

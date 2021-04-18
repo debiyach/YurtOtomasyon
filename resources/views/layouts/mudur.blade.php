@@ -66,17 +66,11 @@
                             </div>
                             <ul>
                                 <li class="nav-item ">
-                                    <div class="baslik">Mail</div>
-                                    <div>mudur@gmail.com</div>
+                                    <div class="baslik">Ad - Soyad</div>
+                                    <div>{{session()->get('personel')->ad . ' ' . session()->get('personel')->soyad}}</div>
                                 </li>
-                                <li class="nav-item ">
-                                    <div class="baslik">Yetki</div>
-                                    <div>Mudur</div>
-                                </li>
-                                <li class="nav-item ">
-                                    <div class="baslik">Kurum</div>
-                                    <div>Nusrat</div>
-                                </li>
+
+                                
                             </ul>
                         </div>
                         
@@ -86,16 +80,31 @@
 
                         <li class="nav-item ">
                             
-                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">
+                            <a class="nav-link @if (Request::segment(2) == "hesap-ayarlari") active @endif" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">
                                 <i class="fa fa-fw fa-user-circle"></i>Hesap Ayarları <span class="badge badge-success"></span>
                             </a>
                         
-                            <div id="submenu-1" class="collapse submenu" style="">
+                            <div id="submenu-1" class="collapse submenu user2" style="">
                                 <ul class="nav flex-column">
                                     
+                                    <li class="nav-item ">
+                                        <div class="baslik">Mail</div>
+                                        <div>{{ session()->get('personel')->mail }}</div>
+                                    </li>
+    
+                                    <li class="nav-item ">
+                                        <div class="baslik">Yetki</div>
+                                        <div>Mudur</div>
+                                    </li>
+    
+                                    <li class="nav-item ">
+                                        <div class="baslik">Kurum</div>
+                                        <div>{{ session()->get('personel')->kurumId }}</div>
+                                    </li>
+
                                     <li class="nav-item">
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link"><i class="fas fa-cogs"></i>Hesap Ayarları Düzenle</a>
+                                            <a href="{{ route('mudur.hesapAyarlari') }}" class="nav-link"><i class="fas fa-cogs"></i>Hesap Ayarları Düzenle</a>
                                         </li>
                                     </li>
                                     <li class="nav-item">
@@ -112,11 +121,19 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="fas fa-user-plus"></i>Yeni Öğrenci Kayıt</a>
+                            <a href="{{Route('mudur.ogrenciEkle')}}" class="nav-link @if (Request::segment(2) == "ogrenci-ekle") active @endif"><i class="fas fa-user-plus"></i>Yeni Öğrenci Kayıt</a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="fas fa-address-card"></i>Yeni Personel Kayıt</a>
+                            <a href="{{Route('mudur.personelEkle')}}" class="nav-link @if (Request::segment(2) == "personel-ekle") active @endif"><i class="fas fa-address-card"></i>Yeni Personel Kayıt</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{Route('mudur.ogrenciListele')}}" class="nav-link @if (Request::segment(2) == "ogrenci-listele") active @endif"><i class="fas fa-clipboard-list"></i>Öğrenci Listesi</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{Route('mudur.personelListele')}}" class="nav-link @if (Request::segment(2) == "personel-listele") active @endif"><i class="fas fa-clipboard-list"></i>Personel Listesi</a>
                         </li>
 
                         <li class="nav-item">
@@ -124,7 +141,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><i class="fas fa-exclamation"></i>İstek / Şikayet Takip</a>
+                            <a href="{{Route('mudur.istekTalepList')}}" class="nav-link @if (Request::segment(2) == "istek-talep-list") active @endif"><i class="fas fa-exclamation"></i>İstek / Şikayet Takip</a>
                         </li>
                        
 

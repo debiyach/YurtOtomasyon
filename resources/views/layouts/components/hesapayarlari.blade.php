@@ -3,7 +3,7 @@
   @include('layouts.components.errors')
 </div>
 
-<div class="col-8 offset-2">
+<div class="col-sm-8 offset-1 offset-sm-2 ">
   
 
     <div class="d-flex ">
@@ -60,7 +60,7 @@
             <input type="password" value="{{old('yeniSifreTekrar')}}" name="yeniSifreTekrar" class="form-control" id="yeniSifreTekrar">
           </div>
           
-          <button type="submit" class="btn btn-primary mt-5  col-12">Güncelle</button>
+          <button type="submit" class="btn btn-primary mt-5 col-12">Güncelle</button>
         </form>
       </div>
 

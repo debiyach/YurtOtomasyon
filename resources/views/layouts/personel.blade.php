@@ -45,18 +45,7 @@
                                     <div class="baslik">Ad - Soyad</div>
                                     <div>{{session()->get('personel')->ad . ' ' . session()->get('personel')->soyad}}</div>
                                 </li>
-                                <li class="nav-item ">
-                                    <div class="baslik">Mail</div>
-                                    <div>{{session()->get('personel')->mail}}</div>
-                                </li>
-                                <li class="nav-item ">
-                                    <div class="baslik">Yetki</div>
-                                    <div>{{session()->get('personel')->tip}}</div>
-                                </li>
-                                <li class="nav-item ">
-                                    <div class="baslik">Kurum</div>
-                                    <div>{{session()->get('personel')->kurumId}}</div>
-                                </li>
+                                
                             </ul>
                         </div>
 
@@ -70,8 +59,27 @@
                                 <i class="fa fa-fw fa-user-circle"></i>Hesap Ayarları <span class="badge badge-success"></span>
                             </a>
 
-                            <div id="submenu-1" class="collapse submenu" style="">
+                            <div id="submenu-1" class="collapse submenu user2" style="">
                                 <ul class="nav flex-column">
+
+                                    <li class="nav-item">
+                                        <li class="nav-item">
+                                            <div class="baslik">Mail</div>
+                                            <div>{{ session()->get('personel')->mail }}</div>
+                                        </li>
+                                    </li>
+                                    <li class="nav-item">
+                                        <li class="nav-item">
+                                            <div class="baslik">Yetki</div>
+                                            <div>Personel</div>
+                                        </li>
+                                    </li>
+                                    <li class="nav-item">
+                                        <li class="nav-item">
+                                            <div class="baslik">Kurum</div>
+                                            <div>{{session()->get('personel')->kurumId}}</div>
+                                        </li>
+                                    </li>
 
                                     <li class="nav-item">
                                         <li class="nav-item">
@@ -98,8 +106,17 @@
                         <li class="nav-item">
                             <a href="{{ route('personel.ogrenciEkle') }}"  class="nav-link @if (Request::segment(2) == "ogrenci-ekle") active @endif"><i class="fas fa-user-plus"></i>Yeni Öğrenci Kayıt</a>
                         </li>
+
                         <li class="nav-item">
                             <a href="{{ route('personel.personelEkle') }}"  class="nav-link @if (Request::segment(2) == "personel-ekle") active @endif"><i class="fas fa-user-plus"></i>Personel Kayıt</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{Route('personel.ogrenciListele')}}" class="nav-link @if (Request::segment(2) == "ogrenci-listele") active @endif"><i class="fas fa-clipboard-list"></i>Öğrenci Listesi</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{Route('personel.personelListele')}}" class="nav-link @if (Request::segment(2) == "personel-listele") active @endif"><i class="fas fa-clipboard-list"></i>Personel Listesi</a>
                         </li>
 
                         <li class="nav-item">
