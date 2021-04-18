@@ -9,17 +9,17 @@
         
         <div class="form-group">
             <label for="aciklama">Aciklama</label>
-            <input type="text" class="form-control" name="aciklama" required id="aciklama">
+            <input type="text" class="form-control" name="aciklama" value="{{old('aciklama')}}" required id="aciklama">
         </div>
       
         <div class="form-group">
             <label for="izinBaslangic">İzin Baslangic</label>
-            <input type="date" class="form-control" name="izinBaslangic" required id="izinBaslangic">
+            <input type="date" class="form-control" name="izinBaslangic" value="{{old('izinBaslangic')}}" required id="izinBaslangic">
         </div>
       
         <div class="form-group">
             <label for="izinBitis">İzin Bitis</label>
-            <input type="date" class="form-control" name="izinBitis" required id="izinBitis">
+            <input type="date" class="form-control" name="izinBitis" value="{{old('izinBitis')}}" required id="izinBitis">
         </div>
         <input type="submit" class="btn btn-primary">
 
