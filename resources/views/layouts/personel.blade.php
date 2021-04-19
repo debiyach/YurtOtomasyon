@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="{{asset("assets/vendor/fonts/fontawesome/css/fontawesome-all.css")}}">
 <link rel="stylesheet" href="{{asset("assets/libs/css/mine.css")}}">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
+@yield('head.datatable')
 </head>
 
 <body>

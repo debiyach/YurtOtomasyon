@@ -3,7 +3,7 @@
 @section('content')
 
     @include('layouts.components.ogrenci.ogrencilistele')
-
+    
 @endsection
 
 @section('script')
@@ -20,7 +20,7 @@
                     [10, 15, 25, 50, 100]
                 ],
                 "ajax": {
-                    url: routeburadatanımlar '{{route('linki')}}',
+                    url: "{{route('ogrencigetir')}}",
                     headers: {
                         'X-CSRF-TOKEN': '{{csrf_token()}}', // Bu alanı elleme
                     },
@@ -28,10 +28,16 @@
                     },
                     type: "POST"
                 },
-                "columnDefs": [{
-                    "target": [0, 3, 4],
-                    "orderable": false,
-                }],
+                columns: [
+                    {data:'ad'},
+                    {data:'soyad'},
+                    {data:'mail'},
+                    {data:'telNo'},
+                    {data:'tcNo'},
+                    {data:'odaNo'}
+                ],
+                
+
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
                 },

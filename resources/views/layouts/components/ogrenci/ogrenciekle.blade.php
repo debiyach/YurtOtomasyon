@@ -1,3 +1,13 @@
+@if (session('success'))
+  <div class="col-md-6 offset-md-3 alert alert-success">
+    Öğrenci başarıyla kayıt edildi
+  </div>
+@endif
+
+<div class="col-12">
+
+</div>
+
 <div class="col-md-6 mt-3 offset-md-3">
     @include('layouts.components.errors')
 
@@ -25,7 +35,7 @@
 
     <div class="form-group">
       <label for="tcNo">T.C No</label>
-      <input type="number" class="form-control" name="tcNo" required min="11" value="{{old('tcNo')}}" maxlength="11" required id="tcNo">
+      <input type="text" class="form-control" name="tcNo" required minlength="11" maxlength="11" value="{{old('tcNo')}}"  required id="tcNo">
     </div>
 
     <div class="form-group">
@@ -38,7 +48,7 @@
       <input type="file" class="form-control" name="resim" value="{{old('resim')}}" required accept="image/*" id="resim">
     </div>
 
-    <button type="submit" class="btn btn-primary">Ekle</button>
+    <button type="submit" class="btn btn-primary col-12">Ekle</button>
 
   </form>
 </div>

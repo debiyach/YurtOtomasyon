@@ -36,7 +36,7 @@
 
     <div class="form-group">
       <label for="tcNo">T.C No</label>
-      <input type="number" class="form-control" name="tcNo" value="{{old('tcNo')}}" required min="11" maxlength="11"  id="tcNo">
+      <input type="text" class="form-control" name="tcNo" value="{{old('tcNo')}}" required min="11" maxlength="11"  id="tcNo">
     </div>
 
     <div class="form-group">

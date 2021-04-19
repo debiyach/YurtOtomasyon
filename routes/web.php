@@ -7,9 +7,8 @@ Route::get('/test', function () {
 })->name('test');
 
 
-Route::post('linki','Personel\\Datatables\\TempTable@getStudents');
-Route::post('linki','Personel\\Datatables\\TempTablegetPersonels');
-
+Route::post('linki','Personel\\Datatables\\TempTable@getStudents')->name('ogrencigetir');
+Route::post('linki1','Personel\\Datatables\\TempTable@getPersonels')->name('personelgetir');
 
 Route::get('personel/d', fn()=> view('test'));
 
@@ -56,7 +55,7 @@ Route::group(['namespace'=>'Personel','middleware'=>'personel','as' => 'personel
     Route::get('/istek-talep-list',fn() => view('personel.istektaleplist'))->name('istekTalepList');
     Route::get('/izin-talep',fn() => view('personel.izintalep'))->name('izinTalep');
     Route::get('/ogrenci-listele',fn() => view('personel.studentlist'))->name('ogrenciListele');
-    Route::get('/personel-listele',fn() => view('personel.personelList'))->name('personelListele');
+    Route::get('/personel-listele',fn() => view('personel.personellist'))->name('personelListele');
 
 
     Route::group(['prefix'=>'oda-islemleri','as'=>'odaIslemleri.'],function(){
