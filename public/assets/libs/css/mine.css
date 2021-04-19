@@ -74,42 +74,6 @@
   color: white;
 }
 
-.dataTables_paginate .fg-button {
-  color: #111;
-  cursor: pointer;
-  padding: 7.2px 14.4px;
-  border: 1px solid #111;
-  border-radius: 2px;
-  margin: 0 1px;
-  text-decoration: none;
-}
-
-.dataTables_paginate .fg-button:hover {
-  background-color: #007bff;
-  color: white;
-}
-
-.dataTables_paginate .fg-button.ui-state-disabled:hover {
-  background-color: white;
-  color: #111;
-  cursor: context-menu;
-}
-
-.dataTables_paginate span .fg-button {
-  color: #111;
-  cursor: pointer;
-  padding: 7.2px 14.4px;
-  border: 1px solid #111;
-  border-radius: 2px;
-  margin: 0 1px;
-  text-decoration: none;
-}
-
-.dataTables_paginate span .fg-button.ui-state-disabled {
-  background-color: #007bff;
-  color: white;
-}
-
 @media screen and (max-width: 766px) {
   .dashboard-main-wrapper {
     padding-top: 0 !important;

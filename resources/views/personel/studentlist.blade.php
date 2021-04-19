@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     @include('layouts.components.ogrenci.ogrencilistele')
     
 @endsection
@@ -63,6 +64,7 @@
                 ]
             });
         });
+        
     </script>
 
 @endsection
