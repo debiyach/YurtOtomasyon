@@ -2,9 +2,8 @@
 
 @section('content')
 
-
     @include('layouts.components.ogrenci.ogrencilistele')
-    
+
 @endsection
 
 @section('script')
@@ -37,7 +36,7 @@
                     {data:'tcNo'},
                     {data:'odaNo'}
                 ],
-                
+
 
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
@@ -64,7 +63,7 @@
                 ]
             });
         });
-        
+
     </script>
 
 @endsection

@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Kurum::factory(100)->create();
         \App\Models\Ogrenci::factory(100)->create();
         \App\Models\Personel::factory(100)->create();
+        \App\Models\IslemCesitleri::logSeeder();
     }
 }
