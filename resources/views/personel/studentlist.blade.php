@@ -11,7 +11,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#usersDatatable').DataTable({
+            var table = $('#usersDatatable').DataTable({
                 "processing": true,
                 "serverSide": true,
                 "order": [],
@@ -30,6 +30,7 @@
                     type: "POST"
                 },
                 columns: [
+                    {data:'id'},
                     {data:'ad'},
                     {data:'soyad'},
                     {data:'mail'},
@@ -37,6 +38,14 @@
                     {data:'tcNo'},
                     {data:'odaNo'}
                 ],
+                
+                "columnDefs": [ {
+                "targets": 7,
+                "data": "id",
+                "mRender": function(data, type, full) { 
+                        return '<a class="btn btn-primary" href={{route('personel.izinTalep')}}/' + data + '>' + 'Düzenle' + '</a>';
+                    }
+                } ],
                 
 
                 "language": {
@@ -63,8 +72,13 @@
                     }
                 ]
             });
+
+            $('#usersDatatable tbody').on('click', 'button', function () {
+                var data = table.row( $(this).parents('tr') ).data();
+                alert( data[0] +"'s salary is: "+ data[ 5 ] );
+            } );
         });
-        
+       
     </script>
 
 @endsection

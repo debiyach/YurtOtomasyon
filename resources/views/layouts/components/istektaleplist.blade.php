@@ -1,5 +1,4 @@
-
-  <div class="col-8 offset-2">
+<div class="col-8 offset-2">
     <table id="usersDatatable" class="uk-table uk-table-hover uk-table-striped" style="width:100%">
         <thead>
             <tr>
@@ -12,4 +11,3 @@
 
     </table>
 </div>
-
