@@ -35,8 +35,8 @@ class GenelIslemler extends Controller
             case 'sikayet':
                 $tip = 'Şikayet';
                 break;
-            case 'izin':
-                $tip = 'İzin';
+            case 'istek':
+                $tip = 'istek';
                 break;
             case 'ariza':
                 $tip = 'Arıza Bildirimi';

@@ -32,7 +32,7 @@ class HesapIslemleri extends Controller
         if($request->yeniSifre === $request->yeniSifreTekrar){
             $ogrenci = Ogrenci::findOrFail(session()->get('ogrenci')->id);
             if (\Hash::check($request->sifre,$ogrenci->sifre)){
-                $ogrenci->sifre = $request->yeniSifreTekrar;
+                $ogrenci->sifre = \Hash::make($request->yeniSifreTekrar);
                 $result = $ogrenci->save();
                 if ($result){
                     $ogrenci = Ogrenci::findOrFail(session()->get('ogrenci')->id);

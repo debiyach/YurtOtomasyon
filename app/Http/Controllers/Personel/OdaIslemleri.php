@@ -57,7 +57,7 @@ class OdaIslemleri extends Controller
                                 <p class="text-muted font-size-sm">' . $yatak->yatakToOgrenci->mail . '</p>
                                 <p class="text-secondary mb-1">Yatak Adı : ' . $yatak->yatakAdi . '</p>
                                 <p class="text-muted font-size-sm">Yatak No : ' . $yatak->yatakNo . '</p>
-                                <button class="btn btn-outline-danger" onclick="ogrenciKaldir('. $yatak->yatakToOgrenci->id.')">Kaldır</button>
+                                <button class="btn btn-outline-danger" onclick="ogrenciKaldir(' . $yatak->yatakToOgrenci->id . ')">Kaldır</button>
                             </div>
                         </div>
                     </div>
@@ -110,10 +110,10 @@ class OdaIslemleri extends Controller
                 ['binaAdi' => $request->binaAdi, 'kurumId' => session()->get('personel')->kurumId],
                 ['created_at' => now(), 'updated_at' => now()]
             );
-            if($binalar){
-                Logs::personelLog(Writer::BinaEkle,Writer::BinaEkle($request->binaAdi));
+            if ($binalar) {
+                Logs::personelLog(Writer::BinaEkle, Writer::BinaEkle($request->binaAdi));
                 return response(['type' => 'success', 'message' => 'Bina başarıyla eklendi!']);
-            }else return response(['type' => 'error', 'message' => 'Bina eklenirken hata oluştu!']);
+            } else return response(['type' => 'error', 'message' => 'Bina eklenirken hata oluştu!']);
         } else return response(['type' => 'error', 'message' => 'Bina ekleme yetkiniz yok!']);
 
     }
@@ -131,10 +131,10 @@ class OdaIslemleri extends Controller
                 ['created_at' => now(), 'updated_at' => now()]
             );
 
-            if($katlar){
-                Logs::personelLog(Writer::KatEkle,Writer::KatEkle($request->binaNo,$request->katAdi));
+            if ($katlar) {
+                Logs::personelLog(Writer::KatEkle, Writer::KatEkle($request->binaNo, $request->katAdi));
                 return response(['type' => 'success', 'message' => 'Kat başarıyla eklendi!']);
-            }else return response(['type' => 'error', 'message' => 'Kat eklenirken hata oluştu!']);
+            } else return response(['type' => 'error', 'message' => 'Kat eklenirken hata oluştu!']);
         } else return response(['type' => 'error', 'message' => 'Kat ekleme yetkiniz yok!']);
 
     }
@@ -163,10 +163,10 @@ class OdaIslemleri extends Controller
             $odalar->odaNo = $request->odaNo;
             $odalar->odaAdi = $request->odaAdi;
             $result = $odalar->save();
-            if($result){
-                Logs::personelLog(Writer::OdaEkle,Writer::OdaEkle($request->binaNo,$request->odaNo));
+            if ($result) {
+                Logs::personelLog(Writer::OdaEkle, Writer::OdaEkle($request->binaNo, $request->odaNo));
                 return response(['type' => 'success', 'message' => 'Oda başarıyla eklendi!']);
-            }else return response(['type' => 'error', 'message' => 'Oda eklenirken hata oluştu!']);
+            } else return response(['type' => 'error', 'message' => 'Oda eklenirken hata oluştu!']);
         } else return response(['type' => 'error', 'message' => 'Oda ekleme yetkiniz yok!']);
     }
 
@@ -198,10 +198,10 @@ class OdaIslemleri extends Controller
             $yataklar->yatakAdi = $request->yatakAdi;
             $yataklar->yatakNo = $request->yatakNo;
             $result = $yataklar->save();
-            if($result){
-                Logs::personelLog(Writer::YatakEkle,Writer::YatakEkle($request->odaNo, $request->yatakAdi));
+            if ($result) {
+                Logs::personelLog(Writer::YatakEkle, Writer::YatakEkle($request->odaNo, $request->yatakAdi));
                 return response(['type' => 'success', 'message' => 'Yatak başarıyla eklendi!']);
-            }else return response(['type' => 'error', 'message' => 'Yatak eklenirken hata oluştu!']);
+            } else return response(['type' => 'error', 'message' => 'Yatak eklenirken hata oluştu!']);
         } else return response(['type' => 'error', 'message' => 'Yatak ekleme yetkiniz yok!']);
 
     }
@@ -220,12 +220,19 @@ class OdaIslemleri extends Controller
             ]);
 
             $ogr = Ogrenci::findOrFail($request->ogrNo);
-            //dd($ogr->katNo);
             if (!$ogr->yatakNo && !$ogr->odaNo && !$ogr->katNo) {
+                $yatak = Yataklar::find($request->yatakId);
                 $ekle = Yataklar::where('id', $request->yatakId)->where('kurumId', $ogr->kurumId);
                 $ekle->update(['ogrenciId' => $request->ogrNo]);
-                Ogrenci::where('id', $request->ogrNo)->update(['yatakNo' => $request->yatakId]);
-                Logs::personelLog(Writer::OgrenciYatakEkle,Writer::OgrenciYatakEkle($request->ogrNo,$request->yatakId));
+                Ogrenci::where('id', $request->ogrNo)->update(
+                    [
+                        'yatakNo' => $request->yatakId,
+                        'binaNo' => $yatak->binaId,
+                        'odaNo' => $yatak->odaId,
+                        'katNo' => $yatak->katId
+                    ]
+                );
+                Logs::personelLog(Writer::OgrenciYatakEkle, Writer::OgrenciYatakEkle($request->ogrNo, $request->yatakId));
                 return response(['type' => "success", 'message' => 'Öğrenci yatağa eklendi!']);
             } else return response(['type' => "error", 'message' => 'Öğrenci birden fazla yatakta bulunamaz!']);
         } else return response(['type' => 'error', 'message' => 'Öğrenciyi yatağa ekleme yetkiniz yok!']);
@@ -238,12 +245,17 @@ class OdaIslemleri extends Controller
                 'ogrid' => 'required'
             ]);
             $r3 = Yataklar::where('ogrenciId', $request->ogrid)->get();
-            $r1 = Ogrenci::where('id', $request->ogrid)->update(['yatakNo' => null]);
+            $r1 = Ogrenci::where('id', $request->ogrid)->update([
+                'yatakNo' => null,
+                'binaNo' => null,
+                'odaNo' => null,
+                'katNo' => null
+            ]);
             $r2 = Yataklar::where('ogrenciId', $request->ogrid)->update(['ogrenciId' => null]);
-            if($r2 && $r1){
-                Logs::personelLog(Writer::OgrenciYatakKaldir,Writer::OgrenciYatakKaldir($request->ogrid,$r3[0]->id));
+            if ($r2 && $r1) {
+                Logs::personelLog(Writer::OgrenciYatakKaldir, Writer::OgrenciYatakKaldir($request->ogrid, $r3[0]->id));
                 return response(['type' => 'success', 'message' => 'Öğrenci yataktan başarıyla kaldırıldı!']);
-            }else return response(['type' => 'error', 'message' => 'Bir hata oluştu!']);
+            } else return response(['type' => 'error', 'message' => 'Bir hata oluştu!']);
         } else return response(['type' => 'error', 'message' => 'Öğrenciyi yataktan kaldırma yetkiniz yok!']);
 
     }
@@ -252,10 +264,10 @@ class OdaIslemleri extends Controller
     {
         if (json_decode(session()->get('personel')->yetki)->yatakKaldir === \App\Helpers\Writer::Ekle) {
             $result = Yataklar::find($id)->delete();
-            if($result){
-                Logs::personelLog(Writer::YatakKaldir,Writer::yatakKaldir($id));
+            if ($result) {
+                Logs::personelLog(Writer::YatakKaldir, Writer::yatakKaldir($id));
                 return response(['type' => 'success', 'message' => 'Yatak başarıyla kaldırıldı!']);
-            }else return response(['type' => 'error', 'message' => 'Yatak kaldırılırken hata oluştu!']);
+            } else return response(['type' => 'error', 'message' => 'Yatak kaldırılırken hata oluştu!']);
         } else return response(['type' => 'error', 'message' => 'Yatak kaldırma yetkiniz yok!']);
     }
 

@@ -60,6 +60,8 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
 
         ## GENEL POST İSTEKLERİ ##
 
+        Route::post('/hesap-ayarlari/duzenle','HesapIslemleri@hesapDuzenlePost')->name('hesapDuzenlePost');
+        Route::post('/hesap-ayarlari/sifre-duzenle','HesapIslemleri@hesapSifreDuzenlePost')->name('hesapSifreDuzenlePost');
         Route::post('/izin-talep/post','GenelIslemler@izinTalep')->name('izinTalepPost');
         Route::post('/personel-ekle/post','GenelIslemler@persoenlEkle')->name('personelEklePost');
         Route::post('/personel-set-yetki','GenelIslemler@personelSetYetki')->name('personelSetYetki');
