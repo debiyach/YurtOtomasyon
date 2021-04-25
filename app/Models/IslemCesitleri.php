@@ -22,4 +22,24 @@ class IslemCesitleri extends Model
 {
     protected $table  = 'islemcesitleri';
     use HasFactory;
+
+    public static function logSeeder(){
+        $logs = [
+            "Giriş yapıldı.",
+            "Çıkış yapıldı.",
+            "Bina eklendi.",
+            "Kat eklendi.",
+            "Oda eklendi.",
+            "Yatak eklendi.",
+            "Yatak kaldırdı.",
+            "Öğrenci yataktan kaldırdı.",
+            "Yeni bir öğrenci ekledi.",
+            "Öğrenci yatağa eklendi.",
+        ];
+        foreach ($logs as $log){
+            self::insert([
+                'tip' => $log
+            ]);
+        }
+    }
 }

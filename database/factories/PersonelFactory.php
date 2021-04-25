@@ -34,7 +34,15 @@ class PersonelFactory extends Factory
             'mail' => $this->faker->email,
             'sifre' => \Hash::make('123456'),
             'tip' => (rand(0, 1) == 1) ? 'Personel' : 'Müdür',
-            'yetki' => json_encode(['isPerm' => 1]),
+            'yetki' => json_encode([
+                'binaEkle' => 1,
+                'katEkle' => 1,
+                'odaEkle' => 1,
+                "yatakEkle" => 1,
+                "yatakKaldir" => 1,
+                'ogrenciYatakKaldir' => 1,
+                "ogrenciYatakEkle" =>1
+            ]),
             'maas' => json_encode(['maasOdendi' => (rand(0, 1) == 1) ? true : false, 'maasMiktari' => rand(3000, 7000)])
         ];
     }

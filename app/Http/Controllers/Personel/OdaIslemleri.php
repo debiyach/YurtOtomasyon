@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Personel;
 
+use App\Helpers\Writer;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Logs\Logs;
 use App\Models\Binalar;
 use App\Models\Katlar;
 use App\Models\Odalar;
@@ -46,16 +48,16 @@ class OdaIslemleri extends Controller
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="'.$yatak->yatakToOgrenci->foto.'" alt=""
+                            <img src="' . $yatak->yatakToOgrenci->foto . '" alt=""
                                  class="rounded-circle"
                                  width="150">
                             <div class="mt-3">
-                                <h4>'.$yatak->yatakToOgrenci->ad.' '.$yatak->yatakToOgrenci->soyad.'</h4>
-                                <p class="text-secondary mb-1">'.$yatak->yatakToOgrenci->ad.' '.$yatak->yatakToOgrenci->soyad.'</p>
-                                <p class="text-muted font-size-sm">'.$yatak->yatakToOgrenci->mail.'</p>
+                                <h4>' . $yatak->yatakToOgrenci->ad . ' ' . $yatak->yatakToOgrenci->soyad . '</h4>
+                                <p class="text-secondary mb-1">' . $yatak->yatakToOgrenci->ad . ' ' . $yatak->yatakToOgrenci->soyad . '</p>
+                                <p class="text-muted font-size-sm">' . $yatak->yatakToOgrenci->mail . '</p>
                                 <p class="text-secondary mb-1">Yatak Adı : ' . $yatak->yatakAdi . '</p>
                                 <p class="text-muted font-size-sm">Yatak No : ' . $yatak->yatakNo . '</p>
-                                <button class="btn btn-outline-danger">Kaldır</button>
+                                <button class="btn btn-outline-danger" onclick="ogrenciKaldir('. $yatak->yatakToOgrenci->id.')">Kaldır</button>
                             </div>
                         </div>
                     </div>
@@ -71,11 +73,11 @@ class OdaIslemleri extends Controller
                                  class="rounded-circle"
                                  width="150">
                             <div class="mt-3">
-                                <h4>John Doe</h4>
+                                <h4>Boş Yatak</h4>
                                 <p class="text-secondary mb-1">Yatak Adı : ' . $yatak->yatakAdi . '</p>
                                 <p class="text-muted font-size-sm">Yatak No : ' . $yatak->yatakNo . '</p>
                                 <button onclick="deleteBed(\'' . route('personel.odaIslemleri.yatakKaldir') . '/' . $yatak->id . '\')" class="btn delete-bed btn-outline-danger">Kaldır</button>
-                                <button class="btn ogrenci-ekle btn-outline-success">Ekle</button>
+                                <button onclick="addBed(' . $yatak->id . ')" class="btn ogrenci-ekle btn-outline-success">Ekle</button>
                             </div>
                         </div>
                     </div>
@@ -83,8 +85,7 @@ class OdaIslemleri extends Controller
             </div>';
                 }
             }
-        }
-        else $result = '<div class="alert alert-danger" role="alert">
+        } else $result = '<div class="alert alert-danger" role="alert">
                           Oda da yatak bulunamadı!
                         </div>';
 
@@ -100,95 +101,108 @@ class OdaIslemleri extends Controller
 
     public function binaEkle(Request $request)
     {
-        $request->validate([
-            'binaAdi' => 'required|min:2'
-        ]);
+        if (json_decode(session()->get('personel')->yetki)->binaEkle === \App\Helpers\Writer::Ekle) {
+            $request->validate([
+                'binaAdi' => 'required|min:2'
+            ]);
 
-        $binalar = Binalar::firstOrCreate(
-            ['binaAdi' => $request->binaAdi, 'kurumId' => session()->get('personel')->kurumId],
-            ['created_at' => now(), 'updated_at' => now()]
-        );
+            $binalar = Binalar::firstOrCreate(
+                ['binaAdi' => $request->binaAdi, 'kurumId' => session()->get('personel')->kurumId],
+                ['created_at' => now(), 'updated_at' => now()]
+            );
+            if($binalar){
+                Logs::personelLog(Writer::BinaEkle,Writer::BinaEkle($request->binaAdi));
+                return response(['type' => 'success', 'message' => 'Bina başarıyla eklendi!']);
+            }else return response(['type' => 'error', 'message' => 'Bina eklenirken hata oluştu!']);
+        } else return response(['type' => 'error', 'message' => 'Bina ekleme yetkiniz yok!']);
 
-        return ($binalar) ?
-            response(['type' => 'success', 'message' => 'Bina başarıyla eklendi!']) :
-            response(['type' => 'error', 'message' => 'Bina eklenirken hata oluştu!']);
     }
 
     public function katEkle(Request $request)
     {
-        $request->validate([
-            'binaNo' => 'required',
-            'katAdi' => 'required'
-        ]);
+        if (json_decode(session()->get('personel')->yetki)->katEkle === \App\Helpers\Writer::Ekle) {
+            $request->validate([
+                'binaNo' => 'required',
+                'katAdi' => 'required'
+            ]);
 
-        $katlar = Katlar::firstOrCreate(
-            ['katAdi' => $request->katAdi, 'kurumId' => session()->get('personel')->kurumId, 'binaId' => $request->binaNo],
-            ['created_at' => now(), 'updated_at' => now()]
-        );
+            $katlar = Katlar::firstOrCreate(
+                ['katAdi' => $request->katAdi, 'kurumId' => session()->get('personel')->kurumId, 'binaId' => $request->binaNo],
+                ['created_at' => now(), 'updated_at' => now()]
+            );
 
-        return ($katlar) ?
-            response(['type' => 'success', 'message' => 'Kat başarıyla eklendi!']) :
-            response(['type' => 'error', 'message' => 'Kat eklenirken hata oluştu!']);
+            if($katlar){
+                Logs::personelLog(Writer::KatEkle,Writer::KatEkle($request->binaNo,$request->katAdi));
+                return response(['type' => 'success', 'message' => 'Kat başarıyla eklendi!']);
+            }else return response(['type' => 'error', 'message' => 'Kat eklenirken hata oluştu!']);
+        } else return response(['type' => 'error', 'message' => 'Kat ekleme yetkiniz yok!']);
+
     }
 
     public function odaEkle(Request $request)
     {
-        $request->validate([
-            'odaAdi' => 'required',
-            'katNo' => 'required',
-            'binaNo' => 'required',
-            'odaNo' => 'required'
-        ]);
+        if (json_decode(session()->get('personel')->yetki)->odaEkle === \App\Helpers\Writer::Ekle) {
+            $request->validate([
+                'odaAdi' => 'required',
+                'katNo' => 'required',
+                'binaNo' => 'required',
+                'odaNo' => 'required'
+            ]);
 
-        $isRoom = Odalar::where('odaNo', $request->odaNo)
-            ->where('kurumId', session()->get('personel')->kurumId)
-            ->where('binaId', $request->binaNo)
-            ->where('katId', $request->katNo)
-            ->count();
-        if ($isRoom > 0) return response(['type' => 'error', 'message' => 'Bu oda numarası dolu!']);
+            $isRoom = Odalar::where('odaNo', $request->odaNo)
+                ->where('kurumId', session()->get('personel')->kurumId)
+                ->where('binaId', $request->binaNo)
+                ->where('katId', $request->katNo)
+                ->count();
+            if ($isRoom > 0) return response(['type' => 'error', 'message' => 'Bu oda numarası dolu!']);
 
-        $odalar = new Odalar;
-        $odalar->kurumId = session()->get('personel')->kurumId;
-        $odalar->binaId = $request->binaNo;
-        $odalar->katId = $request->katNo;
-        $odalar->odaNo = $request->odaNo;
-        $odalar->odaAdi = $request->odaAdi;
-        $result = $odalar->save();
-        return ($result) ?
-            response(['type' => 'success', 'message' => 'Oda başarıyla eklendi!']) :
-            response(['type' => 'error', 'message' => 'Oda eklenirken hata oluştu!']);
+            $odalar = new Odalar;
+            $odalar->kurumId = session()->get('personel')->kurumId;
+            $odalar->binaId = $request->binaNo;
+            $odalar->katId = $request->katNo;
+            $odalar->odaNo = $request->odaNo;
+            $odalar->odaAdi = $request->odaAdi;
+            $result = $odalar->save();
+            if($result){
+                Logs::personelLog(Writer::OdaEkle,Writer::OdaEkle($request->binaNo,$request->odaNo));
+                return response(['type' => 'success', 'message' => 'Oda başarıyla eklendi!']);
+            }else return response(['type' => 'error', 'message' => 'Oda eklenirken hata oluştu!']);
+        } else return response(['type' => 'error', 'message' => 'Oda ekleme yetkiniz yok!']);
     }
 
     public function yatakEkle(Request $request)
     {
-        $request->validate([
-            'binaNo' => 'required',
-            'katNo' => 'required',
-            'odaNo' => 'required',
-            'yatakNo' => 'required',
-            'yatakAdi' => 'required'
-        ]);
+        if (json_decode(session()->get('personel')->yetki)->yatakEkle === \App\Helpers\Writer::Ekle) {
+            $request->validate([
+                'binaNo' => 'required',
+                'katNo' => 'required',
+                'odaNo' => 'required',
+                'yatakNo' => 'required',
+                'yatakAdi' => 'required'
+            ]);
 
-        $isBed = Yataklar::where('binaId', $request->binaNo)
-            ->where('kurumId', session()->get('personel')->kurumId)
-            ->where('katId', $request->katNo)
-            ->where('odaId', $request->odaNo)
-            ->where('yatakNo', $request->yatakNo)
-            ->count();
-        if ($isBed > 0) return response(['type' => 'error', 'message' => 'Bu yatak numarası dolu!']);
+            $isBed = Yataklar::where('binaId', $request->binaNo)
+                ->where('kurumId', session()->get('personel')->kurumId)
+                ->where('katId', $request->katNo)
+                ->where('odaId', $request->odaNo)
+                ->where('yatakNo', $request->yatakNo)
+                ->count();
+            if ($isBed > 0) return response(['type' => 'error', 'message' => 'Bu yatak numarası dolu!']);
 
-        $yataklar = new Yataklar;
-        $yataklar->odaId = $request->odaNo;
-        $yataklar->binaId = $request->binaNo;
-        $yataklar->katId = $request->katNo;
-        $yataklar->kurumId = session()->get('personel')->kurumId;
-        $yataklar->yatakAdi = $request->yatakAdi;
-        $yataklar->yatakAdi = $request->yatakAdi;
-        $yataklar->yatakNo = $request->yatakNo;
-        $result = $yataklar->save();
-        return ($result) ?
-            response(['type' => 'success', 'message' => 'Yatak başarıyla eklendi!']) :
-            response(['type' => 'error', 'message' => 'Yatak eklenirken hata oluştu!']);
+            $yataklar = new Yataklar;
+            $yataklar->odaId = $request->odaNo;
+            $yataklar->binaId = $request->binaNo;
+            $yataklar->katId = $request->katNo;
+            $yataklar->kurumId = session()->get('personel')->kurumId;
+            $yataklar->yatakAdi = $request->yatakAdi;
+            $yataklar->yatakAdi = $request->yatakAdi;
+            $yataklar->yatakNo = $request->yatakNo;
+            $result = $yataklar->save();
+            if($result){
+                Logs::personelLog(Writer::YatakEkle,Writer::YatakEkle($request->odaNo, $request->yatakAdi));
+                return response(['type' => 'success', 'message' => 'Yatak başarıyla eklendi!']);
+            }else return response(['type' => 'error', 'message' => 'Yatak eklenirken hata oluştu!']);
+        } else return response(['type' => 'error', 'message' => 'Yatak ekleme yetkiniz yok!']);
 
     }
 
@@ -199,39 +213,51 @@ class OdaIslemleri extends Controller
 
     public function ogrenciEkle(Request $request)
     {
-        $request->validate([
-            'yatakId' => 'required',
-            'ogrId' => 'required',
-        ]);
+        if (json_decode(session()->get('personel')->yetki)->ogrenciYatakEkle === \App\Helpers\Writer::Ekle) {
+            $request->validate([
+                'yatakId' => 'required',
+                'ogrNo' => 'required',
+            ]);
 
-        $ogr = Ogrenci::findOrFail($request->ogrId);
-        //dd($ogr->katNo);
-        if (!$ogr->yatakNo && !$ogr->odaNo && !$ogr->katNo) {
-            $ekle = Yataklar::where('id', $request->yatakId)->where('kurumId', $ogr->kurumId);
-            $ekle->update(['ogrenciId' => $request->ogrId]);
-            Ogrenci::where('id', $request->ogrId)->update(['yatakNo' => $request->yatakId]);
-            return true;
-        } else return response(['success' => false, 'message' => 'Öğrenci birden fazla yatakta bulunamaz!'], 404);
+            $ogr = Ogrenci::findOrFail($request->ogrNo);
+            //dd($ogr->katNo);
+            if (!$ogr->yatakNo && !$ogr->odaNo && !$ogr->katNo) {
+                $ekle = Yataklar::where('id', $request->yatakId)->where('kurumId', $ogr->kurumId);
+                $ekle->update(['ogrenciId' => $request->ogrNo]);
+                Ogrenci::where('id', $request->ogrNo)->update(['yatakNo' => $request->yatakId]);
+                Logs::personelLog(Writer::OgrenciYatakEkle,Writer::OgrenciYatakEkle($request->ogrNo,$request->yatakId));
+                return response(['type' => "success", 'message' => 'Öğrenci yatağa eklendi!']);
+            } else return response(['type' => "error", 'message' => 'Öğrenci birden fazla yatakta bulunamaz!']);
+        } else return response(['type' => 'error', 'message' => 'Öğrenciyi yatağa ekleme yetkiniz yok!']);
     }
 
     public function ogrenciYatakKaldir(Request $request)
     {
-        $request->validate([
-            'ogrıd' => 'required'
-        ]);
+        if (json_decode(session()->get('personel')->yetki)->ogrenciYatakKaldir === \App\Helpers\Writer::Ekle) {
+            $request->validate([
+                'ogrid' => 'required'
+            ]);
+            $r3 = Yataklar::where('ogrenciId', $request->ogrid)->get();
+            $r1 = Ogrenci::where('id', $request->ogrid)->update(['yatakNo' => null]);
+            $r2 = Yataklar::where('ogrenciId', $request->ogrid)->update(['ogrenciId' => null]);
+            if($r2 && $r1){
+                Logs::personelLog(Writer::OgrenciYatakKaldir,Writer::OgrenciYatakKaldir($request->ogrid,$r3[0]->id));
+                return response(['type' => 'success', 'message' => 'Öğrenci yataktan başarıyla kaldırıldı!']);
+            }else return response(['type' => 'error', 'message' => 'Bir hata oluştu!']);
+        } else return response(['type' => 'error', 'message' => 'Öğrenciyi yataktan kaldırma yetkiniz yok!']);
 
-        Ogrenci::where('id', $request->ogrıd)->update(['yatakNo' => null]);
-        Yataklar::where('ogrenciId', $request->ogrıd)->update(['ogrenciId' => null]);
-
-        return true;
     }
 
     public function yatakKaldir($id = null)
     {
-        $result = Yataklar::find($id)->delete();
-        return ($result) ?
-            response(['type' => 'success', 'message' => 'Yatak başarıyla kaldırıldı!']) :
-            response(['type' => 'error', 'message' => 'Yatak kaldırılırken hata oluştu!']);
+        if (json_decode(session()->get('personel')->yetki)->yatakKaldir === \App\Helpers\Writer::Ekle) {
+            $result = Yataklar::find($id)->delete();
+            if($result){
+                Logs::personelLog(Writer::YatakKaldir,Writer::yatakKaldir($id));
+                return response(['type' => 'success', 'message' => 'Yatak başarıyla kaldırıldı!']);
+            }else return response(['type' => 'error', 'message' => 'Yatak kaldırılırken hata oluştu!']);
+        } else return response(['type' => 'error', 'message' => 'Yatak kaldırma yetkiniz yok!']);
     }
+
 
 }

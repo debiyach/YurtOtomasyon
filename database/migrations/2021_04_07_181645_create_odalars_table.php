@@ -18,6 +18,7 @@ class CreateOdalarsTable extends Migration
             $table->unsignedBigInteger('kurumId');
             $table->unsignedBigInteger('binaId');
             $table->unsignedBigInteger('katId');
+            $table->unsignedBigInteger('odaNo');
             $table->string('odaAdi');
             $table->timestamps();
 

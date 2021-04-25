@@ -7,7 +7,10 @@ $yapilacaklar = [
     'veri girisi ömer',
     'Personel resmi width 64px çekilsin.',
     'api dokümantasyon yapilmaya baslandi.',
-    'Personel eklenmesi yapılacak.'
+    'Personel eklenmesi yapılacak.',
+    'Perms' => [
+        'binaEkle',"katEkle","odaEkle","yatakEkle","yatakKaldir","ogrenciYatakKaldir","ogrenciYatakEkle"
+    ]
 ];
 
 $yapilanlar = ['login islemleri yapılandırıldı-idea',

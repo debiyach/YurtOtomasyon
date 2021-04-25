@@ -179,6 +179,36 @@
         </div>
     </div>
 
+    <div class="modal fade" id="ogrenciYatakEkleModal" tabindex="-1" aria-labelledby="#ogrenciYatakEkleLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ogrenciYatakEkleLabel">Kat Ekleme Formu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="ogrenciYatakEkle">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="ogrNo">Öğrenci Seçiniz:</label>
+                                <select class="form-control bina-select" name="ogrNo" id="ogrNo">
+                                </select>
+                            </div>
+                            <input type="hidden" name="yatakId" id="yatakId">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-primary">Ekle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="col-md-12 mt-5">
         <div class="row">
             <div class="col-4">
@@ -215,13 +245,35 @@
 @section('script')
     <script>
 
-        $('.ogrenci-ekle').click(function () {
-            alert('asd asd asd asd');
+        function ogrenciKaldir(id) {
+            ajaxPostCall('{{route('personel.odaIslemleri.ogrenciYatakKaldir')}}',{ogrid:id},function (data){
+                yatakYaz($('#yatakOda2 :selected').val());
+                yatakOgrenciGetir(ogrenciOptAdd);
+            });
+        }
+
+        function yatakOgrenciGetir(callback) {
+            $.get('{{route("personel.odaIslemleri.yatakOgrenciGetir")}}', function (data) {
+                callback(data);
+            });
+        }
+        $('#ogrenciYatakEkle').submit(function(e){
+            e.preventDefault();
+            ajaxPostCall('{{route('personel.odaIslemleri.yatakOgrenciEkle')}}',$('#ogrenciYatakEkle').serialize(),function (data){
+                yatakYaz($('#yatakOda2 :selected').val());
+                yatakOgrenciGetir(ogrenciOptAdd);
+                $('.modal').modal('hide');
+            });
         });
 
-        function deleteBed(link){
-            console.log(link)
-            $.get(link,function (data){
+
+        function addBed(s) {
+            $('#ogrenciYatakEkleModal').modal('show');
+            $('#yatakId').val(s)
+        }
+
+        function deleteBed(link) {
+            $.get(link, function (data) {
                 yatakYaz($('#yatakOda2 :selected').val())
             });
         }
@@ -232,7 +284,7 @@
         })
 
         function yatakYaz(id) {
-            if(id === 'null') return $('#list').html(null);
+            if (id === 'null') return $('#list').html(null);
             $.get('{{route("personel.odaIslemleri.yatakGetir")}}/' + id, function (data) {
                 $('#list').html(data);
             })
@@ -381,8 +433,20 @@
             });
         }
 
+        function ogrenciOptAdd(ogrs) {
+            let ogrOpt = '';
+            if (ogrs.length > 0) {
+                ogrOpt = '<option value="null">Yatağa Eklenecek Öğrenciyi Seçiniz</option>';
+                for (const ogr of ogrs) {
+                    ogrOpt += `<option value="${ogr.id}">${ogr.ad} ${ogr.soyad}</option>`;
+                }
+            }else ogrOpt = '<option value="null">Yurdunuzda yataksız öğrenci yok</option>';
+            $('#ogrNo').html(ogrOpt);
+        }
+
         $(document).ready(function () {
             binaGetir();
+            yatakOgrenciGetir(ogrenciOptAdd);
         });
 
     </script>

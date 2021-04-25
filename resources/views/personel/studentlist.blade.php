@@ -2,9 +2,8 @@
 
 @section('content')
 
-
     @include('layouts.components.ogrenci.ogrencilistele')
-    
+
 @endsection
 
 @section('script')
@@ -38,6 +37,7 @@
                     {data:'tcNo'},
                     {data:'odaNo'}
                 ],
+<<<<<<< HEAD
                 
                 "columnDefs": [ {
                 "targets": 7,
@@ -47,6 +47,9 @@
                     }
                 } ],
                 
+=======
+
+>>>>>>> 60f5190fe7fcb9b6e9e16cfc0a24e0baa8c9fa2d
 
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
@@ -78,7 +81,11 @@
                 alert( data[0] +"'s salary is: "+ data[ 5 ] );
             } );
         });
+<<<<<<< HEAD
        
+=======
+
+>>>>>>> 60f5190fe7fcb9b6e9e16cfc0a24e0baa8c9fa2d
     </script>
 
 @endsection

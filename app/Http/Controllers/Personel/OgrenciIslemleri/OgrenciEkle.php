@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Personel\OgrenciIslemleri;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Personel\OgrenciIslemleri\OgrenciEkle as ReqOgrenciEkle;
 use App\Mail\Ogrenci\SifreGonder;
+use App\Models\IslemCesitleri;
 use App\Models\Ogrenci;
+use App\Models\Personel;
+use App\Models\PersonelIslemKayit;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -14,7 +17,7 @@ class OgrenciEkle extends Controller
     public function ogrenciEkle(ReqOgrenciEkle $request)
     {
 
-        if (json_decode(session()->get('personel')->yetki)->ogrenciEkle === \App\Helpers\Permission::Ekle){
+        if (json_decode(session()->get('personel')->yetki)->ogrenciEkle === \App\Helpers\Writer::Ekle){
             $sifre = Str::random(4).time();
             $ogrenci = new Ogrenci;
             $ogrenci->kurumId = session()->get('personel')->kurumId;
@@ -42,7 +45,13 @@ class OgrenciEkle extends Controller
                     "title" => "Ogrencimiz {$request->ad} {$request->soyad}",
                     "body" => "Burası body alanı"
                 ];
-                $result = Mail::to('test@otomasyon.com')->send(new SifreGonder($mailData));
+                Mail::to($request->email)->send(new SifreGonder($mailData));
+                $log = IslemCesitleri::where('tip',\App\Helpers\Writer::OgrenciEkle)->get();
+                PersonelIslemKayit::insert([
+                    "kurumId" => session()->get('personel')->kurumId,
+                    "personelId" => session()->get('personel')->id,
+                    "logId" => $log[0]->id
+                ]);
                 return back()->with('success','Öğrenci Ekleme Başarılı!');
             }else return back()->withErrors(['Beklenmeyen Hata Oluştu!']);
         }else return back()->withErrors(['Bu işlemi gerçekleştirmek için yetkili değilsiniz!']);

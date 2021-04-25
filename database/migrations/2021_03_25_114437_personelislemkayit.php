@@ -17,7 +17,8 @@ class Personelislemkayit extends Migration
             $table->id();
             $table->unsignedBigInteger('personelId');
             $table->unsignedBigInteger('kurumId');
-            $table->unsignedBigInteger('logId');
+            $table->unsignedBigInteger('logId')->nullable();
+            $table->string('logName')->nullable();
             $table->timestamps();
 
             $table->foreign('personelId')->references('id')->on('personel')->cascadeOnUpdate()->cascadeOnDelete();

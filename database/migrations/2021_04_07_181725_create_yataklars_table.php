@@ -20,6 +20,7 @@ class CreateYataklarsTable extends Migration
             $table->unsignedBigInteger('binaId');
             $table->unsignedBigInteger('katId');
             $table->unsignedBigInteger('odaId');
+            $table->unsignedBigInteger('yatakNo');
             $table->string('yatakAdi',50);
             $table->timestamps();
 
