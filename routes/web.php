@@ -62,6 +62,8 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
 
         Route::post('/izin-talep/post','GenelIslemler@izinTalep')->name('izinTalepPost');
         Route::post('/personel-ekle/post','GenelIslemler@persoenlEkle')->name('personelEklePost');
+        Route::post('/personel-set-yetki','GenelIslemler@personelSetYetki')->name('personelSetYetki');
+
 
         ## END GENEL POST İSTEKLERİ ##
 

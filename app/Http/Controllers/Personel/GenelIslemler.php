@@ -11,11 +11,18 @@ use App\Models\IslemCesitleri;
 use App\Models\Personel;
 use App\Models\PersonelIslemKayit;
 use App\Models\PersonelIzin;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Mail;
 
 class GenelIslemler extends Controller
 {
+    public function personelSetYetki(Request $request)
+    {
+        return $request->all();
+    }
+
+
     public function personelYetkiPage()
     {
         $data['personels'] = Personel::where('tip','=','Personel')
