@@ -46,7 +46,7 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
     Route::get('/cikis-yap', 'LoginController@personelLogout')->name('logout');
 
     Route::group(['namespace' => 'Personel'], function () {
-        Route::get('/oda-islemleri', 'OdaIslemleri\OgrenciEkle@odaSayfasi')->name('odaSayfasi');
+        Route::get('/oda-islemleri', 'OdaIslemleri@odaSayfasi')->name('odaSayfasi');
         Route::get('/hesap-ayarlari', fn() => view('personel.accountsettings'))->name('hesapAyarlari');
         Route::get('/ogrenci-ekle', fn() => view('personel.insertstudent'))->name('ogrenciEkle');
         Route::get('/personel-ekle', fn() => view('personel.insertpersonel'))->name('personelEkle');
@@ -55,6 +55,10 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::get('/ogrenci-listele', fn() => view('personel.studentlist'))->name('ogrenciListele');
         Route::get('/personel-listele', fn() => view('personel.personellist'))->name('personelListele');
 
+
+        Route::group(['as' => 'ogrenci.', 'prefix' => 'ogrenci-islemleri'], function () {
+            Route::post('/ogrenci', 'OgrenciIslemleri\OgrenciEkle@ogrenciEkle')->name('ogrenciEkle');
+        });
 
         Route::group(['prefix' => 'oda-islemleri', 'as' => 'odaIslemleri.'], function () {
             ## POST ##
@@ -85,10 +89,6 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
 
     });
 
-
-    Route::group(['as' => 'ogrenci.', 'prefix' => 'ogrenci-islemleri'], function () {
-        Route::post('/ogrenci', 'OgrenciIslemleri\OgrenciEkle@ogrenciEkle')->name('ogrenciEkle');
-    });
 
 
 });
