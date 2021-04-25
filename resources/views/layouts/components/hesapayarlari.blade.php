@@ -9,7 +9,7 @@
 
 
       <div class="col-5">
-        <form method="POST" action="{{route('ogrenci.hesapDuzenlePost')}}">
+        <form method="POST" action="{{route('personel.hesapDuzenlePost')}}">
             @csrf
           <div class="form-group">
             <label for="mail">Email</label>
@@ -44,7 +44,7 @@
 
 
       <div class="col-5 h-100 align-self-end">
-        <form method="POST" action="{{route('ogrenci.hesapSifreDuzenlePost')}}">
+        <form method="POST" action="{{route('personel.hesapSifreDuzenlePost')}}">
             @csrf
           <div class="form-group">
             <label for="sifre">Şuanki Şifreniz</label>
