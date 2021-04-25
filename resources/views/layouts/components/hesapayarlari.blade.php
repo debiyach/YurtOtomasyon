@@ -1,6 +1,5 @@
-
 <div class="col-12">
-  @include('layouts.components.errors')
+    @include('layouts.components.errors')
 </div>
 
 <div class="col-sm-8 offset-1 offset-sm-2 ">

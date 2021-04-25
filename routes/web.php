@@ -54,7 +54,11 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::get('/izin-talep', fn() => view('personel.izintalep'))->name('izinTalep');
         Route::get('/ogrenci-listele', fn() => view('personel.studentlist'))->name('ogrenciListele');
         Route::get('/personel-listele', fn() => view('personel.personellist'))->name('personelListele');
+        Route::get('/personel-yetkilendirme', fn() => view('personel.personelYetkilendirme'))->name('personelYetkilendirme');
 
+        Route::group(['as' => 'ogrenci.', 'prefix' => 'ogrenci-islemleri'], function () {
+            Route::post('/ogrenci', 'OgrenciIslemleri\OgrenciEkle@ogrenciEkle')->name('ogrenciEkle');
+        });
 
         Route::group(['as' => 'ogrenci.', 'prefix' => 'ogrenci-islemleri'], function () {
             Route::post('/ogrenci', 'OgrenciIslemleri\OgrenciEkle@ogrenciEkle')->name('ogrenciEkle');
