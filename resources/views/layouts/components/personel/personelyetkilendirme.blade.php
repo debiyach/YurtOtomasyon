@@ -3,9 +3,9 @@
             <div class="col-md-12">
                 <div class="input-group mb-3 mt-5">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Personel Seçin</label>
+                        <label class="input-group-text" for="personel">Personel Seçin</label>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect01">
+                    <select class="custom-select" id="personel" onchange="degistir(event)">
                         <option selected>Bir Personel Seçin</option>
                         @foreach($personels as $personel)
                             <option value="{{$personel->id}}">{{$personel->ad}} {{$personel->soyad}}</option>
@@ -41,7 +41,7 @@
                                     <tbody>
                                       <tr>
                                         <td>Personel Ekleme</td>
-                                        <td><input value="personelEkleme" type="checkbox"></td>
+                                        <td><input value="personelEkleme"  type="checkbox"></td>
                                       </tr>
                                       <tr>
                                           <td>Personel Yetki Düzenleme</td>

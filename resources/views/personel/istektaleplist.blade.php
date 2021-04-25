@@ -27,11 +27,10 @@
                     type: "POST"
                 },
                 columns: [
-                    {data: 'ad'},
-                    {data: 'soyad'},
-                    {data: 'mail'},
-                    {data: 'telNo'},
-                    {data: 'tcNo'}
+                    {data: 'aciklama'},
+                    {data: 'tip'},
+                    {data: 'onayDurumu'},
+                   
                 ],
 
                 "language": {

@@ -18,7 +18,7 @@
 
           <div class="form-group">
             <label for="telNo">Telefon</label>
-            <input type="tel" class="form-control col-12" id="telNo" name='telNo' @if(session()->get('personel')) value="{{session()->get('personel')->telNo}}"  @elseif(session()->get('ogrenci')) value="{{session()->get('ogrenci')->telNo}}" @endif placeholder="{533-333-3333} formatında"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" >
+            <input type="tel" class="form-control col-12" id="telNo" minlength="10" maxlength="10" name='telNo' @if(session()->get('personel')) value="{{session()->get('personel')->telNo}}"  @elseif(session()->get('ogrenci')) value="{{session()->get('ogrenci')->telNo}}" @endif placeholder="{533-333-3333} formatında">
           </div>
 
           <div class="form-group">
