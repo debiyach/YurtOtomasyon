@@ -26,7 +26,7 @@ class Personel extends Migration
             $table->string('sifre');
             $table->string('apiToken');
             $table->enum('tip', ['Personel', 'Müdür']);
-            $table->json('yetki');
+            $table->json('yetki')->nullable();
             $table->json('maas')->comment('Maaş ödemesi ve maaş miktarı tutulacak.');
             $table->timestamps();
 

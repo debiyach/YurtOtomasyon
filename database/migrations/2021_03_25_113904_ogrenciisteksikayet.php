@@ -20,8 +20,8 @@ class Ogrenciisteksikayet extends Migration
             $table->string('aciklama');
             $table->enum('tip',['İzin','Şikayet','İstek','Arıza Bildirimi']);
             $table->enum('onayDurumu',["Bekleniyor","Reddedildi","Kabul Edildi"])->default("Bekleniyor");
-            $table->time('izinBaslangic')->nullable();
-            $table->time('izinBitis')->nullable();
+            $table->date('izinBaslangic')->nullable();
+            $table->date('izinBitis')->nullable();
             $table->timestamps();
 
             $table->foreign('kurumId')->references('id')->on('kurum')->cascadeOnDelete()->cascadeOnUpdate();

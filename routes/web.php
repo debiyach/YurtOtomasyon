@@ -46,7 +46,7 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
     Route::get('/cikis-yap', 'LoginController@personelLogout')->name('logout');
 
     Route::group(['namespace' => 'Personel'], function () {
-        Route::get('/oda-islemleri', 'OdaIslemleri@odaSayfasi')->name('odaSayfasi');
+        Route::get('/oda-islemleri', 'OdaIslemleri\OgrenciEkle@odaSayfasi')->name('odaSayfasi');
         Route::get('/hesap-ayarlari', fn() => view('personel.accountsettings'))->name('hesapAyarlari');
         Route::get('/ogrenci-ekle', fn() => view('personel.insertstudent'))->name('ogrenciEkle');
         Route::get('/personel-ekle', fn() => view('personel.insertpersonel'))->name('personelEkle');
@@ -104,6 +104,14 @@ Route::group(['middleware' => 'ogrenci', 'as' => 'ogrenci.', 'prefix' => 'ogrenc
     Route::get('/', function () {
         return view('ogrenci.index');
     })->name('index');
+
+    Route::group(['namespace'=>'Ogrenci'],function (){
+        Route::post('/hesap-ayarlari/hesap-guncelle','HesapIslemleri@hesapDuzenle')->name('hesapDuzenlePost');
+        Route::post('/hesap-ayarlari/hesap-sifre-guncelle','HesapIslemleri@sifreDuzenle')->name('hesapSifreDuzenlePost');
+        Route::post('/izin-talep/post','GenelIslemler@izinTalep')->name('izinTalepPost');
+        Route::post('/istek-sikayet/post','GenelIslemler@istekSikayet')->name('istekSikayetPost');
+    });
+
     Route::get('/cikis-yap', 'LoginController@ogrenciLogout')->name('logout');
     Route::get('/izin-talep', fn() => view('ogrenci.izintalep'))->name('izinTalep');
     Route::get('/hesap-ayarlari', fn() => view('ogrenci.accountsettings'))->name('hesapAyarlari');

@@ -41,7 +41,8 @@ class PersonelFactory extends Factory
                 "yatakEkle" => 1,
                 "yatakKaldir" => 1,
                 'ogrenciYatakKaldir' => 1,
-                "ogrenciYatakEkle" =>1
+                "ogrenciYatakEkle" =>1,
+                "ogrenciEkle" => 1
             ]),
             'maas' => json_encode(['maasOdendi' => (rand(0, 1) == 1) ? true : false, 'maasMiktari' => rand(3000, 7000)])
         ];

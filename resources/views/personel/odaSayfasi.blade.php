@@ -241,6 +241,7 @@
     <div class="col-md-12 mt-5">
         <div class="row" id="list"></div>
     </div>
+
 @endsection
 @section('script')
     <script>
