@@ -99,25 +99,48 @@
                             Menu
                         </li>
 
-                        <li class="nav-item">
-                            <a href="{{ route('personel.odaSayfasi') }}"  class="nav-link @if (Request::segment(2) == "oda-islemleri") active @endif"><i class="fas fa-user-plus"></i>Oda İşlemleri</a>
-                        </li>
+                        <a class="nav-link @if (Request::segment(2) == "ogrenci-ekle" || Request::segment(2) =="ogrenci-listele" || Request::segment(2) =="oda-islemleri" ) active @endif" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2">
+                            <i class="fa fa-fw fa-user-circle"></i>Öğrenci İşlemleri <span class="badge badge-success"></span>
+                        </a>
 
-                        <li class="nav-item">
-                            <a href="{{ route('personel.ogrenciEkle') }}"  class="nav-link @if (Request::segment(2) == "ogrenci-ekle") active @endif"><i class="fas fa-user-plus"></i>Yeni Öğrenci Kayıt</a>
-                        </li>
+                        <div id="submenu-2" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a href="{{ route('personel.ogrenciEkle') }}"  class="nav-link @if (Request::segment(2) == "ogrenci-ekle") active @endif"><i class="fas fa-user-plus"></i>Öğrenci Kayıt</a>
+                                </li>
 
-                        <li class="nav-item">
-                            <a href="{{ route('personel.personelEkle') }}"  class="nav-link @if (Request::segment(2) == "personel-ekle") active @endif"><i class="fas fa-user-plus"></i>Personel Kayıt</a>
-                        </li>
+                                <li class="nav-item">
+                                    <a href="{{Route('personel.ogrenciListele')}}" class="nav-link @if (Request::segment(2) == "ogrenci-listele") active @endif"><i class="fas fa-clipboard-list"></i>Öğrenci Listesi</a>
+                                </li>
 
-                        <li class="nav-item">
-                            <a href="{{Route('personel.ogrenciListele')}}" class="nav-link @if (Request::segment(2) == "ogrenci-listele") active @endif"><i class="fas fa-clipboard-list"></i>Öğrenci Listesi</a>
-                        </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('personel.odaSayfasi') }}"  class="nav-link @if (Request::segment(2) == "oda-islemleri") active @endif"><i class="fas fa-user-plus"></i>Oda İşlemleri</a>
+                                </li>
 
-                        <li class="nav-item">
-                            <a href="{{Route('personel.personelListele')}}" class="nav-link @if (Request::segment(2) == "personel-listele") active @endif"><i class="fas fa-clipboard-list"></i>Personel Listesi</a>
-                        </li>
+                            </ul>
+                        </div>
+
+
+                        <a class="nav-link @if (Request::segment(2) == "personel-ekle" || Request::segment(2) =="personel-listele") active @endif" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3">
+                            <i class="fa fa-fw fa-user-circle"></i>Personel İşlemleri <span class="badge badge-success"></span>
+                        </a>
+
+                        <div id="submenu-3" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                
+                                <li class="nav-item">
+                                    <a href="{{ route('personel.personelEkle') }}"  class="nav-link @if (Request::segment(2) == "personel-ekle") active @endif"><i class="fas fa-user-plus"></i>Personel Kayıt</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{{Route('personel.personelListele')}}" class="nav-link @if (Request::segment(2) == "personel-listele") active @endif"><i class="fas fa-clipboard-list"></i>Personel Listesi</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{{Route('personel.personelYetkilendirme')}}" class="nav-link @if (Request::segment(2) == "personel-yetkilendirme") active @endif"><i class="fas fa-clipboard-list"></i>Personel Yetkilendirme</a>
+                                </li>
+                            </ul>
+                        </div>
 
                         <li class="nav-item">
                             <a href="{{ route('personel.istekTalepList') }}" class="nav-link @if (Request::segment(2) == "istek-talep-list") active @endif"><i class="fas fa-exclamation"></i>İstek / Şikayet Takip</a>
