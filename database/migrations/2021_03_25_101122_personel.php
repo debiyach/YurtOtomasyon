@@ -24,10 +24,13 @@ class Personel extends Migration
             $table->string('evAdresi',50);
             $table->string('mail')->unique();
             $table->string('sifre');
+            $table->string('foto');
             $table->string('apiToken');
+            $table->boolean('aktif');
             $table->enum('tip', ['Personel', 'Müdür']);
             $table->json('yetki')->nullable();
             $table->json('maas')->comment('Maaş ödemesi ve maaş miktarı tutulacak.');
+            $table->string('izin');
             $table->timestamps();
 
             $table->foreign('kurumId')->references('id')->on('kurum')->onUpdate('cascade')->onDelete('cascade');

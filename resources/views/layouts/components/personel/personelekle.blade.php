@@ -4,8 +4,8 @@
 </div>
 
 <div class="col-md-6 mt-3 offset-md-3">
-<form enctype="multipart/form-data">
-
+<form method="POST" action="{{route('personel.personelEklePost')}}" enctype="multipart/form-data">
+    @csrf
     <div class="form-group">
       <label for="ad">Ad</label>
       <input type="text" name="ad" value="{{old('ad')}}" required class="form-control" id="ad">
@@ -23,9 +23,9 @@
 
     <div class="form-group">
       <label for="telNo">Telefon</label>
-      <input type="tel" class="form-control" name="telNo" value="{{old('telNo')}}"  required placeholder="{533-333-3333}" minlength="10" maxlength="10"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="telNo">
+      <input type="tel" class="form-control" name="telNo" value="{{old('telNo')}}"  required placeholder="{533-333-3333}" minlength="10" maxlength="10" id="telNo">
     </div>
-    
+
 
     <div class="form-group">
       <label for="tcNo">T.C No</label>
@@ -43,12 +43,12 @@
       <input class="form-check-input" type="checkbox" id="ogrenciEkleDuzenle" value="ogrenciekleDuzenle">
       <label class="form-check-label" for="ogrenciEkleDuzenle">Ogrenci Ekle / Duzenle</label>
     </div>
-    
+
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="checkbox" id="ogrenciOdaIslemleri" value="ogrenciOdaIslemleri">
       <label class="form-check-label" for="ogrenciOdaIslemleri">Ogrenci Oda İşlemleri</label>
     </div>
-    
+
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="checkbox" id="personelEkleDuzenle" value="personelEkleDuzenle">
       <label class="form-check-label" for="personelEkleDuzenle">Personel Ekle / Duzenle</label>

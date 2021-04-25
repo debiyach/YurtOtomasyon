@@ -7,8 +7,7 @@ Route::get('/test', function () {
 })->name('test');
 
 
-Route::post('linki', 'Personel\\Datatables\\TempTable@getStudents')->name('ogrencigetir');
-Route::post('linki1', 'Personel\\Datatables\\TempTable@getPersonels')->name('personelgetir');
+
 
 Route::get('personel/d', fn() => view('test'));
 
@@ -46,6 +45,33 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
     Route::get('/cikis-yap', 'LoginController@personelLogout')->name('logout');
 
     Route::group(['namespace' => 'Personel'], function () {
+
+        ## DATATABLES ##
+
+        Route::group(['namespace'=>'Datatables','as'=>'datatable.'],function (){
+            Route::post('/get-student', 'TempTable@getStudents')->name('ogrencigetir');
+            Route::post('/get-personel', 'TempTable@getPersonels')->name('personelgetir');
+            Route::post('/get-istek-sikayet', 'TempTable@getIstekSikayet')->name('istekSikayetGetir'); //isteksiyaet
+        });
+
+        ## END DATATABLES ##
+
+        ##=========================================================================================##
+
+        ## GENEL POST İSTEKLERİ ##
+
+        Route::post('/izin-talep/post','GenelIslemler@izinTalep')->name('izinTalepPost');
+        Route::post('/personel-ekle/post','GenelIslemler@persoenlEkle')->name('personelEklePost');
+
+        ## END GENEL POST İSTEKLERİ ##
+
+        ##=========================================================================================##
+
+        ## GENEL GET İSTEKLERİ ##
+
+        Route::get('/personel-yetki/{id??}','GenelIslemler@personelYetkiGetir')->name('personelYetkiGetir');
+        Route::get('/personel-yetkilendirme', 'GenelIslemler@personelYetkiPage')->name('personelYetkilendirme');
+
         Route::get('/oda-islemleri', 'OdaIslemleri@odaSayfasi')->name('odaSayfasi');
         Route::get('/hesap-ayarlari', fn() => view('personel.accountsettings'))->name('hesapAyarlari');
         Route::get('/ogrenci-ekle', fn() => view('personel.insertstudent'))->name('ogrenciEkle');
@@ -54,17 +80,23 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::get('/izin-talep', fn() => view('personel.izintalep'))->name('izinTalep');
         Route::get('/ogrenci-listele', fn() => view('personel.studentlist'))->name('ogrenciListele');
         Route::get('/personel-listele', fn() => view('personel.personellist'))->name('personelListele');
-        Route::get('/personel-yetkilendirme', fn() => view('personel.personelYetkilendirme'))->name('personelYetkilendirme');
+
+
+        ## END GENEL GET İSTEKLERİ ##
+
+        ##=========================================================================================##
 
         Route::group(['as' => 'ogrenci.', 'prefix' => 'ogrenci-islemleri'], function () {
             Route::post('/ogrenci', 'OgrenciIslemleri\OgrenciEkle@ogrenciEkle')->name('ogrenciEkle');
         });
 
-        Route::group(['as' => 'ogrenci.', 'prefix' => 'ogrenci-islemleri'], function () {
-            Route::post('/ogrenci', 'OgrenciIslemleri\OgrenciEkle@ogrenciEkle')->name('ogrenciEkle');
-        });
+
+        ##=========================================================================================##
+
+        ## ODA İŞLEMLERİ ##
 
         Route::group(['prefix' => 'oda-islemleri', 'as' => 'odaIslemleri.'], function () {
+
             ## POST ##
 
             Route::post('/bina-ekle', 'odaIslemleri@binaEkle')->name('binaEkle');
@@ -90,10 +122,11 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
             ## END GET ##
         });
 
+        ## END ODA İŞLEMLERİ ##
+
+        ##=========================================================================================##
 
     });
-
-
 
 });
 

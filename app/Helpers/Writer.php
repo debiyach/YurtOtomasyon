@@ -17,6 +17,7 @@ class Writer
     const BinaEkle  = "Bina eklendi.";
     const OgrenciYatakEkle = "Öğrenci yatağa eklendi.";
     const OgrenciYatakKaldir = "Öğrenci yataktan kaldırdı.";
+    const PersonelEkle = "Yeni bir personel ekledi.";
 
     static function OdaEkle($binaid, $odano){
         return "$binaid idli binaya $odano nolu oda eklendi";

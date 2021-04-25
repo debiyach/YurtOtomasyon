@@ -18,9 +18,9 @@ class Personelizin extends Migration
             $table->unsignedBigInteger('personelId');
             $table->unsignedBigInteger('kurumId');
             $table->string('aciklama');
-            $table->enum('onayDurumu',[null,"Reddedildi","Kabul Edildi"])->default(null);
-            $table->time('izinBaslangic');
-            $table->time('izinBitis');
+            $table->enum('onayDurumu',["Beklemede","İşlemde","Reddedildi","Kabul Edildi"])->default("Beklemede");
+            $table->date('izinBaslangic');
+            $table->date('izinBitis');
             $table->timestamps();
 
             $table->foreign('kurumId')->references('id')->on('kurum')->cascadeOnDelete()->cascadeOnUpdate();

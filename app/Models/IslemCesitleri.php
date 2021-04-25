@@ -34,6 +34,7 @@ class IslemCesitleri extends Model
             "Yatak kaldırdı.",
             "Öğrenci yataktan kaldırdı.",
             "Yeni bir öğrenci ekledi.",
+            "Yeni bir personel ekledi.",
             "Öğrenci yatağa eklendi.",
         ];
         foreach ($logs as $log){

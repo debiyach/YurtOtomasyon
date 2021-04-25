@@ -20,7 +20,7 @@
                     [10, 15, 25, 50, 100]
                 ],
                 "ajax": {
-                    url: "{{ route('ogrencigetir') }}",
+                    url: "{{ route('personel.datatable.ogrencigetir') }}",
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
                     },

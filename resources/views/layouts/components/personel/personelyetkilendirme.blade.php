@@ -7,17 +7,17 @@
                     </div>
                     <select class="custom-select" id="inputGroupSelect01">
                         <option selected>Bir Personel Seçin</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        @foreach($personels as $personel)
+                            <option value="{{$personel->id}}">{{$personel->ad}} {{$personel->soyad}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
 
             <div class="col-md-12">
                 <div class="accordion" id="accordionExample">
-                    
-                    
+
+
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h2 class="mb-0">
@@ -40,7 +40,7 @@
                                     </thead>
                                     <tbody>
                                       <tr>
-                                        <td>Personel Ekleme</td> 
+                                        <td>Personel Ekleme</td>
                                         <td><input value="personelEkleme" type="checkbox"></td>
                                       </tr>
                                       <tr>
@@ -77,7 +77,7 @@
                                     </thead>
                                     <tbody>
                                       <tr>
-                                        <td>Bina Ekle</td> 
+                                        <td>Bina Ekle</td>
                                         <td><input value="binaEkle" type="checkbox"></td>
                                       </tr>
 
@@ -85,7 +85,7 @@
                                           <td>Kat Ekle</td>
                                           <td><input value="katEkle" type="checkbox"></td>
                                       </tr>
-                                      
+
                                       <tr>
                                           <td>odaEkle</td>
                                           <td><input value="odaEkle" type="checkbox"></td>
@@ -142,7 +142,7 @@
                                     </thead>
                                     <tbody>
                                       <tr>
-                                        <td>Öğrenci Ekleme</td> 
+                                        <td>Öğrenci Ekleme</td>
                                         <td><input value="ogrenciEkleme" type="checkbox"></td>
                                       </tr>
                                     </tbody>
