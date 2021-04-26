@@ -10,6 +10,7 @@
                         <th>Email</th>
                         <th>Telefon</th>
                         <th>Tc No</th>
+                        <th>Adres</th>
                     </tr>
                 </thead>
                

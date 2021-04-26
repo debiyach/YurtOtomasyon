@@ -1,10 +1,10 @@
 
-<div class="col-12">
-    @include('layouts.components.errors')
-</div>
+
 
 <div class="col-12 col-md-6 offset-md-3">
-
+    <div class="col-12">
+        @include('layouts.components.errors')
+    </div>
     <form method="POST" action="{{route('ogrenci.istekSikayetPost')}}">
 
         @csrf

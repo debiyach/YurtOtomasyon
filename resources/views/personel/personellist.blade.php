@@ -33,7 +33,8 @@
                     {data:'soyad'},
                     {data:'mail'},
                     {data:'telNo'},
-                    {data:'tcNo'}
+                    {data:'tcNo'},
+                    {data:'evAdresi'}
                 ],
 
                 "language": {

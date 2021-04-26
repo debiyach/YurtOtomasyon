@@ -1,15 +1,17 @@
-<div class="col-12">
-    @include('layouts.components.errors')
-</div>
+
 
 <div class="col-sm-8 offset-1 offset-sm-2 ">
-
+      <div class="col-12">
+        @include('layouts.components.errors')
+      </div>
 
     <div class="d-flex ">
 
-
+      
       <div class="col-5">
-        <form method="POST" action="{{route('personel.hesapDuzenlePost')}}">
+        <form method="POST" @if (session()->get('ogrenci')) action="{{route('ogrenci.hesapDuzenlePost')}}"
+            @elseif(session()->get('personel'))  action="{{ route('personel.hesapDuzenlePost')}}"
+          @endif>
             @csrf
           <div class="form-group">
             <label for="mail">Email</label>
@@ -44,7 +46,9 @@
 
 
       <div class="col-5 h-100 align-self-end">
-        <form method="POST" action="{{route('personel.hesapSifreDuzenlePost')}}">
+        <form method="POST" @if (session()->get('ogrenci')) action="{{route('ogrenci.hesapSifreDuzenlePost')}}"
+          @elseif(session()->get('personel'))  action="{{ route('personel.hesapSifreDuzenlePost')}}"
+        @endif>
             @csrf
           <div class="form-group">
             <label for="sifre">Şuanki Şifreniz</label>
