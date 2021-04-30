@@ -52,6 +52,8 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
             Route::post('/get-student', 'TempTable@getStudents')->name('ogrencigetir');
             Route::post('/get-personel', 'TempTable@getPersonels')->name('personelgetir');
             Route::post('/get-istek-sikayet', 'TempTable@getIstekSikayet')->name('istekSikayetGetir'); //isteksiyaet
+            Route::get('/ogrenci-islem-bilgileri/{id??}', 'TempTable@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
+            Route::get('/personel-islem-bilgileri/{id??}', 'TempTable@personelIslemBilgileri')->name('personelIslemBilgileri');
         });
 
         ## END DATATABLES ##
@@ -76,13 +78,17 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::get('/personel-yetki/{id??}','GenelIslemler@personelYetkiGetir')->name('personelYetkiGetir');
         Route::get('/personel-yetkilendirme', 'GenelIslemler@personelYetkiPage')->name('personelYetkilendirme');
 
+        
+        
+
+
         Route::get('/oda-islemleri', 'OdaIslemleri@odaSayfasi')->name('odaSayfasi');
         Route::get('/hesap-ayarlari', fn() => view('personel.accountsettings'))->name('hesapAyarlari');
         Route::get('/ogrenci-ekle', fn() => view('personel.insertstudent'))->name('ogrenciEkle');
         Route::get('/personel-ekle', fn() => view('personel.insertpersonel'))->name('personelEkle');
         Route::get('/istek-talep-list', fn() => view('personel.istektaleplist'))->name('istekTalepList');
         Route::get('/izin-talep', fn() => view('personel.izintalep'))->name('izinTalep');
-        Route::get('/ogrenci-listele', fn() => view('personel.studentlist'))->name('ogrenciListele');
+        Route::get('/ogrenci-listele', 'GenelIslemler@ogrenciListelePage')->name('ogrenciListele');
         Route::get('/personel-listele', fn() => view('personel.personellist'))->name('personelListele');
         Route::get('/ogrenciIslemBilgileri/{id??}', fn() => view('personel.ogrenciIslemBilgileri'))->name('ogrenciIslemBilgileri');
         Route::get('/personelIslemBilgileri/{id??}', fn() => view('personel.personelIslemBilgileri'))->name('personelIslemBilgileri');

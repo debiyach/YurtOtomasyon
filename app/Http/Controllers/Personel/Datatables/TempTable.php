@@ -6,11 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Models\Ogrenci;
 use App\Models\OgrenciIstekSikayet;
 use App\Models\Personel;
+use App\Models\OgrenciLog;
+use App\Models\PersonelIslemKayit;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
 class TempTable extends Controller
 {
+
+    public function ogrenciIslemBilgileri($id = null)
+    {
+        $users = Ogrencilog::where('kurumId',session()->get('personel')->kurumId)->where('ogrenciId',$id);
+        return Datatables::of($users)->make();
+    }
+
+    public function personelIslemBilgileri($id = null)
+    {
+        $users = PersonelIslemKayit::where('kurumId',session()->get('personel')->kurumId)->where('personelId',$id);
+        return Datatables::of($users)->make();
+    }
+
     //Öğrenciler
 
     public function getStudents(Request $request)

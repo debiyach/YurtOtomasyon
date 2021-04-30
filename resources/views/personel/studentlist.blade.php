@@ -1,5 +1,5 @@
 @extends('layouts.personel')
-
+{{-- $binalar => Binalar için, $katlar => Katlar için --}}
 @section('content')
 
     @include('layouts.components.ogrenci.ogrencilistele')
