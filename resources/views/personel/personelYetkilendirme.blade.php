@@ -8,29 +8,30 @@
 
     <script>
         
-        $(document).ready(function () {
-           
-            $("input[type=checkbox]").click(function () { 
-               
-               var deger = $(this).attr("value");
+        
+        function degistir(e) { 
+            e.preventDefault();
+            var item = e.target.value;
 
-               $.ajax({
-                   type: "get",
-                   url: "eklepersonello.php",
-                   data: {
-                       "deger"  :deger,
-                        "id"    :data['id']    
-                    },
-                   success: function (response) {
-                       
-                   }
-               });
-
-               alert(deger);
-
-              
-           });
-        });
+            $.ajax({
+                type: "get",
+                url: "{{ route('personel.personelYetkiGetir') }}/"+item,
+                
+                success: function (data) {
+                    data = JSON.parse(data);
+                    //console.log(data);
+                    data.forEach((key,value) => {
+                        if(item)
+                            $('#'+item).checked;
+                        else 
+                            $('#'+item).notChecked;
+                    });
+                    
+                    
+                }
+            });
+            
+        }
     </script>
 
 

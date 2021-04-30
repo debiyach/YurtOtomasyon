@@ -1,6 +1,6 @@
 @if (session('success'))
   <div class="col-md-6 offset-md-3 alert alert-success">
-    Öğrenci başarıyla kayıt edildi
+    Personel başarıyla kayıt edildi
   </div>
 @endif
 
