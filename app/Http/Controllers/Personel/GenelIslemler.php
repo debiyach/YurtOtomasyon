@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Personel\IzinTalep;
 use App\Http\Requests\Personel\PersonelEkle;
 use App\Mail\SendPasswordMail;
+use App\Models\Binalar;
 use App\Models\IslemCesitleri;
+use App\Models\Katlar;
 use App\Models\Personel;
 use App\Models\PersonelIslemKayit;
 use App\Models\PersonelIzin;
@@ -15,8 +17,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Mail;
 
+
 class GenelIslemler extends Controller
 {
+
+
+    public function ogrenciListelePage()
+    {
+        $data['katlar'] = Katlar::where('kurumId',session()->get('personel')->kurumId)->get();
+        $data['binalar'] = Binalar::where('kurumId',session()->get('personel')->kurumId)->get();
+        return view('personel.studentlist',$data);
+    }
+
     public function personelSetYetki(Request $request)
     {
         return $request->all();
