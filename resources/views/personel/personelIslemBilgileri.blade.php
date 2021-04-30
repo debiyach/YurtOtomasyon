@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('layouts.components.personel.personellistele')
+    @include('layouts.components.personel.personelIslemBilgileri')
 
 @endsection
 
@@ -20,7 +20,7 @@
                     [10, 15, 25, 50, 100]
                 ],
                 "ajax": {
-                    url: "{{route('personel.datatable.personelgetir')}}",
+                    url: //"{{route('personel.datatable.personelgetir')}}",
                     headers: {
                         'X-CSRF-TOKEN': '{{csrf_token()}}', // Bu alanı elleme
                     },
@@ -36,15 +36,6 @@
                     {data:'tcNo'},
                     {data:'evAdresi'}
                 ],
-
-                "columnDefs": [{
-                    "targets": 6,
-                    "data": "id",
-                    "mRender": function(data, type, full) {
-                        return '<a class="btn btn-info btn-sm" href={{route('personel.personelIslemBilgileri')}}'+ '/' + data + '>' + 'İşlem Bilgileri' + '</a>';
-                        
-                    }
-                }],
 
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"

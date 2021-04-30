@@ -84,6 +84,8 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::get('/izin-talep', fn() => view('personel.izintalep'))->name('izinTalep');
         Route::get('/ogrenci-listele', fn() => view('personel.studentlist'))->name('ogrenciListele');
         Route::get('/personel-listele', fn() => view('personel.personellist'))->name('personelListele');
+        Route::get('/ogrenciIslemBilgileri/{id??}', fn() => view('personel.ogrenciIslemBilgileri'))->name('ogrenciIslemBilgileri');
+        Route::get('/personelIslemBilgileri/{id??}', fn() => view('personel.personelIslemBilgileri'))->name('personelIslemBilgileri');
 
 
         ## END GENEL GET İSTEKLERİ ##

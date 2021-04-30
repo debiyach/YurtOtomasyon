@@ -1,15 +1,16 @@
 @extends('layouts.personel')
+
 @section('content')
 
-    @include('layouts.components.istektaleplist')
+    @include('layouts.components.ogrenci.ogrenciIslemBilgileri')
 
 @endsection
-@include('layouts.system.datatableTags')
 
 @section('script')
+
     <script>
         $(document).ready(function() {
-            $('#usersDatatable').DataTable({
+            var table = $('#usersDatatable').DataTable({
                 "processing": true,
                 "serverSide": true,
                 "order": [],
@@ -19,7 +20,7 @@
                     [10, 15, 25, 50, 100]
                 ],
                 "ajax": {
-                    url: "{{ route('personel.datatable.istekSikayetGetir') }}",
+                    url: //"{{ route('personel.datatable.ogrencigetir') }}",
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
                     },
@@ -27,52 +28,27 @@
                     type: "POST"
                 },
                 columns: [{
-                        data: 'aciklama'
+                        data: 'id'
                     },
                     {
-                        data: 'tip'
+                        data: 'ad'
                     },
                     {
-                        data: 'onayDurumu'
+                        data: 'soyad'
                     },
                     {
-                        data: 'created_at'
+                        data: 'mail'
                     },
+                    {
+                        data: 'telNo'
+                    },
+                    {
+                        data: 'tcNo'
+                    },
+                    {
+                        data: 'odaNo'
+                    }
                 ],
-
-
-                initComplete: function() {
-                    var Tur = ['Istek', 'Şikayet', 'Arıza Bildirimi']
-
-                    this.api().columns(1).every(function() {
-                        var column = this;
-                        var array = Tur;
-                        var input = document.createElement("select");
-                        input.id = "tur";
-
-
-                        var option = document.createElement("option");
-                        option.value = '';
-                        option.text = 'Tümü';
-                        input.appendChild(option);
-
-                        for (let i = 0; i < array.length; i++) {
-                            var option = document.createElement("option");
-                            option.value = array[i];
-                            option.text = array[i];
-                            input.appendChild(option);
-                        }
-
-                        //var input = document.createElement('input');
-                        $(input).appendTo($(column.footer()).empty())
-                            .on('change', function() {
-                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                                column.search(val ? val : '', true, false).draw();
-                            });
-                    });
-
-                },
 
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
@@ -98,7 +74,16 @@
                     }
                 ]
             });
+
+            $('#usersDatatable tbody').on('click', 'button', function() {
+                var data = table.row($(this).parents('tr')).data();
+                alert(data[0] + "'s salary is: " + data[5]);
+            });
         });
 
+
     </script>
+
 @endsection
+
+@include('layouts.system.datatableTags')

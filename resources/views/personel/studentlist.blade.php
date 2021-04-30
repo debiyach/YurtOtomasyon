@@ -28,35 +28,116 @@
                     type: "POST"
                 },
                 columns: [{
-                        data: 'id'
+                        data: 'id',
+                        name: 'id'
                     },
                     {
-                        data: 'ad'
+                        data: 'ad',
+                        name: 'ad'
                     },
                     {
-                        data: 'soyad'
+                        data: 'soyad',
+                        name: 'soyad'
                     },
                     {
-                        data: 'mail'
+                        data: 'mail',
+                        name: 'mail'
                     },
                     {
-                        data: 'telNo'
+                        data: 'telNo',
+                        name: 'telNo'
                     },
                     {
-                        data: 'tcNo'
+                        data: 'tcNo',
+                        name: 'tcNo'
                     },
                     {
-                        data: 'odaNo'
+                        data: 'binaNo',
+                        name: 'binaNo'
+                    },
+                    {
+                        data: 'katNo',
+                        name: 'katNo'
+                    },
+                    {
+                        data: 'odaNo',
+                        name: 'odaNo'
                     }
                 ],
 
                 "columnDefs": [{
-                    "targets": 7,
+                    "targets": 9,
                     "data": "id",
                     "mRender": function(data, type, full) {
-                        return '<a class="btn btn-primary" href={{ route('personel.odaSayfasi') }}>' + 'Düzenle' + '</a>';
+                        return '<a class="btn btn-info btn-sm" href={{ route('personel.ogrenciIslemBilgileri') }}' +
+                            '/' + data + '>' + 'İşlem Bilgileri' + '</a>';
+
                     }
                 }],
+
+                initComplete: function() {
+                    var blok = ['1', '2']
+                    var kat = ['1', '2', '3', '4'];
+
+                    this.api().columns(6).every(function() {
+                        var column = this;
+                        var array = blok;
+                        var input = document.createElement("select");
+                        input.id = "blok";
+                        input.className = 'form-control';
+
+                        var option = document.createElement("option");
+                        option.value = '';
+                        option.text = 'Tümü';
+                        input.appendChild(option);
+
+
+                        for (let i = 0; i < array.length; i++) {
+                            var option = document.createElement("option");
+                            option.value = array[i];
+                            option.text = 'Blok ' + array[i];
+                            input.appendChild(option);
+                        }
+
+                        //var input = document.createElement('input');
+                        $(input).appendTo($(column.footer()).empty())
+                            .on('change', function() {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                column.search(val ? val : '', true, false).draw();
+                            });
+                    });
+
+                    this.api().columns(7).every(function() {
+                        var column = this;
+                        var array = kat;
+                        var input = document.createElement("select");
+                        input.id = "katlar";
+                        input.className = 'form-control';
+
+                        var option = document.createElement("option");
+                        option.value = '';
+                        option.text = 'Tümü';
+                        input.appendChild(option);
+
+                        for (let i = 0; i < array.length; i++) {
+                            var option = document.createElement("option");
+                            option.value = array[i];
+                            option.text = 'Kat ' + array[i];
+                            input.appendChild(option);
+                        }
+
+                        //var input = document.createElement('input');
+                        $(input).appendTo($(column.footer()).empty())
+                            .on('change', function() {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                column.search(val ? val : '', true, false).draw();
+                            });
+                    });
+
+
+                },
 
 
                 "language": {

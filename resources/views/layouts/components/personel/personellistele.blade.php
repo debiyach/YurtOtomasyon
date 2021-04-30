@@ -11,9 +11,9 @@
                         <th>Telefon</th>
                         <th>Tc No</th>
                         <th>Adres</th>
+                        <th>İslemler</th>
                     </tr>
                 </thead>
-               
             </table>
         </div>
     </div>
