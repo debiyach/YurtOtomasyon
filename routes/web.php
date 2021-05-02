@@ -70,10 +70,6 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::post('/personel-ekle/post','GenelIslemler@persoenlEkle')->name('personelEklePost');
         Route::post('/personel-set-yetki','GenelIslemler@personelSetYetki')->name('personelSetYetki');
 
-        Route::post('/personel-set-yetkiduzenle',function(Request $request){
-            return $request->all();
-        })->name('denemeseysi');
-
 
         ## END GENEL POST İSTEKLERİ ##
 
@@ -84,8 +80,8 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::get('/personel-yetki/{id??}','GenelIslemler@personelYetkiGetir')->name('personelYetkiGetir');
         Route::get('/personel-yetkilendirme', 'GenelIslemler@personelYetkiPage')->name('personelYetkilendirme');
 
-        
-        
+
+
 
 
         Route::get('/oda-islemleri', 'OdaIslemleri@odaSayfasi')->name('odaSayfasi');
@@ -96,8 +92,8 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::get('/izin-talep', fn() => view('personel.izintalep'))->name('izinTalep');
         Route::get('/ogrenci-listele', 'GenelIslemler@ogrenciListelePage')->name('ogrenciListele');
         Route::get('/personel-listele', fn() => view('personel.personellist'))->name('personelListele');
-        Route::get('/ogrenciIslemBilgileri/{id??}', fn() => view('personel.ogrenciIslemBilgileri'))->name('ogrenciIslemBilgileri');
-        Route::get('/personelIslemBilgileri/{id??}', fn() => view('personel.personelIslemBilgileri'))->name('personelIslemBilgileri');
+        Route::get('/ogrenci-islem-bilgileri/{id??}', fn() => view('personel.ogrenciIslemBilgileri'))->name('ogrenciIslemBilgileri');
+        Route::get('/personel-islem-bilgileri/{id??}', fn() => view('personel.personelIslemBilgileri'))->name('personelIslemBilgileri');
 
 
         ## END GENEL GET İSTEKLERİ ##

@@ -4,6 +4,9 @@
 
     @include('layouts.components.personel.personelIslemBilgileri')
 
+
+{{--    $islemler olarak erişebilirsin işlemlere --}}
+
 @endsection
 
 @section('script')

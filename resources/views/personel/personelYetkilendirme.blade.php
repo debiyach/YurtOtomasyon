@@ -7,11 +7,15 @@
 @section('script')
 
     <script>
+        $('#accordionExample').hide();
         var item;
 
         function degistir(e) {
             e.preventDefault();
             item = e.target.value;
+            if(item.trim() == 'Bir Personel Seçin')
+                return $('#accordionExample').hide();
+            else $('#accordionExample').show();
 
             $.ajax({
                 type: "get",
@@ -43,7 +47,7 @@
                 id: item
             };
 
-            ajaxPostCall('{{ route('personel.denemeseysi') }}', data);
+            ajaxPostCall('{{ route('personel.personelSetYetki') }}', data);
         });
 
 

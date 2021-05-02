@@ -29,5 +29,10 @@ use Illuminate\Database\Eloquent\Model;
 class OgrenciLog extends Model
 {
     protected $table = 'ogrenciLog';
+
+    public function ogrenciToLog()
+    {
+        return $this->hasOne(IslemCesitleri::class, 'id', 'logId');
+    }
     use HasFactory;
 }

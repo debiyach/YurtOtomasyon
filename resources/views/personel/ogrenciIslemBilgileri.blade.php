@@ -4,6 +4,8 @@
 
     @include('layouts.components.ogrenci.ogrenciIslemBilgileri')
 
+    {{--    $islemler olarak erişebilirsin işlemlere --}}
+
 @endsection
 
 @section('script')
@@ -20,7 +22,7 @@
                     [10, 15, 25, 50, 100]
                 ],
                 "ajax": {
-                    url: //"{{ route('personel.datatable.ogrencigetir') }}",
+                    url: "{{ route('personel.datatable.ogrencigetir') }}",
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
                     },

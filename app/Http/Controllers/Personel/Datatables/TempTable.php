@@ -16,35 +16,55 @@ class TempTable extends Controller
 
     public function ogrenciIslemBilgileri($id = null)
     {
-        $users = Ogrencilog::where('kurumId',session()->get('personel')->kurumId)->where('ogrenciId',$id);
-        return Datatables::of($users)->make();
+        $users = Ogrencilog::where('kurumId', session()->get('personel')->kurumId)->where('ogrenciId', $id);
+        return DataTables::eloquent($users)
+            ->editColumn('logId', function (Ogrencilog $user) {
+                return $user->ogrenciToLog->tip;
+            })
+            ->toJson();
     }
 
     public function personelIslemBilgileri($id = null)
     {
-        $users = PersonelIslemKayit::where('kurumId',session()->get('personel')->kurumId)->where('personelId',$id);
-        return Datatables::of($users)->make();
+        $users = PersonelIslemKayit::where('kurumId', session()->get('personel')->kurumId)->where('personelId', $id);
+        return DataTables::eloquent($users)
+            ->editColumn('logId', function (PersonelIslemKayit $user) {
+                return $user->personelToLog->tip;
+            })
+            ->toJson();
     }
 
     //Öğrenciler
 
     public function getStudents(Request $request)
     {
-        $users = Ogrenci::where('kurumId',session()->get('personel')->kurumId);
-        return Datatables::of($users)->make();
+        $users = Ogrenci::where('kurumId', session()->get('personel')->kurumId);
+        if ($request->has("binaNo"))
+            $users->where('binaNo', $request->binaNo);
+        return DataTables::eloquent($users)
+            ->editColumn('binaNo', function (Ogrenci $user) {
+                return $user->ogrenciToBlok->binaAdi;
+            })
+            ->editColumn('katNo', function (Ogrenci $user) {
+                return $user->ogrenciToKat->katAdi;
+            })
+            ->editColumn('odaNo', function (Ogrenci $user) {
+                return $user->ogrenciToOda->odaNo;
+            })
+            ->toJson();
     }
 
     //personeller
     public function getPersonels(Request $request)
     {
-        $users = Personel::where('kurumId',session()->get('personel')->kurumId);
+        $users = Personel::where('kurumId', session()->get('personel')->kurumId);
         return Datatables::of($users)->make();
     }
 
     //istek-sikayet
     public function getIstekSikayet(Request $request)
     {
-        $data = OgrenciIstekSikayet::where('kurumId',session()->get('personel')->kurumId);
+        $data = OgrenciIstekSikayet::where('kurumId', session()->get('personel')->kurumId);
         return Datatables::of($data)->make();
     }
 }

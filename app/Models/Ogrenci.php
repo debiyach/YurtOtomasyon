@@ -60,7 +60,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Ogrenci whereYatakNo($value)
  * @mixin \Eloquent
  */
-
 class Ogrenci extends Model
 {
     protected $table = 'ogrenci';
@@ -71,7 +70,20 @@ class Ogrenci extends Model
 //    {
 //        return $this->hasOne('App\Models\Yataklar','ogrenciId','id');
 //    }
+    public function ogrenciToBlok()
+    {
+        return $this->hasOne('\App\Models\Binalar', 'id', 'binaNo');
+    }
 
+    public function ogrenciToKat()
+    {
+        return $this->hasOne('\App\Models\Katlar', 'id', 'katNo');
+    }
+
+    public function ogrenciToOda()
+    {
+        return $this->hasOne('\App\Models\Odalar', 'id', 'odaNo');
+    }
 
     use HasFactory;
 }

@@ -20,7 +20,17 @@ use Mail;
 
 class GenelIslemler extends Controller
 {
+    public function personelIslemBilgileri()
+    {
+        $data['islemler'] = IslemCesitleri::all();
+        return view('personel.personelIslemBilgileri',$data);
+    }
 
+    public function ogrenciIslemBilgileri($id=null)
+    {
+        $data['islemler'] = IslemCesitleri::all();
+        return view('personel.ogrenciIslemBilgileri',$data);
+    }
 
     public function ogrenciListelePage()
     {
@@ -31,7 +41,14 @@ class GenelIslemler extends Controller
 
     public function personelSetYetki(Request $request)
     {
-        return $request->all();
+        $updatePerm = Personel::find($request->id);
+        $yetki = json_decode($updatePerm->yetki,1);
+        $yetki[$request->deger] = intval($request->durum);
+        $updatePerm->update([
+            'yetki' => json_encode($yetki)
+        ]);
+        echo '<pre>';
+        print_r($yetki);
     }
 
 
