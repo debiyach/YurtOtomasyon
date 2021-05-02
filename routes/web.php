@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
 
 Route::get('/test', function () {
     return view('test');
@@ -67,6 +69,10 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::post('/izin-talep/post','GenelIslemler@izinTalep')->name('izinTalepPost');
         Route::post('/personel-ekle/post','GenelIslemler@persoenlEkle')->name('personelEklePost');
         Route::post('/personel-set-yetki','GenelIslemler@personelSetYetki')->name('personelSetYetki');
+
+        Route::post('/personel-set-yetkiduzenle',function(Request $request){
+            return $request->all();
+        })->name('denemeseysi');
 
 
         ## END GENEL POST İSTEKLERİ ##

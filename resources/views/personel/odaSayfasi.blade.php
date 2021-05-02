@@ -159,8 +159,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="katAdi">Yatak Numarasını Giriniz:</label>
-                                <input type="number" maxlength="6" min="0" class="form-control" name="yatakNo"
-                                       id="yatakNo">
+                                <input type="number" maxlength="6" min="0" class="form-control" name="yatakNo" id="yatakNo">
                             </div>
                         </div>
                         <div class="col-12">
@@ -180,7 +179,7 @@
     </div>
 
     <div class="modal fade" id="ogrenciYatakEkleModal" tabindex="-1" aria-labelledby="#ogrenciYatakEkleLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -245,26 +244,29 @@
 @endsection
 @section('script')
     <script>
-
         function ogrenciKaldir(id) {
-            ajaxPostCall('{{route('personel.odaIslemleri.ogrenciYatakKaldir')}}',{ogrid:id},function (data){
+            ajaxPostCall('{{ route('personel.odaIslemleri.ogrenciYatakKaldir') }}', {
+                ogrid: id
+            }, function(data) {
                 yatakYaz($('#yatakOda2 :selected').val());
                 yatakOgrenciGetir(ogrenciOptAdd);
             });
         }
 
         function yatakOgrenciGetir(callback) {
-            $.get('{{route("personel.odaIslemleri.yatakOgrenciGetir")}}', function (data) {
+            $.get('{{ route('personel.odaIslemleri.yatakOgrenciGetir') }}', function(data) {
                 callback(data);
             });
         }
-        $('#ogrenciYatakEkle').submit(function(e){
+        $('#ogrenciYatakEkle').submit(function(e) {
             e.preventDefault();
-            ajaxPostCall('{{route('personel.odaIslemleri.yatakOgrenciEkle')}}',$('#ogrenciYatakEkle').serialize(),function (data){
-                yatakYaz($('#yatakOda2 :selected').val());
-                yatakOgrenciGetir(ogrenciOptAdd);
-                $('.modal').modal('hide');
-            });
+            ajaxPostCall('{{ route('personel.odaIslemleri.yatakOgrenciEkle') }}', $('#ogrenciYatakEkle')
+            .serialize(),
+                function(data) {
+                    yatakYaz($('#yatakOda2 :selected').val());
+                    yatakOgrenciGetir(ogrenciOptAdd);
+                    $('.modal').modal('hide');
+                });
         });
 
 
@@ -274,42 +276,42 @@
         }
 
         function deleteBed(link) {
-            $.get(link, function (data) {
+            $.get(link, function(data) {
                 yatakYaz($('#yatakOda2 :selected').val())
             });
         }
 
-        $('#yatakOda2').change(function (e) {
+        $('#yatakOda2').change(function(e) {
             e.preventDefault();
             yatakYaz(e.target.value);
         })
 
         function yatakYaz(id) {
             if (id === 'null') return $('#list').html(null);
-            $.get('{{route("personel.odaIslemleri.yatakGetir")}}/' + id, function (data) {
+            $.get('{{ route('personel.odaIslemleri.yatakGetir') }}/' + id, function(data) {
                 $('#list').html(data);
             })
         }
 
-        $('#yatakKat').change(function (e) {
+        $('#yatakKat').change(function(e) {
             yatakKatIslem(e, data => $('#yatakOda').html(data));
         });
 
-        $('#yatakKat2').change(function (e) {
+        $('#yatakKat2').change(function(e) {
             yatakKatIslem(e, data => $('#yatakOda2').html(data));
         });
 
-        $('#yatakBina').change(function (e) {
+        $('#yatakBina').change(function(e) {
             yatakBinaIslem(e, data => $('#yatakKat').html(data));
         });
-        $('#yatakBina2').change(function (e) {
+        $('#yatakBina2').change(function(e) {
             yatakBinaIslem(e, data => $('#yatakKat2').html(data));
         });
 
         function yatakKatIslem(e, callback) {
             e.preventDefault();
-            $.get('{{route("personel.odaIslemleri.odaGetir")}}/' + e.target.value, function (data) {
-                odaOptYaz(data, function (data) {
+            $.get('{{ route('personel.odaIslemleri.odaGetir') }}/' + e.target.value, function(data) {
+                odaOptYaz(data, function(data) {
                     callback(data)
                 });
             });
@@ -318,8 +320,8 @@
         function yatakBinaIslem(e, callback) {
             e.preventDefault();
             if (e.target.value != 'null')
-                katGetir(e.target.value, function (data) {
-                    katOptionYaz(data, function (d) {
+                katGetir(e.target.value, function(data) {
+                    katOptionYaz(data, function(d) {
                         callback(d);
                     });
                 });
@@ -329,31 +331,33 @@
             }
         }
 
-        $('#yatakEkle').submit(function (e) {
+        $('#yatakEkle').submit(function(e) {
             e.preventDefault();
-            ajaxPostCall('{{route('personel.odaIslemleri.yatakEkle')}}', $('#yatakEkle').serialize(), function (data) {
+            ajaxPostCall('{{ route('personel.odaIslemleri.yatakEkle') }}', $('#yatakEkle').serialize(), function(
+                data) {
                 writeNot(data);
             });
         });
 
-        $('#binaEkle').submit(function (e) {
+        $('#binaEkle').submit(function(e) {
             e.preventDefault();
-            ajaxPostCall('{{route('personel.odaIslemleri.binaEkle')}}', $('#binaEkle').serialize(), function (data) {
+            ajaxPostCall('{{ route('personel.odaIslemleri.binaEkle') }}', $('#binaEkle').serialize(), function(
+            data) {
                 writeNot(data);
             });
             binaGetir();
         });
 
-        $('#katEkle').submit(function (e) {
+        $('#katEkle').submit(function(e) {
             e.preventDefault();
-            ajaxPostCall('{{route('personel.odaIslemleri.katEkle')}}', $('#katEkle').serialize(), function (data) {
+            ajaxPostCall('{{ route('personel.odaIslemleri.katEkle') }}', $('#katEkle').serialize(), function(data) {
                 writeNot(data);
             });
         });
 
-        $('#odaEkle').submit(function (e) {
+        $('#odaEkle').submit(function(e) {
             e.preventDefault();
-            ajaxPostCall('{{route('personel.odaIslemleri.odaEkle')}}', $('#odaEkle').serialize(), function (data) {
+            ajaxPostCall('{{ route('personel.odaIslemleri.odaEkle') }}', $('#odaEkle').serialize(), function(data) {
                 writeNot(data);
             });
         });
@@ -366,18 +370,18 @@
             }
         }
 
-        $('#binaSecinizs').change(function (e) {
+        $('#binaSecinizs').change(function(e) {
             e.preventDefault();
             if (e.target.value != 'null')
-                katGetir(e.target.value, function (data) {
-                    katOptionYaz(data, function (d) {
+                katGetir(e.target.value, function(data) {
+                    katOptionYaz(data, function(d) {
                         $('#katSecin').html(d);
                     });
                 });
         });
 
         function katGetir(id, callback) {
-            $.get('{{route("personel.odaIslemleri.katGetir")}}/' + id, function (data) {
+            $.get('{{ route('personel.odaIslemleri.katGetir') }}/' + id, function(data) {
                 callback(data);
             })
         }
@@ -394,7 +398,7 @@
         }
 
         function binaGetir() {
-            $.get('{{route("personel.odaIslemleri.binaGetir")}}', function (data) {
+            $.get('{{ route('personel.odaIslemleri.binaGetir') }}', function(data) {
                 binaOptionYaz(data);
             });
         }
@@ -425,7 +429,7 @@
                 url: route,
                 type: 'POST',
                 headers: {
-                    'X-CSRF-TOKEN': '{{csrf_token()}}',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
                 },
                 data: data,
                 success(data) {
@@ -441,11 +445,11 @@
                 for (const ogr of ogrs) {
                     ogrOpt += `<option value="${ogr.id}">${ogr.ad} ${ogr.soyad}</option>`;
                 }
-            }else ogrOpt = '<option value="null">Yurdunuzda yataksız öğrenci yok</option>';
+            } else ogrOpt = '<option value="null">Yurdunuzda yataksız öğrenci yok</option>';
             $('#ogrNo').html(ogrOpt);
         }
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             binaGetir();
             yatakOgrenciGetir(ogrenciOptAdd);
         });
