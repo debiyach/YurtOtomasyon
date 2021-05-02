@@ -49,6 +49,7 @@
                         var array = Tur;
                         var input = document.createElement("select");
                         input.id = "tur";
+                        input.className = 'form-control';
 
 
                         var option = document.createElement("option");

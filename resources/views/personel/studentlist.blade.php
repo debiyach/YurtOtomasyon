@@ -10,6 +10,7 @@
 
     <script>
         $(document).ready(function() {
+
             var table = $('#usersDatatable').DataTable({
                 "processing": true,
                 "serverSide": true,
@@ -75,9 +76,25 @@
                     }
                 }],
 
+
                 initComplete: function() {
-                    var blok = ['1', '2']
-                    var kat = ['1', '2', '3', '4'];
+                    var blok = [];
+                    var kat = [];
+
+                    var gelenbinalar = @json($binalar);
+                    gelenbinalar.forEach(element => {
+                        blok.push(element.binaAdi);
+                    });
+
+                    var gelenkatlar = @json($katlar);
+                    gelenkatlar.forEach(element => {
+                        kat.push(element.katAdi);
+                    });
+
+                    //console.log(blok);
+
+                    //var blok = ['1', '2']
+                    //var kat = ['1', '2', '3', '4'];
 
                     this.api().columns(6).every(function() {
                         var column = this;
@@ -95,7 +112,7 @@
                         for (let i = 0; i < array.length; i++) {
                             var option = document.createElement("option");
                             option.value = array[i];
-                            option.text = 'Blok ' + array[i];
+                            option.text = array[i];
                             input.appendChild(option);
                         }
 
@@ -123,11 +140,25 @@
                         for (let i = 0; i < array.length; i++) {
                             var option = document.createElement("option");
                             option.value = array[i];
-                            option.text = 'Kat ' + array[i];
+                            option.text = array[i];
                             input.appendChild(option);
                         }
 
                         //var input = document.createElement('input');
+                        $(input).appendTo($(column.footer()).empty())
+                            .on('change', function() {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                column.search(val ? val : '', true, false).draw();
+                            });
+                    });
+
+                    this.api().columns(8).every(function() {
+                        var column = this;
+                        var input = document.createElement("input");
+                        input.id = "odalar";
+                        input.className = 'form-control';
+
                         $(input).appendTo($(column.footer()).empty())
                             .on('change', function() {
                                 var val = $.fn.dataTable.util.escapeRegex($(this).val());

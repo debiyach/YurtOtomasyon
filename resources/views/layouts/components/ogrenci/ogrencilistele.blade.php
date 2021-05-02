@@ -4,6 +4,7 @@
         <div class="table-responsive">
             <table id="usersDatatable" class="table table-striped table-bordered first">
                 <thead>
+
                     <tr>
                         <th>id</th>
                         <th>Ad</th>
@@ -46,6 +47,7 @@
                     <th rowspan="1" colspan="1"></th>
                     <th rowspan="1" colspan="1"><select>></th>
                     <th rowspan="1" colspan="1"><select>></th>
+                    <th rowspan="1" colspan="1"><input></th>
                 </tfoot>
             </table>
         </div>
