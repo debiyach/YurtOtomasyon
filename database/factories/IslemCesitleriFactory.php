@@ -27,6 +27,7 @@ class IslemCesitleriFactory extends Factory
             "Yatak kaldırdı.",
             "Öğrenciyi yataktan kaldırdı.",
             "Yeni bir öğrenci ekledi.",
+            "Yetki değiştirildi."
         ];
         foreach ($logs as $log){
             IslemCesitleri::insert([
