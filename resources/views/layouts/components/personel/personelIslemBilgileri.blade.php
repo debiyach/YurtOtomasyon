@@ -10,6 +10,10 @@
                         <th>Tarih</th>
                     </tr>
                 </thead>
+                <tfoot>
+                    <th></th>
+                    <th><select></th>
+                </tfoot>
             </table>
         </div>
     </div>

@@ -39,9 +39,8 @@ class TempTable extends Controller
     public function getStudents(Request $request)
     {
         $users = Ogrenci::where('kurumId', session()->get('personel')->kurumId);
-        if ($request->has("binaNo"))
-            $users->where('binaNo', $request->binaNo);
-        return DataTables::eloquent($users)
+        
+        return DataTables::of($users)
             ->editColumn('binaNo', function (Ogrenci $user) {
                 return $user->ogrenciToBlok->binaAdi;
             })
@@ -51,7 +50,7 @@ class TempTable extends Controller
             ->editColumn('odaNo', function (Ogrenci $user) {
                 return $user->ogrenciToOda->odaNo;
             })
-            ->toJson();
+            ->make();
     }
 
     //personeller

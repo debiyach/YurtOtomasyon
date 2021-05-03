@@ -38,7 +38,20 @@
                     {
                         data: 'created_at'
                     },
+
                 ],
+
+
+                "columnDefs": [{
+                    "targets": 4,
+                    "data": "id",
+                    "mRender": function(data, type, full) {
+                        return '<a class="btn btn-success btn-sm" href={{ route('personel.ogrenciIslemBilgileri') }}' +
+                            '/' + data + '>' + 'Onayla' + '</a>' +
+                            '<a class="btn ml-4 btn-warning  btn-sm " href={{ route('personel.ogrenciIslemBilgileri') }}' +
+                            '/' + data + '>' + 'Değerlendirmeye Al' + '</a>';
+                    }
+                }],
 
 
                 initComplete: function() {

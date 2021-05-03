@@ -13,7 +13,7 @@
         function degistir(e) {
             e.preventDefault();
             item = e.target.value;
-            if(item.trim() == 'Bir Personel Seçin')
+            if (item.trim() == 'Bir Personel Seçin')
                 return $('#accordionExample').hide();
             else $('#accordionExample').show();
 
@@ -39,7 +39,7 @@
             //var deger = this.attr('checked');
             var durum = $(this).is(':checked');
             var deger = $(this).attr('id');
-            alert(deger + ' ' + durum + ' adlı kullanıcı' + item);
+            //alert(deger + ' ' + durum + ' adlı kullanıcı' + item);
 
             var data = {
                 durum: durum,

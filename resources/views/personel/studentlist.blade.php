@@ -2,17 +2,6 @@
 {{-- $binalar => Binalar için, $katlar => Katlar için --}}
 @section('content')
 
-
-    <div class="form-group">
-        <label for="binalar">Bina Seçiniz: </label>
-        <select class="form-control" id="binalar" >
-            <option value="null">Bina Seçilmedi</option>
-            @foreach($binalar as $bina)
-                    <option value="{{$bina->id}}">{{$bina->binaAdi}}</option>
-            @endforeach
-        </select>
-    </div>
-
     @include('layouts.components.ogrenci.ogrencilistele')
 
 @endsection
@@ -20,8 +9,6 @@
 @section('script')
 
     <script>
-
-
         var table = $('#usersDatatable').DataTable({
             "processing": true,
             "serverSide": true,
@@ -42,9 +29,9 @@
                 type: "POST"
             },
             columns: [{
-                data: 'id',
-                name: 'id'
-            },
+                    data: 'id',
+                    name: 'id'
+                },
                 {
                     data: 'ad',
                     name: 'ad'
@@ -96,12 +83,13 @@
 
                 var gelenbinalar = @json($binalar);
                 gelenbinalar.forEach(element => {
-                    blok.push(element.binaAdi);
+                    blok.push(element);
                 });
+
 
                 var gelenkatlar = @json($katlar);
                 gelenkatlar.forEach(element => {
-                    kat.push(element.katAdi);
+                    kat.push(element);
                 });
 
                 //console.log(blok);
@@ -124,8 +112,8 @@
 
                     for (let i = 0; i < array.length; i++) {
                         var option = document.createElement("option");
-                        option.value = array[i];
-                        option.text = array[i];
+                        option.value = array[i].id;
+                        option.text = array[i].binaAdi;
                         input.appendChild(option);
                     }
 
@@ -138,33 +126,6 @@
                         });
                 });
 
-                this.api().columns(7).every(function() {
-                    var column = this;
-                    var array = kat;
-                    var input = document.createElement("select");
-                    input.id = "katlar";
-                    input.className = 'form-control';
-
-                    var option = document.createElement("option");
-                    option.value = '';
-                    option.text = 'Tümü';
-                    input.appendChild(option);
-
-                    for (let i = 0; i < array.length; i++) {
-                        var option = document.createElement("option");
-                        option.value = array[i];
-                        option.text = array[i];
-                        input.appendChild(option);
-                    }
-
-                    //var input = document.createElement('input');
-                    $(input).appendTo($(column.footer()).empty())
-                        .on('change', function() {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                            column.search(val ? val : '', true, false).draw();
-                        });
-                });
 
                 this.api().columns(8).every(function() {
                     var column = this;
@@ -188,12 +149,12 @@
                 "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
             },
             buttons: [{
-                extend: 'excel',
-                text: 'Excel',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4]
-                }
-            },
+                    extend: 'excel',
+                    text: 'Excel',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                },
                 {
                     extend: 'csv',
                     text: 'CSV'
@@ -217,11 +178,10 @@
             table.draw();
         });
 
-        $('#binalar').change(function (e){
+        $('#binalar').change(function(e) {
             e.preventDefault();
             table.draw();
         })
-
 
     </script>
 
