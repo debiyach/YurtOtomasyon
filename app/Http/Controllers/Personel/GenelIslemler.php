@@ -14,6 +14,8 @@ use App\Models\Personel;
 use App\Models\PersonelIslemKayit;
 use App\Models\PersonelIzin;
 use Illuminate\Http\Request;
+use App\Helpers\Writer;
+use App\Http\Controllers\Logs\Logs;
 use Illuminate\Support\Str;
 use Mail;
 
@@ -23,40 +25,44 @@ class GenelIslemler extends Controller
     public function personelIslemBilgileri()
     {
         $data['islemler'] = IslemCesitleri::all();
-        return view('personel.personelIslemBilgileri',$data);
+        return view('personel.personelIslemBilgileri', $data);
     }
 
-    public function ogrenciIslemBilgileri($id=null)
+    public function ogrenciIslemBilgileri($id = null)
     {
         $data['islemler'] = IslemCesitleri::all();
-        return view('personel.ogrenciIslemBilgileri',$data);
+        return view('personel.ogrenciIslemBilgileri', $data);
     }
 
     public function ogrenciListelePage()
     {
-        $data['katlar'] = Katlar::where('kurumId',session()->get('personel')->kurumId)->get();
-        $data['binalar'] = Binalar::where('kurumId',session()->get('personel')->kurumId)->get();
-        return view('personel.studentlist',$data);
+        $data['katlar'] = Katlar::where('kurumId', session()->get('personel')->kurumId)->get();
+        $data['binalar'] = Binalar::where('kurumId', session()->get('personel')->kurumId)->get();
+        return view('personel.studentlist', $data);
     }
 
     public function personelSetYetki(Request $request)
     {
-        $updatePerm = Personel::find($request->id);
-        $yetki = json_decode($updatePerm->yetki,1);
-        $yetki[$request->deger] = intval($request->durum);
-        $updatePerm->update([
-            'yetki' => json_encode($yetki)
-        ]);
-        echo '<pre>';
-        print_r($yetki);
+        if (json_decode(session()->get('personel')->yetki)->personelYetkiDuzenle === \App\Helpers\Writer::Ekle) {
+            $updatePerm = Personel::find($request->id);
+            $yetki = json_decode($updatePerm->yetki, 1);
+            $yetki[$request->deger] = ($request->durum == 'true') ? 1 : 0;
+            $result = $updatePerm->update([
+                'yetki' => json_encode($yetki)
+            ]);
+            if ($result) {
+                Logs::personelLog(Writer::changePerm, Writer::changePerm($request->durum, $request->deger));
+                return response(['type' => 'success', 'message' => 'İzin başarıyla değiştirildi!']);
+            } else return response(['type' => 'error', 'message' => 'İzin değiştilirken hata oluştu!']);
+        } else return response(['type' => 'error', 'message' => 'İzin düzenleme yetkiniz yok!']);
     }
 
 
     public function personelYetkiPage()
     {
-        $data['personels'] = Personel::where('tip','=','Personel')
-                                        ->where('kurumId',session()->get('personel')->kurumId)
-                                        ->get();
+        $data['personels'] = Personel::where('tip', '=', 'Personel')
+            ->where('kurumId', session()->get('personel')->kurumId)
+            ->get();
         return view('personel.personelYetkilendirme', $data);
     }
 
@@ -66,7 +72,6 @@ class GenelIslemler extends Controller
             $personel = Personel::find($id);
             return response(($personel->yetki), 200);
         } else return response(['success' => false, 'message' => 'Hatalı işlem'], 404);
-
     }
 
     public function persoenlEkle(PersonelEkle $request)

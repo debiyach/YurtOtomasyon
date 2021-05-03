@@ -3,16 +3,6 @@
 @section('content')
 
 
-    <div class="form-group">
-        <label for="binalar">Bina Seçiniz: </label>
-        <select class="form-control" id="binalar" >
-            <option value="null">Bina Seçilmedi</option>
-            @foreach($binalar as $bina)
-                    <option value="{{$bina->id}}">{{$bina->binaAdi}}</option>
-            @endforeach
-        </select>
-    </div>
-
     @include('layouts.components.ogrenci.ogrencilistele')
 
 @endsection
@@ -217,10 +207,7 @@
             table.draw();
         });
 
-        $('#binalar').change(function (e){
-            e.preventDefault();
-            table.draw();
-        })
+
 
 
     </script>

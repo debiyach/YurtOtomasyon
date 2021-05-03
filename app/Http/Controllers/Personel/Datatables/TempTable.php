@@ -39,8 +39,7 @@ class TempTable extends Controller
     public function getStudents(Request $request)
     {
         $users = Ogrenci::where('kurumId', session()->get('personel')->kurumId);
-        if ($request->has("binaNo"))
-            $users->where('binaNo', $request->binaNo);
+
         return DataTables::eloquent($users)
             ->editColumn('binaNo', function (Ogrenci $user) {
                 return $user->ogrenciToBlok->binaAdi;

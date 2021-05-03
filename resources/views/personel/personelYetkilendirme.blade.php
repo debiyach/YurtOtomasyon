@@ -7,6 +7,11 @@
 @section('script')
 
     <script>
+        if('{{json_decode(session()->get('personel')->yetki)->personelYetkiDuzenle}}' != 1){
+            $('.dashboard-content').remove();
+            writeNot({"type":"error","message":"Bu sayfayı görüntüleme yetkiniz yok!"});                                                                                                                                                                          
+        }
+                
         $('#accordionExample').hide();
         var item;
 
@@ -39,7 +44,7 @@
             //var deger = this.attr('checked');
             var durum = $(this).is(':checked');
             var deger = $(this).attr('id');
-            alert(deger + ' ' + durum + ' adlı kullanıcı' + item);
+            //alert(deger + ' ' + durum + ' adlı kullanıcı' + item);
 
             var data = {
                 durum: durum,
@@ -47,7 +52,9 @@
                 id: item
             };
 
-            ajaxPostCall('{{ route('personel.personelSetYetki') }}', data);
+            ajaxPostCall('{{ route('personel.personelSetYetki') }}', data, function(data){
+                writeNot(data);
+            });
         });
 
 
@@ -63,6 +70,13 @@
                     callback(data);
                 }
             });
+        }
+
+        function writeNot(data) {
+            $.notify(data.message, data.type);
+            if (data.type === 'success') {
+                $('.modal').modal('hide');
+            }
         }
 
     </script>

@@ -43,7 +43,8 @@ class PersonelFactory extends Factory
                 'ogrenciYatakKaldir' => 1,
                 "ogrenciYatakEkle" =>1,
                 "ogrenciEkle" => 1,
-                "personelEkle" => 1
+                "personelEkle" => 1,
+                "personelYetkiDuzenle" => 1,
             ]),
             'izin' => rand(0,1),
             'aktif' => rand(0,1),

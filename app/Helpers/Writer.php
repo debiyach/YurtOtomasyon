@@ -18,6 +18,12 @@ class Writer
     const OgrenciYatakEkle = "Öğrenci yatağa eklendi.";
     const OgrenciYatakKaldir = "Öğrenci yataktan kaldırdı.";
     const PersonelEkle = "Yeni bir personel ekledi.";
+    const changePerm = "Yetki değiştirildi.";
+
+    static function changePerm($durum, $deger)      
+    {                                                                          
+        return "$deger izni $durum olarak değiştirildi.";
+    }
 
     static function OdaEkle($binaid, $odano){
         return "$binaid idli binaya $odano nolu oda eklendi";
