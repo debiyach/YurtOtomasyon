@@ -44,7 +44,7 @@
                                 </tr>
                                 <tr>
                                     <td>Personel Yetki Düzenleme</td>
-                                    <td><input value="personelYetkiDuzenle" type="checkbox"></td>
+                                    <td><input id="personelYetkiDuzenle" type="checkbox"></td>
                                 </tr>
 
                             </tbody>

@@ -45,8 +45,8 @@
                     <th rowspan="1" colspan="1"></th>
                     <th rowspan="1" colspan="1"></th>
                     <th rowspan="1" colspan="1"></th>
-                    <th rowspan="1" colspan="1"><select>></th>
-                    <th rowspan="1" colspan="1"><select>></th>
+                    <th rowspan="1" colspan="1"><select></th>
+                    <th rowspan="1" colspan="1"></th>
                     <th rowspan="1" colspan="1"><input></th>
                 </tfoot>
             </table>

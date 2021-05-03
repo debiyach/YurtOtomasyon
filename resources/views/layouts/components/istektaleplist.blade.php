@@ -9,6 +9,7 @@
                         <th>Tip</th>
                         <th>Onay Durumu</th>
                         <th>Tarih</th>
+                        <th>İşlem</th>
                     </tr>
                 </thead>
                 <tfoot>

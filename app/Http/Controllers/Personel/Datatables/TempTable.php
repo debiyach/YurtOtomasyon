@@ -50,7 +50,7 @@ class TempTable extends Controller
             ->editColumn('odaNo', function (Ogrenci $user) {
                 return $user->ogrenciToOda->odaNo;
             })
-            ->toJson();
+            ->make();
     }
 
     //personeller

@@ -4,7 +4,7 @@
 
     @include('layouts.components.ogrenci.ogrenciIslemBilgileri')
 
-    {{--    $islemler olarak erişebilirsin işlemlere --}}
+    {{-- $islemler olarak erişebilirsin işlemlere --}}
 
 @endsection
 
@@ -22,7 +22,7 @@
                     [10, 15, 25, 50, 100]
                 ],
                 "ajax": {
-                    url: "{{ route('personel.datatable.ogrencigetir') }}",
+                    url: "{{ route('personel.datatable.ogrenciIslemBilgileri') . '/' . Request::segment(3) }}",
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
                     },
@@ -30,27 +30,58 @@
                     type: "POST"
                 },
                 columns: [{
-                        data: 'id'
+                        data: 'kurumId'
                     },
                     {
-                        data: 'ad'
+                        data: 'ogrenciId'
                     },
                     {
-                        data: 'soyad'
-                    },
-                    {
-                        data: 'mail'
-                    },
-                    {
-                        data: 'telNo'
-                    },
-                    {
-                        data: 'tcNo'
-                    },
-                    {
-                        data: 'odaNo'
+                        data: 'created_at'
                     }
                 ],
+
+                initComplete: function() {
+                    var islemler = [];
+
+                    var islemcesitleri = @json($islemler);
+                    islemcesitleri.forEach(element => {
+                        islemler.push(element);
+                    });
+
+
+                    this.api().columns(1).every(function() {
+                        var column = this;
+                        var array = islemler;
+                        var input = document.createElement("select");
+                        input.id = "islemler";
+                        input.className = 'form-control';
+
+                        var option = document.createElement("option");
+                        option.value = '';
+                        option.text = 'Tümü';
+                        input.appendChild(option);
+
+
+                        for (let i = 0; i < array.length; i++) {
+                            var option = document.createElement("option");
+                            option.value = array[i].id;
+                            option.text = array[i].tip;
+                            input.appendChild(option);
+                        }
+
+                        //var input = document.createElement('input');
+                        $(input).appendTo($(column.footer()).empty())
+                            .on('change', function() {
+                                var val = $.fn.dataTable.util.escapeRegex($(this)
+                                    .val());
+
+                                column.search(val ? val : '', true, false).draw();
+                            });
+                    });
+
+
+
+                },
 
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
@@ -82,7 +113,6 @@
                 alert(data[0] + "'s salary is: " + data[5]);
             });
         });
-
 
     </script>
 

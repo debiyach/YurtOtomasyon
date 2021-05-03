@@ -18,7 +18,7 @@
         function degistir(e) {
             e.preventDefault();
             item = e.target.value;
-            if(item.trim() == 'Bir Personel Seçin')
+            if (item.trim() == 'Bir Personel Seçin')
                 return $('#accordionExample').hide();
             else $('#accordionExample').show();
 

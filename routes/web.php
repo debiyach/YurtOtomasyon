@@ -54,8 +54,8 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
             Route::post('/get-student', 'TempTable@getStudents')->name('ogrencigetir');
             Route::post('/get-personel', 'TempTable@getPersonels')->name('personelgetir');
             Route::post('/get-istek-sikayet', 'TempTable@getIstekSikayet')->name('istekSikayetGetir'); //isteksiyaet
-            Route::get('/ogrenci-islem-bilgileri/{id??}', 'TempTable@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
-            Route::get('/personel-islem-bilgileri/{id??}', 'TempTable@personelIslemBilgileri')->name('personelIslemBilgileri');
+            Route::post('/ogrenci-islem-bilgileri/{id??}', 'TempTable@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
+            Route::post('/personel-islem-bilgileri/{id??}', 'TempTable@personelIslemBilgileri')->name('personelIslemBilgileri');
         });
 
         ## END DATATABLES ##
@@ -92,8 +92,8 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::get('/izin-talep', fn() => view('personel.izintalep'))->name('izinTalep');
         Route::get('/ogrenci-listele', 'GenelIslemler@ogrenciListelePage')->name('ogrenciListele');
         Route::get('/personel-listele', fn() => view('personel.personellist'))->name('personelListele');
-        Route::get('/ogrenci-islem-bilgileri/{id??}', fn() => view('personel.ogrenciIslemBilgileri'))->name('ogrenciIslemBilgileri');
-        Route::get('/personel-islem-bilgileri/{id??}', fn() => view('personel.personelIslemBilgileri'))->name('personelIslemBilgileri');
+        Route::get('/ogrenci-islem-bilgileri/{id??}', 'GenelIslemler@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
+        Route::get('/personel-islem-bilgileri/{id??}', 'GenelIslemler@personelIslemBilgileri')->name('personelIslemBilgileri');
 
 
         ## END GENEL GET İSTEKLERİ ##

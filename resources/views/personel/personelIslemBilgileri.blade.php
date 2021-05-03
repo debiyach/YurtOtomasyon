@@ -1,74 +1,121 @@
-@extends('layouts.personel')
+    @extends('layouts.personel')
 
-@section('content')
+    @section('content')
 
-    @include('layouts.components.personel.personelIslemBilgileri')
+        @include('layouts.components.personel.personelIslemBilgileri')
 
 
-{{--    $islemler olarak erişebilirsin işlemlere --}}
+        {{-- $islemler olarak erişebilirsin işlemlere --}}
 
-@endsection
+    @endsection
 
-@section('script')
+    @section('script')
 
-    <script>
-        $(document).ready(function () {
-            $('#usersDatatable').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "order": [],
-                dom: '<"d-flex justify-content-between"lf>rt<"d-flex justify-content-between"Bip>',
-                "lengthMenu": [
-                    [10, 15, 25, 50, 100],
-                    [10, 15, 25, 50, 100]
-                ],
-                "ajax": {
-                    url: //"{{route('personel.datatable.personelgetir')}}",
-                    headers: {
-                        'X-CSRF-TOKEN': '{{csrf_token()}}', // Bu alanı elleme
+        <script>
+            $(document).ready(function() {
+                $('#usersDatatable').DataTable({
+
+                    "processing": true,
+                    "serverSide": true,
+                    "order": [],
+                    dom: '<"d-flex justify-content-between"lf>rt<"d-flex justify-content-between"Bip>',
+                    "lengthMenu": [
+                        [10, 15, 25, 50, 100],
+                        [10, 15, 25, 50, 100]
+                    ],
+                    "ajax": {
+                        url: "{{ route('personel.datatable.personelIslemBilgileri') . '/' . Request::segment(3) }}",
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
+                        },
+                        data: function(d) {},
+                        type: "post"
                     },
-                    data: function (d) {
-                    },
-                    type: "POST"
-                },
-                columns: [
-                    {data:'ad'},
-                    {data:'soyad'},
-                    {data:'mail'},
-                    {data:'telNo'},
-                    {data:'tcNo'},
-                    {data:'evAdresi'}
-                ],
+                    columns: [{
+                            data: 'logName'
+                        },
+                        {
+                            data: 'logId'
+                        },
+                        {
+                            data: 'created_at'
+                        }
 
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
-                },
-                buttons: [{
-                    extend: 'excel',
-                    text: 'Excel',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4]
-                    }
-                },
-                    {
-                        extend: 'csv',
-                        text: 'CSV'
+                    ],
+
+                    initComplete: function() {
+                        var islemler = [];
+
+                        var islemcesitleri = @json($islemler);
+                        islemcesitleri.forEach(element => {
+                            islemler.push(element);
+                        });
+
+
+                        this.api().columns(1).every(function() {
+                            var column = this;
+                            var array = islemler;
+                            var input = document.createElement("select");
+                            input.id = "islemler";
+                            input.className = 'form-control';
+
+                            var option = document.createElement("option");
+                            option.value = '';
+                            option.text = 'Tümü';
+                            input.appendChild(option);
+
+
+                            for (let i = 0; i < array.length; i++) {
+                                var option = document.createElement("option");
+                                option.value = array[i].id;
+                                option.text = array[i].tip;
+                                input.appendChild(option);
+                            }
+
+                            //var input = document.createElement('input');
+                            $(input).appendTo($(column.footer()).empty())
+                                .on('change', function() {
+                                    var val = $.fn.dataTable.util.escapeRegex($(this)
+                                        .val());
+
+                                    column.search(val ? val : '', true, false).draw();
+                                });
+                        });
+
+
+
                     },
-                    {
-                        extend: 'copy',
-                        text: 'Kopyala'
+
+
+
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
                     },
-                    {
-                        extend: 'print',
-                        text: 'Yazdır'
-                    }
-                ]
+                    buttons: [{
+                            extend: 'excel',
+                            text: 'Excel',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4]
+                            }
+                        },
+                        {
+                            extend: 'csv',
+                            text: 'CSV'
+                        },
+                        {
+                            extend: 'copy',
+                            text: 'Kopyala'
+                        },
+                        {
+                            extend: 'print',
+                            text: 'Yazdır'
+                        }
+                    ]
+                });
             });
-        });
-    </script>
 
-@endsection
+        </script>
 
-@include('layouts.system.datatableTags')
+    @endsection
 
-
+    @include('layouts.system.datatableTags')
