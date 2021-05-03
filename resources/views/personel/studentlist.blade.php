@@ -178,14 +178,6 @@
             table.draw();
         });
 
-<<<<<<< HEAD
-
-=======
-        $('#binalar').change(function(e) {
-            e.preventDefault();
-            table.draw();
-        })
->>>>>>> 53a2046cc4aca6148a25bc945402664f565d4df1
 
     </script>
 

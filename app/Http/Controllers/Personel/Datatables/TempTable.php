@@ -19,7 +19,7 @@ class TempTable extends Controller
         $users = Ogrencilog::where('kurumId', session()->get('personel')->kurumId)->where('ogrenciId', $id);
         return DataTables::eloquent($users)
             ->editColumn('logId', function (Ogrencilog $user) {
-                return $user->ogrenciToLog->tip;
+                return $user->ogrenciToLog->tip ?? '';
             })
             ->toJson();
     }
@@ -29,7 +29,7 @@ class TempTable extends Controller
         $users = PersonelIslemKayit::where('kurumId', session()->get('personel')->kurumId)->where('personelId', $id);
         return DataTables::eloquent($users)
             ->editColumn('logId', function (PersonelIslemKayit $user) {
-                return $user->personelToLog->tip;
+                return $user->personelToLog->tip ?? '';
             })
             ->toJson();
     }
@@ -42,13 +42,13 @@ class TempTable extends Controller
 
         return DataTables::eloquent($users)
             ->editColumn('binaNo', function (Ogrenci $user) {
-                return $user->ogrenciToBlok->binaAdi;
+                return $user->ogrenciToBlok->binaAdi ?? '';
             })
             ->editColumn('katNo', function (Ogrenci $user) {
-                return $user->ogrenciToKat->katAdi;
+                return $user->ogrenciToKat->katAdi ?? '';
             })
             ->editColumn('odaNo', function (Ogrenci $user) {
-                return $user->ogrenciToOda->odaNo;
+                return $user->ogrenciToOda->odaNo ?? '';
             })
             ->make();
     }
