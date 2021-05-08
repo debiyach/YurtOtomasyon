@@ -1,8 +1,8 @@
-@extends('layouts.personel')
+@extends('layouts.ogrenci')
 {{-- $binalar => Binalar için, $katlar => Katlar için --}}
 @section('content')
 
-    @include('layouts.components.ogrenci.ogrencilistele')
+    @include('layouts.components.ogrenci.ogrenciDevamsizlik')
 
 @endsection
 
@@ -30,10 +30,10 @@
                 [10, 15, 25, 50, 100]
             ],
             "ajax": {
-                url: "{{ route('personel.datatable.ogrencigetir') }}",
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
-                },
+                url: //"{{ route('personel.datatable.ogrencigetir') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
+                    },
                 data: function(d) {
                     d.binaNo = $('#binalar :selected').val();
                     d.odaNo = $("#odaNo").val();
@@ -48,34 +48,6 @@
                 {
                     data: 'ad',
                     name: 'ad'
-                },
-                {
-                    data: 'soyad',
-                    name: 'soyad'
-                },
-                {
-                    data: 'mail',
-                    name: 'mail'
-                },
-                {
-                    data: 'telNo',
-                    name: 'telNo'
-                },
-                {
-                    data: 'tcNo',
-                    name: 'tcNo'
-                },
-                {
-                    data: 'binaNo',
-                    name: 'binaNo'
-                },
-                {
-                    data: 'katNo',
-                    name: 'katNo'
-                },
-                {
-                    data: 'odaNo',
-                    name: 'odaNo'
                 }
             ],
 
@@ -91,14 +63,6 @@
 
 
             initComplete: function() {
-                var blok = [];
-                var kat = [];
-
-                var gelenbinalar = @json($binalar);
-                gelenbinalar.forEach(element => {
-                    blok.push(element);
-                });
-
 
                 //console.log(blok);
 

@@ -144,6 +144,16 @@
                                 class="far fa-calendar-alt "></i>İstek/Şikayet Talep</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="{{ route('ogrenci.aidatOdeme') }}" class="nav-link @if (Request::segment(2)=='istek-talep' ) active @endif"><i
+                                class="far fa-calendar-alt "></i>Aidat Ödeme</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('ogrenci.devamsizlik') }}" class="nav-link @if (Request::segment(2)=='istek-talep' ) active @endif"><i
+                                class="far fa-calendar-alt "></i>Devamsızlık Bilgisi</a>
+                    </li>
+
 
                     </ul>
             </div>

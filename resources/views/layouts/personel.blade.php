@@ -161,13 +161,10 @@
                                 <a href="{{ Route('personel.personelListele') }}" class="nav-link @if (Request::segment(2)=='personel-listele' ) active @endif"><i class="fas fa-clipboard-list"></i>Personel Listesi</a>
                             </li>
 
-                            @if (json_decode(session()->get('personel')->yetki)->personelYetkiDuzenle)
-                                <li class="nav-item">
-                                    <a href="{{ Route('personel.personelYetkilendirme') }}"
-                                        class="nav-link @if (Request::segment(2)=='personel-yetkilendirme' ) active @endif"><i class="fas fa-clipboard-list"></i>Personel
-                                        Yetkilendirme</a>
-                                </li>
-                            @endif
+                            <li class="nav-item">
+                                <a href="{{ Route('personel.personelYetkilendirme') }}" class="nav-link @if (Request::segment(2)=='personel-yetkilendirme' ) active @endif"><i class="fas fa-clipboard-list"></i>Personel
+                                    Yetkilendirme</a>
+                            </li>
 
 
                         </ul>

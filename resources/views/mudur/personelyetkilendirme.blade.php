@@ -1,20 +1,12 @@
-@extends('layouts.personel')
+@extends('layouts.mudur')
 
 @section('content')
-    @include('layouts.components.personel.personelyetkilendirme')
+    @include('layouts.components.personel.personelyetkilendirme2')
 @endsection
 
 @section('script')
 
     <script>
-        if ('{{ json_decode(session()->get('personel')->yetki)->personelYetkiDuzenle }}' != 1) {
-            $('.dashboard-content').remove();
-            writeNot({
-                "type": "error",
-                "message": "Bu sayfayı görüntüleme yetkiniz yok!"
-            });
-        }
-
         $('#accordionExample').hide();
         var item;
 
