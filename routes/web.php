@@ -30,6 +30,9 @@ Route::group(['middleware' => 'mudur', 'as' => 'mudur.', 'prefix' => 'mudur'], f
     Route::get('/ogrenci-ekle', fn() => view('mudur.insertstudent'))->name('ogrenciEkle');
     Route::get('/ogrenci-listele', fn() => view('mudur.studentlist'))->name('ogrenciListele');
     Route::get('/istek-talep-list', fn() => view('mudur.istektaleplist'))->name('istekTalepList');
+    Route::get('/personel-yetkilendirme', 'GenelIslemler@personelYetkiPage')->name('personelYetkilendirme');
+    Route::get('/gelirgider-tablosu', fn() => view('mudur.gelirGiderTablosu'))->name('gelirGiderTablosu');
+
 
 });
 
@@ -167,6 +170,8 @@ Route::group(['middleware' => 'ogrenci', 'as' => 'ogrenci.', 'prefix' => 'ogrenc
     Route::get('/izin-talep', fn() => view('ogrenci.izintalep'))->name('izinTalep');
     Route::get('/hesap-ayarlari', fn() => view('ogrenci.accountsettings'))->name('hesapAyarlari');
     Route::get('/istek-talep', fn() => view('ogrenci.istektalep'))->name('istekTalep');
+    Route::get('/aidat-odeme', fn() => view('ogrenci.aidatodeme'))->name('aidatOdeme');
+    Route::get('/devamsizlik', fn() => view('ogrenci.devamsizlik'))->name('devamsizlik');
 });
 
 ## End Öğrenci Route İşlemleri ##

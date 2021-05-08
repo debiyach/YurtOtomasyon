@@ -49,8 +49,8 @@ class OdaIslemleri extends Controller
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src="' . $yatak->yatakToOgrenci->foto . '" alt=""
-                                 class="rounded-circle"
-                                 width="150">
+                                class="rounded-circle"
+                                width="150">
                             <div class="mt-3">
                                 <h4>' . $yatak->yatakToOgrenci->ad . ' ' . $yatak->yatakToOgrenci->soyad . '</h4>
                                 <p class="text-secondary mb-1">' . $yatak->yatakToOgrenci->ad . ' ' . $yatak->yatakToOgrenci->soyad . '</p>
@@ -70,8 +70,8 @@ class OdaIslemleri extends Controller
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
-                                 class="rounded-circle"
-                                 width="150">
+                                class="rounded-circle"
+                                width="150">
                             <div class="mt-3">
                                 <h4>Boş Yatak</h4>
                                 <p class="text-secondary mb-1">Yatak Adı : ' . $yatak->yatakAdi . '</p>
@@ -86,7 +86,7 @@ class OdaIslemleri extends Controller
                 }
             }
         } else $result = '<div class="alert alert-danger" role="alert">
-                          Oda da yatak bulunamadı!
+                        Oda da yatak bulunamadı!
                         </div>';
 
         return $result;
