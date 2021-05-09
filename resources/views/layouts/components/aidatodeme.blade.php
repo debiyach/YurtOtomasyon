@@ -29,13 +29,6 @@
             <input type="tel" name="cvc" class="form-control cc-cvc" placeholder="TL">
         </div>
 
-        <div class="form-group">
-            <label for="aciklama">Yatırılacak Ay</label>
-            <select class="form-control" name="tip" id="tip">
-                <option>Ay seç</option>
-                <option value="1">Haziran - 415 TL</option>
-            </select>
-        </div>
 
         <input type="submit" class="btn btn-primary col-12">
 

@@ -74,6 +74,153 @@
   color: white;
 }
 
+.uzuncard {
+  display: block;
+  min-height: 75px;
+  width: 720px;
+  margin: 0 auto;
+  padding: 10px 0;
+  border: 1px solid black;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-transition: -webkit-transform 400ms;
+  transition: -webkit-transform 400ms;
+  transition: transform 400ms;
+  transition: transform 400ms, -webkit-transform 400ms;
+}
+
+.uzuncard h3 {
+  text-align: center;
+}
+
+.uzuncard p {
+  text-align: center;
+}
+
+.uzuncard:hover {
+  border: 1px solid blue;
+  -webkit-transform: scale(0.99, 0.99);
+          transform: scale(0.99, 0.99);
+}
+
+#binaGoruntule {
+  max-width: 960px;
+  min-height: 150px;
+  border: 1px solid black;
+  margin: 50px auto auto;
+}
+
+#binaGoruntule .kat {
+  display: block;
+  position: relative;
+  min-width: 100%;
+  min-height: 150px;
+  padding: 0 15px;
+  margin: 10px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  border-top: 2px solid #2c3e50;
+}
+
+#binaGoruntule .kat .katNo {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(-150%, -50%);
+          transform: translate(-150%, -50%);
+}
+
+#binaGoruntule .kat .oda {
+  width: 125px;
+  min-height: 125px;
+  margin-left: 15px;
+  margin-top: 20px;
+  background-color: #95a5a6;
+  -webkit-box-shadow: 1px 1px black;
+          box-shadow: 1px 1px black;
+  -webkit-box-shadow: 3px 3px 5px grey;
+          box-shadow: 3px 3px 5px grey;
+  position: relative;
+  padding-bottom: 10px;
+  -webkit-transition: -webkit-transform 400ms;
+  transition: -webkit-transform 400ms;
+  transition: transform 400ms;
+  transition: transform 400ms, -webkit-transform 400ms;
+  border-radius: 5px;
+}
+
+#binaGoruntule .kat .oda .ogrenciler {
+  position: absolute;
+  min-width: 200%;
+  min-height: 100%;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  visibility: hidden;
+  z-index: -5;
+  -webkit-transition: top 1s;
+  transition: top 1s;
+  background-color: white;
+  color: blue;
+}
+
+#binaGoruntule .kat .oda:hover {
+  -webkit-transform: scale(0.99, 0.99);
+          transform: scale(0.99, 0.99);
+}
+
+#binaGoruntule .kat .oda:hover > .ogrenciler {
+  visibility: visible;
+  top: -100%;
+}
+
+#binaGoruntule .kat .oda .odaNo {
+  display: block;
+  text-align: center;
+  font-weight: bolder;
+}
+
+#binaGoruntule .kat .oda .yataklar {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#binaGoruntule .kat .oda .yataklar .yatak {
+  width: 50px;
+  height: 50px;
+  margin-left: 5px;
+  margin-top: 10px;
+  background-color: green;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 28px;
+}
+
+#binaGoruntule .kat .oda .yataklar .yatak:nth-child(2n + 1) {
+  margin-left: 0;
+}
+
 @media screen and (max-width: 766px) {
   .dashboard-main-wrapper {
     padding-top: 0 !important;

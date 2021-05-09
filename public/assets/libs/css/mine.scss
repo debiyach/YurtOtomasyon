@@ -1,16 +1,15 @@
-.dashboard-main-wrapper{
+.dashboard-main-wrapper {
     padding-top: 0 !important;
     height: 100vh !important;
 }
 
-.nav-left-sidebar{
+.nav-left-sidebar {
     top: 0 !important;
 }
 
-.dashboard-wrapper{
+.dashboard-wrapper {
     height: 100% !important;
 }
-
 
 /*   TOP HEADER DAKİ YURT ADININ RENGİ İDİ KENDİLERİ
 .yurtAdi{
@@ -20,129 +19,182 @@
 }
 */
 
-
-
-
-.user{
-    .user-photo{
+.user {
+    .user-photo {
         text-align: center;
         margin-bottom: 25px;
-        img{
+        img {
             width: 100px;
             border-radius: 50%;
         }
-        
     }
-    
-    ul{
-        
+
+    ul {
         padding: 12px;
         list-style: none;
-        li{
+        li {
             margin-top: 15px;
-            &:first-child{
+            &:first-child {
                 margin-top: 0;
             }
-            .baslik{
-                color:#7a80b4;
+            .baslik {
+                color: #7a80b4;
                 text-transform: uppercase;
             }
 
-            div{
-                color:white;
+            div {
+                color: white;
             }
         }
-    
     }
 }
 
-.user2{
-    
-    ul{
+.user2 {
+    ul {
         padding: 12px;
         list-style: none;
-        li{
+        li {
             margin-top: 5px;
-            &:first-child{
-                margin-top: 0; 
+            &:first-child {
+                margin-top: 0;
             }
-            .baslik{
-                color:#7a80b4;
+            .baslik {
+                color: #7a80b4;
                 text-transform: uppercase;
             }
 
-            div{
+            div {
                 padding: 0px 12px;
-                color:white;
+                color: white;
             }
         }
-    
     }
 }
 
+.uzuncard {
+    display: block;
+    min-height: 75px;
+    width: 720px;
+    margin: 0 auto;
+    padding: 10px 0;
+    border: 1px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: transform 400ms;
+    h3 {
+        text-align: center;
+    }
+    p {
+        text-align: center;
+    }
+    &:hover {
+        border: 1px solid blue;
+        transform: scale(0.99, 0.99);
+    }
+}
 
-// .dataTables_paginate{
-//     .fg-button{
-//         color:#111;
-//         cursor: pointer;
-//         padding: 7.2px 14.4px;
-//         border: 1px solid #111;
-//         border-radius: 2px;
-//         margin: 0 1px;
-//         text-decoration: none;
-//         &:hover{
-//             background-color: #007bff;
-//             color:white;  
-//         }
-//         &.ui-state-disabled{
-//             &:hover{
-//                 background-color:white;
-//                 color:#111;
-//                 cursor: context-menu;  
-//             }
-//         }
-//     }
-//     span{
-//         .fg-button{
-//             color:#111;
-//             cursor: pointer;
-//             padding: 7.2px 14.4px;
-//             border: 1px solid #111;
-//             border-radius: 2px;
-//             margin: 0 1px;
-//             text-decoration: none;
-//             &.ui-state-disabled{
-//                 background-color: #007bff;  
-//                 color:white;  
-//             }
-//         }
-//     }
-    
-// }
+#binaGoruntule {
+    max-width: 960px;
+    min-height: 150px;
+    border: 1px solid black;
+    margin: 50px auto auto;
+    .kat {
+        display: block;
+        position: relative;
+        min-width: 100%;
+        min-height: 150px;
+        padding: 0 15px;
+        margin: 10px 0;
+        display: flex;
+        flex-wrap: wrap;
+        border-top: 2px solid #2c3e50;
+        .katNo {
+            position: absolute;
+            top: 50%;
+            transform: translate(-150%, -50%);
+        }
+        .oda {
+            width: 125px;
+            min-height: 125px;
+            //border: 1px solid blue;
+            margin-left: 15px;
+            margin-top: 20px;
+            background-color: #95a5a6;
+            box-shadow: 1px 1px black;
+            box-shadow: 3px 3px 5px grey;
+            position: relative;
+            padding-bottom: 10px;
+            transition: transform 400ms;
+            border-radius: 5px;
+            .ogrenciler {
+                position: absolute;
+                min-width: 200%;
+                min-height: 100%;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                visibility: hidden;
+                z-index: -5;
+                transition: top 1s;
+                background-color: white;
+                color: blue;
+            }
+            &:hover {
+                transform: scale(0.99, 0.99);
+            }
+            &:hover > .ogrenciler {
+                visibility: visible;
+                top: -100%;
+            }
 
-
-
-
-
+            .odaNo {
+                display: block;
+                text-align: center;
+                font-weight: bolder;
+            }
+            .yataklar {
+                width: 100%;
+                //min-height: 100%;
+                //background-color: green;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                .yatak {
+                    width: 50px;
+                    height: 50px;
+                    margin-left: 5px;
+                    margin-top: 10px;
+                    background-color: green;
+                    // border: 1px solid green;
+                    color: white;
+                    &:nth-child(2n + 1) {
+                        margin-left: 0;
+                    }
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 28px;
+                }
+            }
+        }
+    }
+}
 
 @media screen and (max-width: 766px) {
-    
-    .dashboard-main-wrapper{
+    .dashboard-main-wrapper {
         padding-top: 0 !important;
         height: 100% !important;
     }
-    
-     .nav-left-sidebar{
-         height:50% !important;
-     }
-    .user{
-        .user-photo{
-            img{
+
+    .nav-left-sidebar {
+        height: 50% !important;
+    }
+    .user {
+        .user-photo {
+            img {
                 width: 150px;
                 border-radius: 50%;
             }
         }
     }
 }
-
-

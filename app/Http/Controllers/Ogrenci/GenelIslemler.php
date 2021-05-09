@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Ogrenci\IzinTalep;
 use App\Http\Requests\Ogrenci\SikayetIstek;
 use App\Models\OgrenciIstekSikayet;
+use App\Models\Ogrenci;
 use Illuminate\Http\Request;
 
 class GenelIslemler extends Controller
@@ -53,5 +54,10 @@ class GenelIslemler extends Controller
         if ($result){
             return back()->withErrors(["$tip talebiniz alınmıştır."]);
         }else return back()->withErrors(['Sistemsel hata!']);
+    }
+
+    public function aidatListe(){
+        $data['ogrenci'] = Ogrenci::where('id',session()->get('ogrenci')->id)->get();
+        return view('ogrenci.aidatliste',$data);
     }
 }
