@@ -1,6 +1,13 @@
 <div class="card">
     <h5 class="card-header">Öğrenci tablo</h5>
     <div class="card-body">
+        @php
+            $kats = [];
+            foreach ($katlar as $kat) {
+                $kats[] = $kat->katAdi;
+            }
+            $katlar = array_unique($kats);
+        @endphp
         <div class="table-responsive">
             <table id="usersDatatable" class="table table-striped table-bordered first">
                 <thead>
@@ -39,6 +46,7 @@
                             <option value="2">B Blok</option>
                         </select>
                     </th> --}}
+
                     <th rowspan="1" colspan="1"></th>
                     <th rowspan="1" colspan="1"></th>
                     <th rowspan="1" colspan="1"></th>
@@ -46,7 +54,14 @@
                     <th rowspan="1" colspan="1"></th>
                     <th rowspan="1" colspan="1"></th>
                     <th rowspan="1" colspan="1"><select></th>
-                    <th rowspan="1" colspan="1"><input type="text" id="katNo"></th>
+                    <th rowspan="1" colspan="1">
+                        <select id="katNo" class="form-control">
+                            <option value=" ">Tümü</option>
+                            @foreach ($katlar as $item)
+                                <option value="{{ $item }}">{{ $item }}</option>
+                            @endforeach
+                        </select>
+                    </th>
                     <th rowspan="1" colspan="1"><input type="text" id="odaNo"></th>
                 </tfoot>
             </table>

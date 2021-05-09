@@ -4,6 +4,8 @@
 
     @include('layouts.components.ogrenci.ogrencilistele')
 
+
+
 @endsection
 
 @section('script')
@@ -13,8 +15,9 @@
             table.draw();
         });
 
-        $("#katNo").keyup(function(e) {
+        $("#katNo").change(function(e) {
             table.draw();
+            alert(this.value);
         });
 
         var odaNo;
