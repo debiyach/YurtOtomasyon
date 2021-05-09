@@ -7,7 +7,8 @@ use App\Http\Requests\Personel\OgrenciIslemleri\OgrenciEkle as ReqOgrenciEkle;
 use App\Mail\Ogrenci\SifreGonder;
 use App\Models\IslemCesitleri;
 use App\Models\Ogrenci;
-use App\Models\Personel;
+use App\Helpers\Writer;
+use App\Http\Controllers\Logs\Logs;
 use App\Models\PersonelIslemKayit;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -46,13 +47,10 @@ class OgrenciEkle extends Controller
                     "body" => "Burası body alanı"
                 ];
                 Mail::to($request->email)->send(new SifreGonder($mailData));
-                $log = IslemCesitleri::where('tip',\App\Helpers\Writer::OgrenciEkle)->get();
-                PersonelIslemKayit::insert([
-                    "kurumId" => session()->get('personel')->kurumId,
-                    "personelId" => session()->get('personel')->id,
-                    "logId" => $log[0]->id
-                ]);
-                return back()->with('success','Öğrenci Ekleme Başarılı!');
+                if ($result) {
+                    Logs::personelLog(Writer::OgrenciEkle);
+                    back()->with('success','Öğrenci Ekleme Başarılı!');
+                } else return response(['type' => 'error', 'message' => 'Kat eklenirken hata oluştu!']);
             }else return back()->withErrors(['Beklenmeyen Hata Oluştu!']);
         }else return back()->withErrors(['Bu işlemi gerçekleştirmek için yetkili değilsiniz!']);
 

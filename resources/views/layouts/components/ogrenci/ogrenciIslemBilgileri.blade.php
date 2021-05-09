@@ -5,7 +5,6 @@
             <table id="usersDatatable" class="table table-striped table-bordered first">
                 <thead>
                     <tr>
-                        <th>Aciklama</th>
                         <th>Tür</th>
                         <th>Tarih</th>
                     </tr>

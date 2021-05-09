@@ -29,15 +29,13 @@
                     data: function(d) {},
                     type: "POST"
                 },
-                columns: [{
-                        data: 'kurumId'
-                    },
-                    {
-                        data: 'ogrenciId'
-                    },
-                    {
-                        data: 'created_at'
-                    }
+                columns: [
+                        {
+                            data: 'logId'
+                        },
+                        {
+                            data: 'created_at'
+                        }
                 ],
 
                 initComplete: function() {
@@ -49,7 +47,7 @@
                     });
 
 
-                    this.api().columns(1).every(function() {
+                    this.api().columns(0).every(function() {
                         var column = this;
                         var array = islemler;
                         var input = document.createElement("select");

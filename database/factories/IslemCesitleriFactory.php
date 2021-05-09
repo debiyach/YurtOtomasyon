@@ -18,20 +18,22 @@ class IslemCesitleriFactory extends Factory
     public function definition()
     {
         $logs = [
-            "Giriş yapıldı.",
-            "Çıkış yapıldı.",
-            "Bina eklendi.",
-            "Kat eklendi.",
-            "Oda eklendi.",
-            "Yatak eklendi.",
-            "Yatak kaldırdı.",
-            "Öğrenciyi yataktan kaldırdı.",
-            "Yeni bir öğrenci ekledi.",
-            "Yetki değiştirildi."
+            ["Giriş yapıldı.", 3],
+            ["Çıkış yapıldı.", 3],
+            ["Bina eklendi.", 2],
+            ["Kat eklendi.", 2],
+            ["Oda eklendi.", 2],
+            ["Yatak eklendi.", 2],
+            ["Yatak kaldırdı.", 2],
+            ["Öğrenciyi yataktan kaldırdı.", 2],
+            ["Yeni bir öğrenci ekledi.", 2],
+            ["Yetki değiştirildi.", 2]
         ];
-        foreach ($logs as $log){
+
+        foreach ($logs as $log) {
             IslemCesitleri::insert([
-               'tip' => $log
+                'tip' => $log[0],
+                'tur' => $log[1]
             ]);
         }
     }

@@ -34,6 +34,7 @@ class Ogrenci extends Migration
             $table->json('depozito');
             $table->string('izin');
             $table->boolean('aktif');
+            $table->unsignedInteger('yoklama')->comment('1 ise yurtta, 2 ise dışarda');
             $table->timestamps();
 
 

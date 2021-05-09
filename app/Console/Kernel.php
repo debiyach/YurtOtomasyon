@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\SetAidat',
+        'App\Console\Commands\SetMaas',
+        'App\Console\Commands\SetYoklama',
     ];
 
     /**
@@ -25,6 +27,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('aidat:set')->monthly();
+        $schedule->command('maas:set')->monthly();
+        $schedule->command('yoklama:set')->dailyAt('23:00');
     }
 
     /**

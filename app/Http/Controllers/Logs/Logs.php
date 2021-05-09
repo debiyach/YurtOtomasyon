@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Logs;
 
 use App\Helpers\Writer;
 use App\Models\IslemCesitleri;
+use App\Models\OgrenciLog;
 use App\Models\PersonelIslemKayit;
 
 class Logs
@@ -15,7 +16,7 @@ class Logs
     {
         $data = [
             "kurumId" => session()->get('ogrenci')->kurumId,
-            "personelId" => session()->get('ogrenci')->id,
+            "ogrenciId" => session()->get('ogrenci')->id,
             "logId" => (new Logs)->logId($log),
             "created_at" => now(),
             "updated_at" => now()
@@ -24,7 +25,7 @@ class Logs
             $data = array_merge(["logName" => $name], $data);
         }
 
-        PersonelIslemKayit::insert($data);
+        OgrenciLog::insert($data);
     }
 
     public static function personelLog($log, $name=null)

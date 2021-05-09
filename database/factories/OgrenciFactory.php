@@ -37,7 +37,8 @@ class OgrenciFactory extends Factory
             'aidat' => json_encode(['yurtUcreti' => rand(250, 650), 'odemeDurumu' => (rand(0, 1) == 1) ? true : false]),
             'depozito' => json_encode(['depozitoUcreti' => rand(550, 950), 'odemeDurumu' => (rand(0, 1) == 1) ? true : false]),
             'izin' => (rand(0, 1) == 1) ? true : false,
-            'aktif' => (rand(0, 1) == 1) ? true : false
+            'aktif' => (rand(0, 1) == 1) ? true : false,
+            'yoklama' => rand(0,1)
         ];
     }
 }

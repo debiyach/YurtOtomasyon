@@ -27,13 +27,13 @@ class GenelIslemler extends Controller
 {
     public function personelIslemBilgileri()
     {
-        $data['islemler'] = IslemCesitleri::all();
+        $data['islemler'] = IslemCesitleri::whereIn('tur',[2,3])->get();
         return view('personel.personelIslemBilgileri', $data);
     }
 
     public function ogrenciIslemBilgileri($id = null)
     {
-        $data['islemler'] = IslemCesitleri::all();
+        $data['islemler'] = IslemCesitleri::whereIn('tur',[1,3])->get();
         return view('personel.ogrenciIslemBilgileri', $data);
     }
 

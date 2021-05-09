@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Aidat extends Migration
+class CreatePersonelMaasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class Aidat extends Migration
      */
     public function up()
     {
-        Schema::create('aidat', function (Blueprint $table) {
+        Schema::create('personel_maas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('ogrenciId');
             $table->unsignedBigInteger('kurumId');
-            $table->unsignedBigInteger('yatirilacak')->comment('kurumlar tablosundaki aidat miktar');
+            $table->unsignedBigInteger('personelId');
             $table->unsignedBigInteger('durum')->comment('1 ise yatırılmış, 0 ise yatırılmamış.');
             $table->unsignedBigInteger('yatirilan')->default(0);
             $table->unsignedBigInteger('mevcutAy')->comment('1 ise bu ay aidatıdır. 0 ise geçmiş dönem aidatlarıdır.');
             $table->timestamps();
 
-            $table->foreign('ogrenciId')->references('id')->on('ogrenci')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreign('kurumId')->references('id')->on('kurum')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('kurumId')->references('id')->on('kurum')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('personelId')->references('id')->on('personel')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
@@ -35,6 +34,6 @@ class Aidat extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aidat');
+        Schema::dropIfExists('personel_maas');
     }
 }
