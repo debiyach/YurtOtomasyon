@@ -10,7 +10,10 @@ use App\Mail\SendPasswordMail;
 use App\Models\Binalar;
 use App\Models\IslemCesitleri;
 use App\Models\Katlar;
+use App\Models\Odalar;
+use App\Models\Yataklar;
 use App\Models\Personel;
+use App\Models\Ogrenci;
 use App\Models\PersonelIslemKayit;
 use App\Models\PersonelIzin;
 use Illuminate\Http\Request;
@@ -132,4 +135,20 @@ class GenelIslemler extends Controller
             return back()->withErrors(['İzin talebiniz alınmıştır.']);
         } else return back()->withErrors(['Sistemsel hata!']);
     }
+
+    public function binaListele(){
+        $data['binalar'] = Binalar::where('kurumId',session()->get('personel')->kurumId)->get();
+        return view('personel.binaGoruntule',$data);
+    }
+
+    public function binaGetir(Request $request){
+        $id = $request->id;
+        $data['katlar'] = Katlar::where('kurumId',session()->get('personel')->kurumId)->where('binaId',$id)->orderBy('id','desc')->get();
+        $data['odalar'] = Odalar::where('kurumId',session()->get('personel')->kurumId)->where('binaId',$id)->get();
+        $data['yataklar'] = Yataklar::where('kurumId',session()->get('personel')->kurumId)->where('binaId',$id)->get();
+        $data['ogrenciler'] = Ogrenci::where('kurumId',session()->get('personel')->kurumId)->where('binaNo',$id)->get();
+        
+        return view('layouts.components.binaGetir',$data);
+    }
+
 }

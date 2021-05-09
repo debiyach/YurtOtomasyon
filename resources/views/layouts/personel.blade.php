@@ -149,11 +149,9 @@
                     <div id="submenu-3" class="collapse submenu" style="">
                         <ul class="nav flex-column">
 
-                            @if (json_decode(session()->get('personel')->yetki)->personelEkle)
-                                <li class="nav-item">
-                                    <a href="{{ route('personel.personelEkle') }}" class="nav-link @if (Request::segment(2)=='personel-ekle' ) active @endif"><i class="fas fa-user-plus"></i>Personel Kayıt</a>
-                                </li>
-                            @endif
+                            <li class="nav-item">
+                                <a href="{{ route('personel.personelEkle') }}" class="nav-link @if (Request::segment(2)=='personel-ekle' ) active @endif"><i class="fas fa-user-plus"></i>Personel Kayıt</a>
+                            </li>
 
 
 
@@ -178,6 +176,11 @@
                     <li class="nav-item">
                         <a href="{{ route('personel.izinTalep') }}" class="nav-link @if (Request::segment(2)=='izin-talep' ) active @endif"><i
                                 class="far fa-calendar-alt "></i>İzin Talep</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('personel.binaListele') }}" class="nav-link @if (Request::segment(2)=='izin-talep' ) active @endif"><i
+                                class="far fa-calendar-alt "></i>Bina Görüntüle</a>
                     </li>
 
                     </ul>

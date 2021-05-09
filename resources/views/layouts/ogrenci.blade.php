@@ -145,7 +145,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('ogrenci.aidatOdeme') }}" class="nav-link @if (Request::segment(2)=='istek-talep' ) active @endif"><i
+                        <a href="{{ route('ogrenci.aidatListele') }}" class="nav-link @if (Request::segment(2)=='istek-talep' ) active @endif"><i
                                 class="far fa-calendar-alt "></i>Aidat Ödeme</a>
                     </li>
 
