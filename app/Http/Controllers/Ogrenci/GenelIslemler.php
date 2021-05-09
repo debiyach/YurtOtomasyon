@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ogrenci\IzinTalep;
 use App\Http\Requests\Ogrenci\SikayetIstek;
+use App\Models\Aidat;
 use App\Models\OgrenciIstekSikayet;
 use App\Models\Ogrenci;
 use Illuminate\Http\Request;
@@ -58,6 +59,24 @@ class GenelIslemler extends Controller
 
     public function aidatListe(){
         $data['ogrenci'] = Ogrenci::where('id',session()->get('ogrenci')->id)->get();
+        $data['aidats'] = Aidat::where('ogrenciId',session()->get('ogrenci')->id)->get();
         return view('ogrenci.aidatliste',$data);
+    }
+    
+    public function aidatOdeme($id = null)
+    {
+        $data['aidat'] = Aidat::find($id);
+        return view('ogrenci.aidatodeme',$data);
+    }
+
+    public function aidatOde(Request $request)
+    {
+        $yatir = Aidat::find($request->aidatId);
+        $yatir->yatirilacak = $yatir->yatirilacak - $request->para;
+        $yatir->yatirilan = $request->para;
+        $yatir->updated_at = now();
+        $result = $yatir->save();
+
+        return  $result ? back()->withErrors(['Ödeme işleminiz gerçekleşti']) :back()->withErrors(['Ödeme işleminiz sırasında hata alındı']) ; 
     }
 }

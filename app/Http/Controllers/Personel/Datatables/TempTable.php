@@ -11,10 +11,18 @@ use App\Models\Personel;
 use App\Models\OgrenciLog;
 use App\Models\PersonelIslemKayit;
 use Illuminate\Http\Request;
+use App\Models\Yoklama;
 use Yajra\DataTables\Facades\DataTables;
 
 class TempTable extends Controller
 {
+
+    public function ogrenciYoklamaGoster($id = null)
+    {
+        $users = Yoklama::where('kurumId', session()->get('personel')->kurumId)->where('ogrenci', $id);
+        return DataTables::eloquent($users)
+            ->toJson();
+    }
 
     public function ogrenciIslemBilgileri($id = null)
     {
