@@ -11,12 +11,10 @@
     <script>
         $("#odaNo").keyup(function(e) {
             table.draw();
-            alert(this.value);
         });
 
         $("#katNo").keyup(function(e) {
             table.draw();
-            alert(this.value);
         });
 
         var odaNo;

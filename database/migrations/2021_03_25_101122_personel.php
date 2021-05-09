@@ -29,7 +29,7 @@ class Personel extends Migration
             $table->boolean('aktif');
             $table->enum('tip', ['Personel', 'Müdür']);
             $table->json('yetki')->nullable();
-            $table->json('maas')->comment('Maaş ödemesi ve maaş miktarı tutulacak.');
+            $table->unsignedBigInteger('maas')->comment('Maaş miktarı tutulacak.');
             $table->string('izin');
             $table->timestamps();
 

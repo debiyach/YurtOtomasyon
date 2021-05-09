@@ -49,7 +49,7 @@ class PersonelFactory extends Factory
             'izin' => rand(0,1),
             'aktif' => rand(0,1),
             'foto' => $this->faker->imageUrl($width = 640, $height = 480),
-            'maas' => json_encode(['maasOdendi' => (rand(0, 1) == 1) ? true : false, 'maasMiktari' => rand(3000, 7000)])
+            'maas' => rand(3000, 7000)
         ];
     }
 }

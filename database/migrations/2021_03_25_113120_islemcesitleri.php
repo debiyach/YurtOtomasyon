@@ -16,6 +16,7 @@ class Islemcesitleri extends Migration
         Schema::create('islemcesitleri', function (Blueprint $table) {
             $table->id();
             $table->string("tip");
+            $table->unsignedInteger('tur')->default(1)->comment('1 = Sadece Öğrenciler, 2 => Sadece Personeller, 3 => Herkese açık');
         });
     }
 

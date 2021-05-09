@@ -15,7 +15,15 @@ class CreatePersonelMaasTable extends Migration
     {
         Schema::create('personel_maas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('kurumId');
+            $table->unsignedBigInteger('personelId');
+            $table->unsignedBigInteger('durum')->comment('1 ise yatırılmış, 0 ise yatırılmamış.');
+            $table->unsignedBigInteger('yatirilan')->default(0);
+            $table->unsignedBigInteger('mevcutAy')->comment('1 ise bu ay aidatıdır. 0 ise geçmiş dönem aidatlarıdır.');
             $table->timestamps();
+
+            $table->foreign('kurumId')->references('id')->on('kurum')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('personelId')->references('id')->on('personel')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

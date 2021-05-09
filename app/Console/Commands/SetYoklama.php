@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Kurum;
+use App\Models\Ogrenci;
+use App\Models\Yoklama;
 use Illuminate\Console\Command;
 
 class SetYoklama extends Command
@@ -11,14 +14,14 @@ class SetYoklama extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'yoklama:set';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Her gün saat 23:00 da yoklama alır';
 
     /**
      * Create a new command instance.
@@ -37,6 +40,19 @@ class SetYoklama extends Command
      */
     public function handle()
     {
-        return 0;
+        $kurumlar = Kurum::all();
+        foreach ($kurumlar as $kurum) {
+            $ogrenciler = Ogrenci::where('kurumId', $kurum->id)->get();
+            foreach ($ogrenciler as $ogrenci) {
+                Yoklama::insert([
+                    'ogrenciId' => $ogrenci->id,
+                    'kurumId' => $kurum->id,
+                    'yokla' => $ogrenci->yoklama,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+        }
+        Command::info('Yoklama başarıyla alındı.');
     }
 }

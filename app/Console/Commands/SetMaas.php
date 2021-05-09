@@ -2,6 +2,10 @@
 
 namespace App\Console\Commands;
 
+
+use App\Models\Kurum;
+use App\Models\Personel;
+use App\Models\PersonelMaas;
 use Illuminate\Console\Command;
 
 class SetMaas extends Command
@@ -11,15 +15,14 @@ class SetMaas extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'maas:set';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
-
+    protected $description = 'Aylık maaşları oluşturur.';
     /**
      * Create a new command instance.
      *
@@ -37,6 +40,22 @@ class SetMaas extends Command
      */
     public function handle()
     {
-        return 0;
+        PersonelMaas::updated(['mevcutAy' => 0, 'updated_at' => now()]);
+        $kurumlar = Kurum::all();
+        foreach ($kurumlar as $kurum) {
+            $personeller = Personel::where('kurumId', $kurum->id)->get();
+            foreach ($personeller as $personel) {
+                PersonelMaas::insert([
+                    'personelId' => $personel->id,
+                    'kurumId' => $kurum->id,
+                    'yatirilan' => $personel->maas,
+                    'durum' => 1,
+                    'mevcutAy' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+        }
+        Command::info('Başarıyla maaşlar set edildi.');
     }
 }
