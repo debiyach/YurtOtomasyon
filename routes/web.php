@@ -99,6 +99,10 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::get('/ogrenci-islem-bilgileri/{id??}', 'GenelIslemler@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
         Route::get('/personel-islem-bilgileri/{id??}', 'GenelIslemler@personelIslemBilgileri')->name('personelIslemBilgileri');
         Route::get('/bina-goruntule', 'GenelIslemler@binaListele')->name('binaListele');
+        
+        
+        Route::get('/ogrenci-aidat-gecmisi', fn()=>view('personel.ogrenciAidatGecmisi'))->name('ogrenciAidatGecmisi');
+        Route::get('/personel-aidat-gecmisi', fn()=>view('personel.personelAidatGecmisi'))->name('personelAidatGecmisi');
 
 
 
@@ -168,18 +172,16 @@ Route::group(['middleware' => 'ogrenci', 'as' => 'ogrenci.', 'prefix' => 'ogrenc
         Route::post('/izin-talep/post','GenelIslemler@izinTalep')->name('izinTalepPost');
         Route::post('/istek-sikayet/post','GenelIslemler@istekSikayet')->name('istekSikayetPost');
 
-        // Get Method
-
-        Route::get('/aidat-liste', 'GenelIslemler@aidatListe')->name('aidatListele');
     });
 
     Route::get('/cikis-yap', 'LoginController@ogrenciLogout')->name('logout');
     Route::get('/izin-talep', fn() => view('ogrenci.izintalep'))->name('izinTalep');
     Route::get('/hesap-ayarlari', fn() => view('ogrenci.accountsettings'))->name('hesapAyarlari');
     Route::get('/istek-talep', fn() => view('ogrenci.istektalep'))->name('istekTalep');
-    //Route::get('/aidat-liste', fn() => view('ogrenci.aidatliste'))->name('aidatListele');
+    Route::get('/aidat-liste', fn() => view('ogrenci.aidatliste'))->name('aidatListele');
     Route::get('/aidat-odeme', fn() => view('ogrenci.aidatodeme'))->name('aidatOdeme');
     Route::get('/devamsizlik', fn() => view('ogrenci.devamsizlik'))->name('devamsizlik');
+    Route::get('/aidat-gecmisi', fn() => view('ogrenci.aidatgecmisi'))->name('aidatGecmis');
 });
 
 ## End Öğrenci Route İşlemleri ##

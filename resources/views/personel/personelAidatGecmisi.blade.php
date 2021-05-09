@@ -1,8 +1,8 @@
-@extends('layouts.ogrenci')
+@extends('layouts.personel')
 {{-- $binalar => Binalar için, $katlar => Katlar için --}}
 @section('content')
 
-    @include('layouts.components.ogrenci.ogrenciDevamsizlik')
+    @include('layouts.components.personel.aidatGecmisi')
 
 @endsection
 
@@ -19,7 +19,6 @@
             alert(this.value);
         });
 
-        var odaNo;
         var table = $('#usersDatatable').DataTable({
             "processing": true,
             "serverSide": true,

@@ -2,7 +2,7 @@
 {{-- $binalar => Binalar için, $katlar => Katlar için --}}
 @section('content')
 
-    @include('layouts.components.ogrenci.ogrenciDevamsizlik')
+    @include('layouts.components.ogrenci.aidatGecmisi')
 
 @endsection
 
@@ -19,7 +19,6 @@
             alert(this.value);
         });
 
-        var odaNo;
         var table = $('#usersDatatable').DataTable({
             "processing": true,
             "serverSide": true,

@@ -2,6 +2,10 @@
 
 @section('content')
     @include('layouts.components.aidatlistele')
+    {{-- @php
+    $aylar = json_decode(session()->get('ogrenci')->aidat, true);
+    @endphp
+    {{ dd($aylar) }} --}}
 @endsection
 
 @section('script')
