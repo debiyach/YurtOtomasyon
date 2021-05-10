@@ -454,8 +454,8 @@
         $(document).ready(function() {
             binaGetir();
             yatakOgrenciGetir(ogrenciOptAdd);
-            if ({{ Request::segment(3) }}) {
-                yatakYaz({{ Request::segment(3) }});
+            if ({{ $odaId }}) {
+                yatakYaz({{ $odaId }});
             }
         });
 

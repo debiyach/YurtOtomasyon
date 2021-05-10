@@ -16,12 +16,13 @@ class OdaIslemleri extends Controller
 {
     public function odaSayfasi()
     {
-        return view('personel.odaSayfasi');
+        $data['odaId'] = 'null';
+        return view('personel.odaSayfasi',$data);
     }
 
     public function direkOda($id = null)
-    {
-        $data['odaId'] = $id;
+    {   
+        $data['odaId'] = $id ?? 'null';
         return view('personel.odaSayfasi',$data);
     }
 
