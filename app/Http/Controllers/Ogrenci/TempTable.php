@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ogrenci;
 
 use App\Http\Controllers\Controller;
 use App\Models\Aidat;
+use App\Models\OgrenciAidatGecmisi;
 use App\Models\Yoklama;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -13,9 +14,9 @@ class TempTable extends Controller
     public function aidatGoruntule($id = null)
     {
 
-        $users = Aidat::where('kurumId', session()->get('ogrenci')->kurumId)->where('ogrenciId', $id);
+        $users = OgrenciAidatGecmisi::where('kurumId', session()->get('ogrenci')->kurumId)->where('ogrenciId', $id);
         return DataTables::eloquent($users)
-        ->editColumn('created_at', function (Aidat $user) {
+        ->editColumn('created_at', function (OgrenciAidatGecmisi $user) {
             return $user->created_at->format('d-m-Y') ?? '';
         })
             ->toJson();

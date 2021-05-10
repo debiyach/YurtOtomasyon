@@ -7,6 +7,7 @@ use App\Models\Katlar;
 use App\Models\Odalar;
 use App\Models\Ogrenci;
 use App\Models\Aidat;
+use App\Models\OgrenciAidatGecmisi;
 use App\Models\OgrenciIstekSikayet;
 use App\Models\Personel;
 use App\Models\OgrenciLog;
@@ -110,9 +111,9 @@ class TempTable extends Controller
     //Öğrenci Aidat Görüntüleme
     public function ogrenciAidatGoruntule($id = null)
     {
-        $users = Aidat::where('kurumId', session()->get('personel')->kurumId)->where('ogrenciId', $id);
+        $users = OgrenciAidatGecmisi::where('kurumId', session()->get('personel')->kurumId)->where('ogrenciId', $id);
         return DataTables::eloquent($users)
-        ->editColumn('created_at', function (Aidat $user) {
+        ->editColumn('created_at', function (OgrenciAidatGecmisi $user) {
             return $user->created_at->format('d-m-Y H:i:s') ?? '';
         })
             ->toJson();

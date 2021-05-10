@@ -39,6 +39,10 @@
                 type: "GET"
             },
             columns: [{
+                    data: 'faturaNo',
+                    name: 'faturaNo'
+                },
+                {
                     data: 'yatirilan',
                     name: 'yatirilan'
                 },

@@ -1,7 +1,12 @@
+@php
+$birsayi = 0;
+@endphp
 @foreach ($aidats as $item)
 
-    @if ($item->yatirilacak - $item->yatirilan > 0)
-
+    @if ($item->yatirilacak > $item->yatirilan)
+        @php
+            $birsayi++;
+        @endphp
         @if ($item->mevcutAy == 0)
 
             <a href="{{ Route('ogrenci.aidatOdeme') . '/' . $item->id }}" class="uzuncard mt-4">
@@ -23,3 +28,6 @@
 
     @endif
 @endforeach
+@if ($birsayi == 0)
+    <div class="alert alert-success text-center">SİSTEMDE HERHANGİ BİR BORCUNUZ BULUNMAMAKTADIR</div>
+@endif

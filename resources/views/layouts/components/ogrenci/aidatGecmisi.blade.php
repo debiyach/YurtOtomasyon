@@ -5,6 +5,7 @@
             <table id="usersDatatable" class="table table-striped table-bordered first">
                 <thead>
                     <tr>
+                        <th>Fatura No</th>
                         <th>Yatırılan Ücret</th>
                         <th>Tarih</th>
                     </tr>

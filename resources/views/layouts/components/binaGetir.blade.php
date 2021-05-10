@@ -12,7 +12,7 @@
                                 @foreach ($yataklar as $yatak)
 
                                     @if ($kat->id == $yatak->katId && $oda->id == $yatak->odaId)
-                                        <div class="yatak @if ($yatak->ogrenciId == null) bg-danger @endif">{{ $yatak->yatakNo }}
+                                        <div class="yatak @if ($yatak->ogrenciId == null) kirmizi @endif">{{ $yatak->yatakNo }}
                                         </div>
 
                                     @endif
@@ -26,6 +26,7 @@
                                         <tr>
                                             <th scope="col">Yatak No</th>
                                             <th scope="col">Öğrenci</th>
+                                            <th>Resim</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -34,6 +35,8 @@
                                                 <tr>
                                                     <th>{{ $ogrenci->ogrenciToYatak->yatakNo }}</th>
                                                     <td>{{ $ogrenci->ad }}</td>
+                                                    <td><img src="{{ $ogrenci->foto }}" width="40px"
+                                                            alt="ProfilResimi"></td>
                                                 </tr>
                                             @endif
 

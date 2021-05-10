@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Ogrenci\IzinTalep;
 use App\Http\Requests\Ogrenci\SikayetIstek;
 use App\Models\Aidat;
+use App\Models\OgrenciAidatGecmisi;
 use App\Models\OgrenciIstekSikayet;
 use App\Models\Ogrenci;
 use Illuminate\Http\Request;
@@ -72,10 +73,19 @@ class GenelIslemler extends Controller
     public function aidatOde(Request $request)
     {
         $yatir = Aidat::find($request->aidatId);
-        $yatir->yatirilacak = $yatir->yatirilacak - $request->para;
-        $yatir->yatirilan = $request->para;
+        $yatir->yatirilacak = $yatir->yatirilacak;
+        $yatir->yatirilan += $request->para;
         $yatir->updated_at = now();
         $result = $yatir->save();
+
+        $yatir2 = new OgrenciAidatGecmisi;
+        $yatir2->ogrenciId = session()->get('ogrenci')->id;
+        $yatir2->kurumId = session()->get('ogrenci')->kurumId;
+        $yatir2->yatirilan = $request->para;
+        $yatir2->faturaNo = $request->aidatId;
+        $yatir2->created_at = now();
+        $yatir2->updated_at = now();
+        $yatir2->save();
 
         return  $result ? back()->withErrors(['Ödeme işleminiz gerçekleşti']) :back()->withErrors(['Ödeme işleminiz sırasında hata alındı']) ; 
     }

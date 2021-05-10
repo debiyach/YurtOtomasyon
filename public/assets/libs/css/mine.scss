@@ -118,13 +118,14 @@
             //border: 1px solid blue;
             margin-left: 15px;
             margin-top: 20px;
-            background-color: #95a5a6;
+            background-color: #2f3640;
             box-shadow: 1px 1px black;
             box-shadow: 3px 3px 5px grey;
             position: relative;
             padding-bottom: 10px;
             transition: transform 400ms;
             border-radius: 5px;
+            color: white;
             .ogrenciler {
                 position: absolute;
                 min-width: 200%;
@@ -136,8 +137,8 @@
                 z-index: -5;
                 transition: transform 1s;
                 transition-delay: 200ms;
-                background-color: white;
-                color: blue;
+                background-color: #7f8fa6;
+                color: white;
             }
             &:hover {
                 transform: scale(0.99, 0.99);
@@ -165,7 +166,7 @@
                     height: 50px;
                     margin-left: 5px;
                     margin-top: 10px;
-                    background-color: green;
+                    background-color: #44bd32;
                     // border: 1px solid green;
                     color: white;
                     &:nth-child(2n + 1) {
@@ -179,6 +180,10 @@
             }
         }
     }
+}
+
+.kirmizi {
+    background-color: #e84118 !important;
 }
 
 @media screen and (max-width: 766px) {

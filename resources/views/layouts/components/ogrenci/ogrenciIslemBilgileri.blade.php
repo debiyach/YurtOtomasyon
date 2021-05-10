@@ -11,7 +11,6 @@
                 </thead>
                 <tfoot>
                     <th></th>
-                    <th><select></th>
                 </tfoot>
             </table>
         </div>
