@@ -157,12 +157,16 @@
   min-height: 100%;
   top: 0;
   left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
   visibility: hidden;
   z-index: -5;
-  -webkit-transition: top 1s;
-  transition: top 1s;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+  -webkit-transition-delay: 200ms;
+          transition-delay: 200ms;
   background-color: white;
   color: blue;
 }
@@ -174,7 +178,8 @@
 
 #binaGoruntule .kat .oda:hover > .ogrenciler {
   visibility: visible;
-  top: -100%;
+  -webkit-transform: translate(-50%, -100%);
+          transform: translate(-50%, -100%);
 }
 
 #binaGoruntule .kat .oda .odaNo {

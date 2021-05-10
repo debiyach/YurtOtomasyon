@@ -19,6 +19,14 @@ class OdaIslemleri extends Controller
         return view('personel.odaSayfasi');
     }
 
+    public function direkOda($id = null)
+    {
+        $data['odaId'] = $id;
+        return view('personel.odaSayfasi',$data);
+    }
+
+
+
     public function binaGetir()
     {
         return Binalar::where('kurumId', session()->get('personel')->kurumId)->select('binaAdi', 'id')->get();

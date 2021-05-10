@@ -85,7 +85,11 @@
                 "data": "id",
                 "mRender": function(data, type, full) {
                     return '<a class="btn btn-info btn-sm" href={{ route('personel.ogrenciIslemBilgileri') }}' +
-                        '/' + data + '>' + 'İşlem Bilgileri' + '</a>';
+                        '/' + data + '>' + 'İşlem Bilgileri' + '</a>' +
+                        '<a class="btn btn-warning ml-2 btn-sm" href={{ route('personel.ogrenciAidatGecmisi') }}' +
+                        '/' + data + '>' + 'Aidat Bilgileir' + '</a>' +
+                        '<a class="btn btn-danger ml-2 btn-sm" href={{ route('personel.ogrenciYoklamaGecmisi') }}' +
+                        '/' + data + '>' + 'Devamsızlık Bilgileri' + '</a>';
 
                 }
             }],

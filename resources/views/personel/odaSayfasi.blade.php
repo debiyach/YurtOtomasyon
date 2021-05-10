@@ -261,7 +261,7 @@
         $('#ogrenciYatakEkle').submit(function(e) {
             e.preventDefault();
             ajaxPostCall('{{ route('personel.odaIslemleri.yatakOgrenciEkle') }}', $('#ogrenciYatakEkle')
-            .serialize(),
+                .serialize(),
                 function(data) {
                     yatakYaz($('#yatakOda2 :selected').val());
                     yatakOgrenciGetir(ogrenciOptAdd);
@@ -342,7 +342,7 @@
         $('#binaEkle').submit(function(e) {
             e.preventDefault();
             ajaxPostCall('{{ route('personel.odaIslemleri.binaEkle') }}', $('#binaEkle').serialize(), function(
-            data) {
+                data) {
                 writeNot(data);
             });
             binaGetir();
@@ -350,14 +350,16 @@
 
         $('#katEkle').submit(function(e) {
             e.preventDefault();
-            ajaxPostCall('{{ route('personel.odaIslemleri.katEkle') }}', $('#katEkle').serialize(), function(data) {
+            ajaxPostCall('{{ route('personel.odaIslemleri.katEkle') }}', $('#katEkle').serialize(), function(
+                data) {
                 writeNot(data);
             });
         });
 
         $('#odaEkle').submit(function(e) {
             e.preventDefault();
-            ajaxPostCall('{{ route('personel.odaIslemleri.odaEkle') }}', $('#odaEkle').serialize(), function(data) {
+            ajaxPostCall('{{ route('personel.odaIslemleri.odaEkle') }}', $('#odaEkle').serialize(), function(
+                data) {
                 writeNot(data);
             });
         });
@@ -452,6 +454,9 @@
         $(document).ready(function() {
             binaGetir();
             yatakOgrenciGetir(ogrenciOptAdd);
+            if ({{ Request::segment(3) }}) {
+                yatakYaz({{ Request::segment(3) }});
+            }
         });
 
     </script>

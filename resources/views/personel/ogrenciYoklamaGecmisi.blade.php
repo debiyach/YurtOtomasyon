@@ -1,8 +1,8 @@
-@extends('layouts.ogrenci')
+@extends('layouts.personel')
 {{-- $binalar => Binalar için, $katlar => Katlar için --}}
 @section('content')
 
-    @include('layouts.components.ogrenci.aidatGecmisi')
+    @include('layouts.components.ogrenci.ogrenciDevamsizlik')
 
 @endsection
 
@@ -29,24 +29,19 @@
                 [10, 15, 25, 50, 100]
             ],
             "ajax": {
-                url: "{{ route('ogrenci.aidatGoruntule') . '/' . session()->get('ogrenci')->id }}",
+                url: "{{ route('personel.datatable.ogrenciYoklamaGoster') . '/' . Request::segment(3) }}",
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
                 },
                 data: function(d) {
                     d.katNo = $("#katNo").val();
                 },
-                type: "GET"
+                type: "POST"
             },
             columns: [{
-                    data: 'yatirilan',
-                    name: 'yatirilan'
-                },
-                {
-                    data: 'created_at',
-                    name: 'created_at'
-                }
-            ],
+                data: 'created_at',
+                name: 'created_at'
+            }],
 
             initComplete: function() {
 

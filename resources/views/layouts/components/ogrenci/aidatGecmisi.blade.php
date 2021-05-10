@@ -9,14 +9,14 @@
                         <th>Tarih</th>
                     </tr>
                 </thead>
-                <tfoot>
+                {{-- <tfoot>
                     <th rowspan="1" colspan="1">
 
                     </th>
                     <th rowspan="1" colspan="1">
                         <select id="ay" class="form-control">
                     </th>
-                </tfoot>
+                </tfoot> --}}
             </table>
         </div>
     </div>

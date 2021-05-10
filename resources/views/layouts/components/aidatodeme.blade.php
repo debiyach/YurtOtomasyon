@@ -3,10 +3,10 @@
         @include('layouts.components.errors')
     </div>
 
-    <form method="POST" id="credit" action="{{route('ogrenci.aidatOde')}}">
+    <form method="POST" id="credit" action="{{ route('ogrenci.aidatOde') }}">
 
         @csrf
-        <input type="hidden" name="aidatId" value="{{$aidat->id}}">
+        <input type="hidden" name="aidatId" value="{{ $aidat->id }}">
         <div class="form-group">
             <label for="kartNo">Kredi Kart No</label>
             <input type="tel" id="kartNo" name="kartNo" class="form-control cc-number" maxlength="19"
@@ -26,7 +26,9 @@
 
         <div class="form-group">
             <label for="aciklama">Yatırılacak Tutar</label>
-            <input type="number" name="para" class="form-control cc-cvc" max="{{$aidat->yatirilacak}}" placeholder="Bu ödeme için en fazla {{$aidat->yatirilacak}} TL yatırabilirsin">
+            <input type="number" name="para" class="form-control cc-cvc"
+                max="{{ $aidat->yatirilacak - $aidat->yatirilan }}"
+                placeholder="Bu ödeme için en fazla {{ $aidat->yatirilacak - $aidat->yatirilan }} TL yatırabilirsin">
         </div>
 
 

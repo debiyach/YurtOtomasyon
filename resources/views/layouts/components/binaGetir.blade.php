@@ -1,4 +1,4 @@
-<div class="offset-md-1 col-md-10">
+<div class="offset-md-1 col-md-10 pt-5">
     <div id="binaGoruntule">
         @foreach ($katlar as $kat)
             <div class="kat">
@@ -6,7 +6,7 @@
                 @foreach ($odalar as $oda)
 
                     @if ($kat->id == $oda->katId)
-                        <a href="#" class="oda">
+                        <a href="{{ route('personel.direkOda') . '/' . $oda->id }}" class="oda">
                             <span class="odaNo">No {{ $oda->odaNo }}</span>
                             <div class="yataklar">
                                 @foreach ($yataklar as $yatak)
@@ -21,21 +21,19 @@
 
                             </div>
                             <div class="ogrenciler">
-                                <table class="table">
+                                <table class="table table-sm">
                                     <thead>
                                         <tr>
                                             <th scope="col">Yatak No</th>
                                             <th scope="col">Öğrenci</th>
-                                            <th>Resim</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($ogrenciler as $ogrenci)
                                             @if ($ogrenci->odaNo == $oda->id)
                                                 <tr>
-                                                    <th>{{ $ogrenci->yatakNo }}</th>
+                                                    <th>{{ $ogrenci->ogrenciToYatak->yatakNo }}</th>
                                                     <td>{{ $ogrenci->ad }}</td>
-                                                    <td>Resim</td>
                                                 </tr>
                                             @endif
 

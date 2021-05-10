@@ -131,10 +131,11 @@
                 min-height: 100%;
                 top: 0;
                 left: 50%;
-                transform: translateX(-50%);
+                transform: translate(-50%, 0);
                 visibility: hidden;
                 z-index: -5;
-                transition: top 1s;
+                transition: transform 1s;
+                transition-delay: 200ms;
                 background-color: white;
                 color: blue;
             }
@@ -143,7 +144,7 @@
             }
             &:hover > .ogrenciler {
                 visibility: visible;
-                top: -100%;
+                transform: translate(-50%, -100%);
             }
 
             .odaNo {
