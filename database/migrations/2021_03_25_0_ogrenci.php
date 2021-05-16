@@ -30,11 +30,13 @@ class Ogrenci extends Migration
             $table->integer('katNo')->nullable();
             $table->integer('yatakNo')->nullable();
             $table->string('foto');
-            $table->json('aidat');
-            $table->json('depozito');
+            $table->integer('aidat');
+            $table->integer('taksitSayisi');
+            $table->integer('kalanTaksit');
+            $table->integer('depozito');
             $table->string('izin');
             $table->boolean('aktif');
-            $table->unsignedInteger('yoklama')->comment('1 ise yurtta, 2 ise dışarda');
+            $table->unsignedInteger('yoklama')->comment('0 ise dışarda, 1 ise yurtta, 2 ise izinli');
             $table->timestamps();
 
 

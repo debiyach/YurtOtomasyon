@@ -16,7 +16,7 @@ class GenelIslemler extends Controller
 {
     public function izinTalep(IzinTalep $request)
     {
-        $tarihs = explode(' - ',$request->tarih);
+        $tarihs = explode(' - ', $request->tarih);
         $izin = new OgrenciIstekSikayet;
         $izin->kurumId = session()->get('ogrenci')->kurumId;
         $izin->ogrenciId = session()->get('ogrenci')->id;
@@ -27,9 +27,9 @@ class GenelIslemler extends Controller
         $izin->created_at = now();
         $izin->updated_at = now();
         $result = $izin->save();
-        if ($result){
+        if ($result) {
             return back()->withErrors(['İzin talebiniz alınmıştır.']);
-        }else return back()->withErrors(['Sistemsel hata!']);
+        } else return back()->withErrors(['Sistemsel hata!']);
     }
 
     public function istekSikayet(SikayetIstek $request)
@@ -53,40 +53,37 @@ class GenelIslemler extends Controller
         $izin->created_at = now();
         $izin->updated_at = now();
         $result = $izin->save();
-        if ($result){
+        if ($result) {
             return back()->withErrors(["$tip talebiniz alınmıştır."]);
-        }else return back()->withErrors(['Sistemsel hata!']);
+        } else return back()->withErrors(['Sistemsel hata!']);
     }
 
-    public function aidatListe(){
-        $data['ogrenci'] = Ogrenci::where('id',session()->get('ogrenci')->id)->get();
-        $data['aidats'] = Aidat::where('ogrenciId',session()->get('ogrenci')->id)->get();
-        return view('ogrenci.aidatliste',$data);
+    public function aidatListe()
+    {
+        $data['ogrenci'] = Ogrenci::where('id', session()->get('ogrenci')->id)->get();
+        $data['aidats'] = Aidat::where('ogrenciId', session()->get('ogrenci')->id)->where('yatirilacak','>',0)->get();
+        return view('ogrenci.aidatliste', $data);
     }
-    
+
     public function aidatOdeme($id = null)
     {
         $data['aidat'] = Aidat::find($id);
-        return view('ogrenci.aidatodeme',$data);
+        return view('ogrenci.aidatodeme', $data);
     }
 
     public function aidatOde(Request $request)
     {
+
         $yatir = Aidat::find($request->aidatId);
-        $yatir->yatirilacak = $yatir->yatirilacak;
-        $yatir->yatirilan += $request->para;
+        $kalanTaksit = ($yatir->yatirilacak == $request->para) ? 1 : 0;
+        $yatir->yatirilacak = $yatir->yatirilacak - $request->para;
+        $yatir->yatirilan = $request->para;
+        $yatir->durum = $kalanTaksit;
         $yatir->updated_at = now();
-        $result = $yatir->save();
+        $ogrenci = Ogrenci::find($yatir->ogrenciId);
+        $ogrenci->aidat -= $request->para;
+        $result = $yatir->save() && $ogrenci->save();
 
-        $yatir2 = new OgrenciAidatGecmisi;
-        $yatir2->ogrenciId = session()->get('ogrenci')->id;
-        $yatir2->kurumId = session()->get('ogrenci')->kurumId;
-        $yatir2->yatirilan = $request->para;
-        $yatir2->faturaNo = $request->aidatId;
-        $yatir2->created_at = now();
-        $yatir2->updated_at = now();
-        $yatir2->save();
-
-        return  $result ? back()->withErrors(['Ödeme işleminiz gerçekleşti']) :back()->withErrors(['Ödeme işleminiz sırasında hata alındı']) ; 
+        return $result ? redirect()->route('ogrenci.aidatListele')->withErrors(['Ödeme işleminiz gerçekleşti']) : redirect()->route('ogrenci.aidatListele')->withErrors(['Ödeme işleminiz sırasında hata alındı']);
     }
 }

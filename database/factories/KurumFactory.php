@@ -31,8 +31,6 @@ class KurumFactory extends Factory
             'odaSayisi' => rand(1, 25),
             'odaYatakSayisi' => rand(3, 13),
             'katSayisi' => rand(1,10),
-            'aidatMiktar' => rand(100,400),
-            'depozitoMiktar' => rand(100,600),
             'yurtCinsiyet' => (rand(0, 1) == 1) ? 'Kız' : 'Erkek',
             'aktiflik' => (rand(0, 1) == 1) ? true : false,
             'sehir' => $this->faker->city,
