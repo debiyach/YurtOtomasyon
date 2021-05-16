@@ -6,6 +6,7 @@ use App\Models\Aidat;
 use App\Models\Kurum;
 use App\Models\Ogrenci;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class SetAidat extends Command
 {
@@ -40,20 +41,24 @@ class SetAidat extends Command
      */
     public function handle()
     {
-        Aidat::updated(['mevcutAy' => 0, 'updated_at' => now()]);
+        DB::table('aidat')->update(['mevcutAy' => 0, 'updated_at' => now()]);
         $kurumlar = Kurum::all();
         foreach ($kurumlar as $kurum) {
             $ogrenciler = Ogrenci::where('kurumId', $kurum->id)->get();
             foreach ($ogrenciler as $ogrenci) {
-                Aidat::insert([
-                    'ogrenciId' => $ogrenci->id,
-                    'kurumId' => $kurum->id,
-                    'yatirilacak' => $kurum->aidatMiktar,
-                    'durum' => 0,
-                    'mevcutAy' => 1,
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
+                if ($ogrenci->kalanTaksit > 0)
+                    Aidat::insert([
+                        'ogrenciId' => $ogrenci->id,
+                        'kurumId' => $kurum->id,
+                        'yatirilacak' => ($ogrenci->aidat / $ogrenci->kalanTaksit),
+                        'durum' => 0,
+                        'mevcutAy' => 1,
+                        'created_at' => now(),
+                        'updated_at' => now()
+                    ]);
+                $ogrenci->kalanTaksit = $ogrenci->kalanTaksit - 1;
+                $ogrenci->save();
+
             }
         }
         Command::info('Başarıyla adiatlar set edildi.');

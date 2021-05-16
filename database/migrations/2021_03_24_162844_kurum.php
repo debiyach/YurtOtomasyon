@@ -26,8 +26,6 @@ class Kurum extends Migration
             $table->integer('katSayisi');
             $table->integer('odaSayisi')->comment('Bir kattaki oda sayısı');
             $table->integer('odaYatakSayisi');
-            $table->integer('aidatMiktar');
-            $table->integer('depozitoMiktar');
             $table->boolean('aktiflik');
             $table->string('sehir',50);
             $table->string('yemekhaneFirma');
