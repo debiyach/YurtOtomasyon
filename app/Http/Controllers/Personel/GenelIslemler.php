@@ -12,6 +12,7 @@ use App\Models\IslemCesitleri;
 use App\Models\Katlar;
 use App\Models\Odalar;
 use App\Models\Yataklar;
+use App\Models\Yoklama;
 use App\Models\Personel;
 use App\Models\Ogrenci;
 use App\Models\PersonelIslemKayit;
@@ -150,5 +151,46 @@ class GenelIslemler extends Controller
         
         return view('layouts.components.binaGetir',$data);
     }
+
+    public function ogrenciYoklama(){
+        $data['katlar'] = Katlar::where('kurumId', session()->get('personel')->kurumId)->get();
+        $data['binalar'] = Binalar::where('kurumId', session()->get('personel')->kurumId)->get();
+        return view('personel.ogrenciyoklama', $data);
+    }
+
+    public function ogrenciYoklamaKaydet(Request $request){
+        $bilgi = $request->post();
+        $tarih = $request->post()['tarih'];
+        $deneme=[];
+        $sonuc=[];
+            foreach ($bilgi as $row ) {
+                $deneme[] = $row;
+            }
+            for ($i=3; $i < count($bilgi); $i++) { 
+                $sonuc[] = $deneme[$i];
+            }
+        if(count($bilgi)==3){
+            return back()->with('error','hata var');
+        }
+
+        foreach ($sonuc as $row ) {
+            $deger = explode(" ",$row);
+            $yoklama = new Yoklama;
+            $yoklama->kurumId = session()->get('personel')->kurumId;
+            $yoklama->ogrenciId = $deger[1];
+            $yoklama->created_at = $tarih;
+            if ($deger[0]=='izinli') {
+                $yoklama->yokla = 1;
+            }else{
+                $yoklama->yokla = 0;
+            }
+            $result = $yoklama->save();
+        }
+        
+        return back()->with('success','Öğrenci Ekleme Başarılı!');
+
+        
+    }
+
 
 }

@@ -182,6 +182,12 @@
     }
 }
 
+.form-check {
+    input[type="radio"] {
+        display: block !important;
+    }
+}
+
 .kirmizi {
     background-color: #e84118 !important;
 }

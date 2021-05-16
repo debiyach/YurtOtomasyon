@@ -81,6 +81,8 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::post('/personel-set-yetki', 'GenelIslemler@personelSetYetki')->name('personelSetYetki');
         Route::post('/bina-goruntu-getir', 'GenelIslemler@binaGetir')->name('binaGetir');
 
+        Route::post('/ogrenci-yoklama', 'GenelIslemler@ogrenciYoklamaKaydet')->name('ogrenciYoklamaKaydet');
+
 
         ## END GENEL POST İSTEKLERİ ##
 
@@ -107,6 +109,10 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::get('/ogrenci-islem-bilgileri/{id??}', 'GenelIslemler@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
         Route::get('/personel-islem-bilgileri/{id??}', 'GenelIslemler@personelIslemBilgileri')->name('personelIslemBilgileri');
         Route::get('/bina-goruntule', 'GenelIslemler@binaListele')->name('binaListele');
+        Route::get('/ogrenci-yoklama', 'GenelIslemler@ogrenciYoklama')->name('ogrenciYoklama');
+
+        
+
         
         
         Route::get('/ogrenci-aidat-gecmisi/{id??}', fn()=>view('personel.ogrenciAidatGecmisi'))->name('ogrenciAidatGecmisi');

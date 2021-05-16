@@ -40,47 +40,59 @@
                 type: "get"
             },
             columns: [{
-                data: 'created_at',
-                name: 'created_at'
-            }],
+                    data: 'yokla',
+                    name: 'yokla'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
+                }
+            ],
 
-            // initComplete: function() {
+            initComplete: function() {
 
-            //     //console.log(blok);
+                //console.log(blok);
 
-            //     //var blok = ['1', '2']
-            //     //var kat = ['1', '2', '3', '4'];
+                var tur = [{
+                        'id': 0,
+                        'ad': 'Devamsiz'
+                    },
+                    {
+                        'id': 1,
+                        'ad': 'İzinli'
+                    }
+                ]
 
-            //     this.api().columns(6).every(function() {
-            //         var column = this;
-            //         var array = blok;
-            //         var input = document.createElement("select");
-            //         input.id = "blok";
-            //         input.className = 'form-control';
+                this.api().columns(0).every(function() {
+                    var column = this;
+                    var array = tur;
+                    var input = document.createElement("select");
+                    input.id = "tur";
+                    input.className = 'form-control';
 
-            //         var option = document.createElement("option");
-            //         option.value = '';
-            //         option.text = 'Tümü';
-            //         input.appendChild(option);
+                    var option = document.createElement("option");
+                    option.value = '';
+                    option.text = 'Tümü';
+                    input.appendChild(option);
 
 
-            //         for (let i = 0; i < array.length; i++) {
-            //             var option = document.createElement("option");
-            //             option.value = array[i].id;
-            //             option.text = array[i].binaAdi;
-            //             input.appendChild(option);
-            //         }
+                    for (let i = 0; i < array.length; i++) {
+                        var option = document.createElement("option");
+                        option.value = array[i].id;
+                        option.text = array[i].ad;
+                        input.appendChild(option);
+                    }
 
-            //         //var input = document.createElement('input');
-            //         $(input).appendTo($(column.footer()).empty())
-            //             .on('change', function() {
-            //                 var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                    //var input = document.createElement('input');
+                    $(input).appendTo($(column.footer()).empty())
+                        .on('change', function() {
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
 
-            //                 column.search(val ? val : '', true, false).draw();
-            //             });
-            //     });
+                            column.search(val ? val : '', true, false).draw();
+                        });
+                });
 
-            // },
+            },
 
 
             "language": {

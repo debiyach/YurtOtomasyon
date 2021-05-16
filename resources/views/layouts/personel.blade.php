@@ -183,6 +183,11 @@
                                 class="far fa-calendar-alt "></i>Bina Görüntüle</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="{{ route('personel.ogrenciYoklama') }}" class="nav-link @if (Request::segment(2)=='ogrenci-yoklama' ) active @endif"><i
+                                class="far fa-calendar-alt "></i>Öğrenci Yoklama</a>
+                    </li>
+
                     </ul>
             </div>
             </nav>

@@ -26,6 +26,13 @@ class TempTable extends Controller
     {
         $users = Yoklama::where('kurumId', session()->get('ogrenci')->kurumId)->where('ogrenciId', session()->get('ogrenci')->id);
         return DataTables::eloquent($users)
+        ->editColumn('yokla', function (Yoklama $user) {
+            if($user->yokla){
+                return 'İzinli';
+            }else{
+                return 'Devamsız';
+            }
+        })
         ->editColumn('created_at', function (Yoklama $user) {
             return $user->created_at->format('d-m-Y') ?? '';
         })
