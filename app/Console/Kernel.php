@@ -29,7 +29,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->command('aidat:set')->monthly();
         $schedule->command('maas:set')->monthly();
-        $schedule->command('yoklama:set')->dailyAt('23:00');
+        //$schedule->command('yoklama:set')->dailyAt('23:00');
+        $schedule->command('yoklama:set')->everyMinute();
     }
 
     /**

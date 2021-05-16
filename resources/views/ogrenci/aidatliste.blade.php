@@ -2,6 +2,7 @@
 
 @section('content')
     @include('layouts.components.aidatlistele')
+
 @endsection
 
 @section('script')

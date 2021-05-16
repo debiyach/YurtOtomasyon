@@ -2,9 +2,7 @@
 {{-- $binalar => Binalar için, $katlar => Katlar için --}}
 @section('content')
 
-    @include('layouts.components.ogrenci.ogrencilistele')
-
-
+    @include('layouts.components.personel.aidatGecmisi')
 
 @endsection
 
@@ -13,14 +11,14 @@
     <script>
         $("#odaNo").keyup(function(e) {
             table.draw();
+            alert(this.value);
         });
 
-        $("#katNo").change(function(e) {
+        $("#katNo").keyup(function(e) {
             table.draw();
             alert(this.value);
         });
 
-        var odaNo;
         var table = $('#usersDatatable').DataTable({
             "processing": true,
             "serverSide": true,
@@ -31,13 +29,11 @@
                 [10, 15, 25, 50, 100]
             ],
             "ajax": {
-                url: "{{ route('personel.datatable.ogrencigetir') }}",
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
-                },
+                url: //"{{ route('personel.datatable.ogrencigetir') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
+                    },
                 data: function(d) {
-                    d.binaNo = $('#binalar :selected').val();
-                    d.odaNo = $("#odaNo").val();
                     d.katNo = $("#katNo").val();
                 },
                 type: "POST"
@@ -49,61 +45,10 @@
                 {
                     data: 'ad',
                     name: 'ad'
-                },
-                {
-                    data: 'soyad',
-                    name: 'soyad'
-                },
-                {
-                    data: 'mail',
-                    name: 'mail'
-                },
-                {
-                    data: 'telNo',
-                    name: 'telNo'
-                },
-                {
-                    data: 'tcNo',
-                    name: 'tcNo'
-                },
-                {
-                    data: 'binaNo',
-                    name: 'binaNo'
-                },
-                {
-                    data: 'katNo',
-                    name: 'katNo'
-                },
-                {
-                    data: 'odaNo',
-                    name: 'odaNo'
                 }
             ],
 
-            "columnDefs": [{
-                "targets": 9,
-                "data": "id",
-                "mRender": function(data, type, full) {
-                    return '<a class="btn btn-info btn-sm" href={{ route('personel.ogrenciIslemBilgileri') }}' +
-                        '/' + data + '>' + 'İşlem Bilgileri' + '</a>' +
-                        '<a class="btn btn-warning ml-2 btn-sm" href={{ route('personel.ogrenciAidatGecmisi') }}' +
-                        '/' + data + '>' + 'Aidat Bilgileir' + '</a>' +
-                        '<a class="btn btn-danger ml-2 btn-sm" href={{ route('personel.ogrenciYoklamaGecmisi') }}' +
-                        '/' + data + '>' + 'Devamsızlık Bilgileri' + '</a>';
-
-                }
-            }],
-
-
             initComplete: function() {
-                var blok = [];
-                var kat = [];
-
-                var gelenbinalar = @json($binalar);
-                gelenbinalar.forEach(element => {
-                    blok.push(element);
-                });
-
 
                 //console.log(blok);
 
@@ -138,7 +83,6 @@
                             column.search(val ? val : '', true, false).draw();
                         });
                 });
-
 
 
                 this.api().columns(8).every(function() {

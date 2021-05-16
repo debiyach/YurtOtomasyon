@@ -150,8 +150,13 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('ogrenci.devamsizlik') }}" class="nav-link @if (Request::segment(2)=='istek-talep' ) active @endif"><i
+                        <a href="{{ route('ogrenci.devamsizlik') }}" class="nav-link @if (Request::segment(2)=='devamsizlik' ) active @endif"><i
                                 class="far fa-calendar-alt "></i>Devamsızlık Bilgisi</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('ogrenci.aidatGecmis') }}" class="nav-link @if (Request::segment(2)=='aidat-gecmisi' ) active @endif"><i
+                                class="far fa-calendar-alt "></i>Aidat Geçmişi</a>
                     </li>
 
 

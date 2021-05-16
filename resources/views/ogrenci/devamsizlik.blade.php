@@ -30,111 +30,57 @@
                 [10, 15, 25, 50, 100]
             ],
             "ajax": {
-                url: //"{{ route('personel.datatable.ogrencigetir') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
-                    },
+                url: "{{ route('ogrenci.ogrenciYoklamaGoster') }}",
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
+                },
                 data: function(d) {
-                    d.binaNo = $('#binalar :selected').val();
-                    d.odaNo = $("#odaNo").val();
                     d.katNo = $("#katNo").val();
                 },
-                type: "POST"
+                type: "get"
             },
             columns: [{
-                    data: 'id',
-                    name: 'id'
-                },
-                {
-                    data: 'ad',
-                    name: 'ad'
-                }
-            ],
-
-            "columnDefs": [{
-                "targets": 9,
-                "data": "id",
-                "mRender": function(data, type, full) {
-                    return '<a class="btn btn-info btn-sm" href={{ route('personel.ogrenciIslemBilgileri') }}' +
-                        '/' + data + '>' + 'İşlem Bilgileri' + '</a>';
-
-                }
+                data: 'created_at',
+                name: 'created_at'
             }],
 
+            // initComplete: function() {
 
-            initComplete: function() {
+            //     //console.log(blok);
 
-                //console.log(blok);
+            //     //var blok = ['1', '2']
+            //     //var kat = ['1', '2', '3', '4'];
 
-                //var blok = ['1', '2']
-                //var kat = ['1', '2', '3', '4'];
+            //     this.api().columns(6).every(function() {
+            //         var column = this;
+            //         var array = blok;
+            //         var input = document.createElement("select");
+            //         input.id = "blok";
+            //         input.className = 'form-control';
 
-                this.api().columns(6).every(function() {
-                    var column = this;
-                    var array = blok;
-                    var input = document.createElement("select");
-                    input.id = "blok";
-                    input.className = 'form-control';
-
-                    var option = document.createElement("option");
-                    option.value = '';
-                    option.text = 'Tümü';
-                    input.appendChild(option);
-
-
-                    for (let i = 0; i < array.length; i++) {
-                        var option = document.createElement("option");
-                        option.value = array[i].id;
-                        option.text = array[i].binaAdi;
-                        input.appendChild(option);
-                    }
-
-                    //var input = document.createElement('input');
-                    $(input).appendTo($(column.footer()).empty())
-                        .on('change', function() {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                            column.search(val ? val : '', true, false).draw();
-                        });
-                });
+            //         var option = document.createElement("option");
+            //         option.value = '';
+            //         option.text = 'Tümü';
+            //         input.appendChild(option);
 
 
+            //         for (let i = 0; i < array.length; i++) {
+            //             var option = document.createElement("option");
+            //             option.value = array[i].id;
+            //             option.text = array[i].binaAdi;
+            //             input.appendChild(option);
+            //         }
 
-                this.api().columns(8).every(function() {
-                    var that = this;
-                    var sonuc;
+            //         //var input = document.createElement('input');
+            //         $(input).appendTo($(column.footer()).empty())
+            //             .on('change', function() {
+            //                 var val = $.fn.dataTable.util.escapeRegex($(this).val());
 
-                    odaNo = this.value;
+            //                 column.search(val ? val : '', true, false).draw();
+            //             });
+            //     });
 
-                    $('input', this.footer()).on('change', function() {
-                        sonuc = this.value;
-                        alert(sonuc);
-                        if (that.search() !== this.value) {
-                            that
-                                .search(this.value)
-                                .draw();
-                        }
-                    });
-
-                });
-
-
-                // this.api().columns(8).every(function() {
-                //     var column = this;
-                //     var input = document.createElement("input");
-                //     input.id = "odalar";
-                //     input.className = 'form-control';
-
-                //     $(input).appendTo($(column.footer()).empty())
-                //         .on('change', function() {
-                //             var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                //             column.search(val ? val : '', true, false).draw();
-                //         });
-                // });
-
-
-            },
+            // },
 
 
             "language": {

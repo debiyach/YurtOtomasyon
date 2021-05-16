@@ -137,7 +137,7 @@
   min-height: 125px;
   margin-left: 15px;
   margin-top: 20px;
-  background-color: #95a5a6;
+  background-color: #2f3640;
   -webkit-box-shadow: 1px 1px black;
           box-shadow: 1px 1px black;
   -webkit-box-shadow: 3px 3px 5px grey;
@@ -149,6 +149,7 @@
   transition: transform 400ms;
   transition: transform 400ms, -webkit-transform 400ms;
   border-radius: 5px;
+  color: white;
 }
 
 #binaGoruntule .kat .oda .ogrenciler {
@@ -157,14 +158,18 @@
   min-height: 100%;
   top: 0;
   left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
   visibility: hidden;
   z-index: -5;
-  -webkit-transition: top 1s;
-  transition: top 1s;
-  background-color: white;
-  color: blue;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+  -webkit-transition-delay: 200ms;
+          transition-delay: 200ms;
+  background-color: #7f8fa6;
+  color: white;
 }
 
 #binaGoruntule .kat .oda:hover {
@@ -174,7 +179,8 @@
 
 #binaGoruntule .kat .oda:hover > .ogrenciler {
   visibility: visible;
-  top: -100%;
+  -webkit-transform: translate(-50%, -100%);
+          transform: translate(-50%, -100%);
 }
 
 #binaGoruntule .kat .oda .odaNo {
@@ -203,7 +209,7 @@
   height: 50px;
   margin-left: 5px;
   margin-top: 10px;
-  background-color: green;
+  background-color: #44bd32;
   color: white;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -219,6 +225,10 @@
 
 #binaGoruntule .kat .oda .yataklar .yatak:nth-child(2n + 1) {
   margin-left: 0;
+}
+
+.kirmizi {
+  background-color: #e84118 !important;
 }
 
 @media screen and (max-width: 766px) {
