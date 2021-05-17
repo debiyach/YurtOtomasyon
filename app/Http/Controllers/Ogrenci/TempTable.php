@@ -17,11 +17,32 @@ class TempTable extends Controller
         $users = OgrenciAidatGecmisi::where('kurumId', session()->get('ogrenci')->kurumId)->where('ogrenciId', $id);
         return DataTables::eloquent($users)
         ->editColumn('created_at', function (OgrenciAidatGecmisi $user) {
+            return $user->created_at->format('d-m-Y H:i:s') ?? '';
+        })
+            ->toJson();
+
+    }
+
+    public function aidatListesi($id = null)
+    {
+
+        $users = Aidat::where('kurumId', session()->get('ogrenci')->kurumId)->where('ogrenciId', $id);
+        return DataTables::eloquent($users)
+        ->editColumn('durum', function (Aidat $user) {
+            if($user->durum==1){
+                return 'Tamamlandı';
+            }else{
+                return 'Devam Ediyor';
+            }
+        })
+        ->editColumn('created_at', function (Aidat $user) {
             return $user->created_at->format('d-m-Y') ?? '';
         })
             ->toJson();
 
     }
+
+
     public function ogrenciYoklamaGoster()
     {
         $users = Yoklama::where('kurumId', session()->get('ogrenci')->kurumId)->where('ogrenciId', session()->get('ogrenci')->id);

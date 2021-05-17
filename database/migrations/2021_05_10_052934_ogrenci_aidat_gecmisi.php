@@ -18,6 +18,7 @@ class OgrenciAidatGecmisi extends Migration
             $table->unsignedBigInteger('ogrenciId');
             $table->unsignedBigInteger('kurumId');
             $table->unsignedBigInteger('faturaNo');
+            $table->string('aciklama');
             $table->unsignedBigInteger('yatirilan')->default(0);
             $table->timestamps();
         });

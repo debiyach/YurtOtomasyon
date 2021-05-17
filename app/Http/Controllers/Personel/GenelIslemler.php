@@ -162,6 +162,7 @@ class GenelIslemler extends Controller
         $bilgi = $request->post();
         $tarih = $request->post()['tarih'];
         $deneme=[];
+        $personelisim = session()->get('personel')->ad;
         $sonuc=[];
             foreach ($bilgi as $row ) {
                 $deneme[] = $row;
@@ -181,8 +182,10 @@ class GenelIslemler extends Controller
             $yoklama->created_at = $tarih;
             if ($deger[0]=='izinli') {
                 $yoklama->yokla = 1;
+                $yoklama->aciklama = ''.$tarih.' tarihinde '.$personelisim.' tarafından alınan yoklamada izinli kayıt edildiniz.';
             }else{
                 $yoklama->yokla = 0;
+                $yoklama->aciklama = ''.$tarih.' tarihinde '. $personelisim.' tarafından alınan yoklamada devamsız kayıt edildiniz.';
             }
             $result = $yoklama->save();
         }

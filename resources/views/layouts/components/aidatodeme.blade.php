@@ -26,9 +26,8 @@
 
         <div class="form-group">
             <label for="aciklama">Yatırılacak Tutar</label>
-            <input type="number" name="para" class="form-control cc-cvc"
-                max="{{ $aidat->yatirilacak - $aidat->yatirilan }}"
-                placeholder="Bu ödeme için en fazla {{ $aidat->yatirilacak - $aidat->yatirilan }} TL yatırabilirsin">
+            <input type="number" name="para" class="form-control cc-cvc" required max="{{ $aidat->yatirilacak }}"
+                placeholder="Bu ödeme için en fazla {{ $aidat->yatirilacak }} TL yatırabilirsin">
         </div>
 
 

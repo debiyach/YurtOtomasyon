@@ -17,7 +17,8 @@ class CreateYoklamasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('kurumId');
             $table->unsignedBigInteger('ogrenciId');
-            $table->unsignedBigInteger('yokla')->comment('1 ise yurttaymış, 0 ise yokmuş');
+            $table->string('aciklama');
+            $table->unsignedBigInteger('yokla')->comment('1 ise izinli, 0 ise yokmuş');
             $table->timestamps();
 
             $table->foreign('kurumId')->references('id')->on('kurum')->onUpdate('cascade')->onDelete('cascade');

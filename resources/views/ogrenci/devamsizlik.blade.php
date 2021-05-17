@@ -44,6 +44,10 @@
                     name: 'yokla'
                 },
                 {
+                    data: 'aciklama',
+                    name: 'aciklama'
+                },
+                {
                     data: 'created_at',
                     name: 'created_at'
                 }

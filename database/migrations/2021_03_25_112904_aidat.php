@@ -21,6 +21,7 @@ class Aidat extends Migration
             $table->unsignedBigInteger('durum')->comment('1 ise yatırılmış, 0 ise yatırılmamış.');
             $table->unsignedBigInteger('yatirilan')->default(0);
             $table->unsignedBigInteger('mevcutAy')->comment('1 ise bu ay aidatıdır. 0 ise geçmiş dönem aidatlarıdır.');
+            $table->date('sonOdemeTarihi');
             $table->timestamps();
 
             $table->foreign('ogrenciId')->references('id')->on('ogrenci')->cascadeOnUpdate()->cascadeOnDelete();

@@ -127,7 +127,7 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         ##=========================================================================================##
 
         Route::group(['as' => 'ogrenci.', 'prefix' => 'ogrenci-islemleri'], function () {
-            Route::post('/ogrenci', 'OgrenciIslemleri\OgrenciEkle@ogrenciEkle')->name('ogrenciEkle');
+            Route::post('/ogrenci', 'OgrenciIslemleri\OgrenciEkle@ogrenciEkle')->name('ogrenciEklePost');
         });
 
 
@@ -194,8 +194,11 @@ Route::group(['middleware' => 'ogrenci', 'as' => 'ogrenci.', 'prefix' => 'ogrenc
 
         // Get Method
         Route::get('/aidat-goruntule/{id??}', 'TempTable@aidatGoruntule')->name('aidatGoruntule');
+        Route::get('/aidat-listele/{id??}', 'TempTable@aidatListesi')->name('aidatListesi');
         Route::get('/aidat-odeme/{id??}', 'GenelIslemler@aidatOdeme')->name('aidatOdeme');
         Route::get('/aidat-liste', 'GenelIslemler@aidatListe')->name('aidatListele');
+        Route::get('/aidat-gecmisi','GenelIslemler@aidatGecmisi')->name('aidatGecmis'); 
+        Route::get('/devamsizlik', 'GenelIslemler@devamsizlik')->name('devamsizlik');
         
     });
 
@@ -203,8 +206,6 @@ Route::group(['middleware' => 'ogrenci', 'as' => 'ogrenci.', 'prefix' => 'ogrenc
     Route::get('/izin-talep', fn () => view('ogrenci.izintalep'))->name('izinTalep');
     Route::get('/hesap-ayarlari', fn () => view('ogrenci.accountsettings'))->name('hesapAyarlari');
     Route::get('/istek-talep', fn () => view('ogrenci.istektalep'))->name('istekTalep');
-    Route::get('/devamsizlik', fn () => view('ogrenci.devamsizlik'))->name('devamsizlik');
-    Route::get('/aidat-gecmisi', fn () => view('ogrenci.aidatgecmisi'))->name('aidatGecmis');
 });
 
 ## End Öğrenci Route İşlemleri ##

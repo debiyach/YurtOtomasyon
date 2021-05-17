@@ -58,7 +58,6 @@ class SetAidat extends Command
                     ]);
                 $ogrenci->kalanTaksit = $ogrenci->kalanTaksit - 1;
                 $ogrenci->save();
-
             }
         }
         Command::info('Başarıyla adiatlar set edildi.');

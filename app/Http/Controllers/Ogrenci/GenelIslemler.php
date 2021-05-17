@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Ogrenci\IzinTalep;
 use App\Http\Requests\Ogrenci\SikayetIstek;
 use App\Models\Aidat;
+use App\Models\Yoklama;
 use App\Models\OgrenciAidatGecmisi;
 use App\Models\OgrenciIstekSikayet;
 use App\Models\Ogrenci;
@@ -73,17 +74,44 @@ class GenelIslemler extends Controller
 
     public function aidatOde(Request $request)
     {
-
+        $gecmis = new OgrenciAidatGecmisi;
         $yatir = Aidat::find($request->aidatId);
-        $kalanTaksit = ($yatir->yatirilacak == $request->para) ? 1 : 0;
+        //$kalanTaksit = ($yatir->yatirilacak == $request->para) ? 1 : 0;
         $yatir->yatirilacak = $yatir->yatirilacak - $request->para;
-        $yatir->yatirilan = $request->para;
-        $yatir->durum = $kalanTaksit;
+        $yatir->yatirilan += $request->para;
+        if($yatir->yatirilacak == 0){
+            $yatir->durum = 1;
+            $gecmis->aciklama = ''.$request->aidatId.' Numaralı Fatura için '.$request->para.' tutarında ucret yatırılmış ve '.$yatir->mevcutAy.'. taksit ödemesi tamamlanmıştır';
+        }else{
+            $yatir->durum = 0;
+            $gecmis->aciklama = ''.$request->aidatId.' Numaralı Fatura için '.$request->para.' tutarında ucret yatırılmış geriye ödenmesi gereken '.$yatir->yatirilacak.' tutarında ucret kalmıştır.';
+
+        }
+        //$yatir->durum = $kalanTaksit;
         $yatir->updated_at = now();
-        $ogrenci = Ogrenci::find($yatir->ogrenciId);
-        $ogrenci->aidat -= $request->para;
-        $result = $yatir->save() && $ogrenci->save();
+        //$ogrenci = Ogrenci::find($yatir->ogrenciId);
+        //$ogrenci->aidat -= $request->para;
+
+        $gecmis->ogrenciId = session()->get('ogrenci')->id;
+        $gecmis->kurumId = session()->get('ogrenci')->kurumId;
+        $gecmis->faturaNo = $request->aidatId;
+        $gecmis->yatirilan = $request->para;
+        $gecmis->created_at = now();
+        $gecmis->updated_at = now();
+
+
+        $result = $yatir->save() && $gecmis->save();
 
         return $result ? redirect()->route('ogrenci.aidatListele')->withErrors(['Ödeme işleminiz gerçekleşti']) : redirect()->route('ogrenci.aidatListele')->withErrors(['Ödeme işleminiz sırasında hata alındı']);
+    }
+
+    public function aidatGecmisi(){
+        $data['veri'] = Aidat::where('ogrenciId',session()->get('ogrenci')->id)->get();
+        return view('ogrenci.aidatgecmisi',$data);
+    }
+
+    public function devamsizlik(){
+        $data['veri'] = Yoklama::where('ogrenciId',session()->get('ogrenci')->id)->get();
+        return view('ogrenci.devamsizlik',$data);
     }
 }

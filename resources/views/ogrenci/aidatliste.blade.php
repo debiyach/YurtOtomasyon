@@ -1,6 +1,7 @@
 @extends('layouts.ogrenci')
 
 @section('content')
+    @include('layouts.components.errors')
     @include('layouts.components.aidatlistele')
 
 @endsection
