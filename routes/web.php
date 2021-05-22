@@ -24,17 +24,125 @@ Route::group(['middleware' => 'mudur', 'as' => 'mudur.', 'prefix' => 'mudur'], f
     })->name('index');
     Route::get('/cikis-yap', 'LoginController@personelLogout')->name('logout');
 
-    Route::get('/personel-maas-goster/{id??}', 'TempTable@personelMaasGoster')->name('personelMaasGoster');
-    Route::get('/ogrenci-yoklama-goster/{id??}', 'TempTable@ogrenciYoklamaGoster')->name('ogrenciYoklamaGoster');
+    Route::group(['namespace' => 'Datatables', 'as' => 'datatable.'], function () {
 
-    Route::get('/hesap-ayarlari', fn () => view('mudur.accountsettings'))->name('hesapAyarlari');
-    Route::get('/personel-ekle', fn () => view('mudur.insertpersonel'))->name('personelEkle');
-    Route::get('/personel-listele', fn () => view('mudur.personellist'))->name('personelListele');
-    Route::get('/ogrenci-ekle', fn () => view('mudur.insertstudent'))->name('ogrenciEkle');
-    Route::get('/ogrenci-listele', fn () => view('mudur.studentlist'))->name('ogrenciListele');
-    Route::get('/istek-talep-list', fn () => view('mudur.istektaleplist'))->name('istekTalepList');
+        Route::get('/personel-maas-goster/{id??}', 'TempTable@personelMaasGoster')->name('personelMaasGoster');
+        Route::post('/get-student', 'TempTable@getStudents')->name('ogrencigetir');
+        Route::post('/get-personel', 'TempTable@getPersonels')->name('personelgetir');
+        Route::post('/get-istek-sikayet', 'TempTable@getIstekSikayet')->name('istekSikayetGetir'); //isteksiyaet
+        Route::post('/ogrenci-islem-bilgileri/{id??}', 'TempTable@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
+        Route::post('/ogrenci-aidat/{id??}', 'TempTable@ogrenciAidatGoruntule')->name('ogrenciAidatGoruntule');
+        Route::post('/ogrenci-yoklama-goster/{id??}', 'TempTable@ogrenciYoklamaGoster')->name('ogrenciYoklamaGoster');
+
+        Route::get('/ogrenci-yoklama-goster/{id??}', 'TempTable@aidatListesi')->name('aidatListesi');
+
+        Route::post('/personel-islem-bilgileri/{id??}', 'TempTable@personelIslemBilgileri')->name('personelIslemBilgileri');
+
+    });
+
+
+
+    Route::post('/hesap-ayarlari/duzenle', 'HesapIslemleri@hesapDuzenlePost')->name('hesapDuzenlePost');
+    Route::post('/hesap-ayarlari/sifre-duzenle', 'HesapIslemleri@hesapSifreDuzenlePost')->name('hesapSifreDuzenlePost');
+    Route::post('/izin-talep/post', 'GenelIslemler@izinTalep')->name('izinTalepPost');
+    Route::post('/personel-ekle/post', 'GenelIslemler@persoenlEkle')->name('personelEklePost');
+    Route::post('/personel-set-yetki', 'GenelIslemler@personelSetYetki')->name('personelSetYetki');
+    Route::post('/bina-goruntu-getir', 'GenelIslemler@binaGetir')->name('binaGetir');
+
+    Route::post('/ogrenci-yoklama', 'GenelIslemler@ogrenciYoklamaKaydet')->name('ogrenciYoklamaKaydet');
+    Route::post('/aidat-ode', 'GenelIslemler@pesinOde')->name('pesinOde');
+
+
+    ## GENEL GET İSTEKLERİ ##
+
+    Route::get('/personel-yetki/{id??}', 'GenelIslemler@personelYetkiGetir')->name('personelYetkiGetir');
     Route::get('/personel-yetkilendirme', 'GenelIslemler@personelYetkiPage')->name('personelYetkilendirme');
-    Route::get('/gelirgider-tablosu', fn () => view('mudur.gelirGiderTablosu'))->name('gelirGiderTablosu');
+
+
+
+
+    Route::get('/oda-islemleri', 'OdaIslemleri@odaSayfasi')->name('odaSayfasi');
+    Route::get('/direk-oda/{id??}', 'OdaIslemleri@direkOda')->name('direkOda');
+    Route::get('/hesap-ayarlari', fn () => view('personel.accountsettings'))->name('hesapAyarlari');
+    Route::get('/ogrenci-ekle', fn () => view('personel.insertstudent'))->name('ogrenciEkle');
+    Route::get('/personel-ekle', fn () => view('personel.insertpersonel'))->name('personelEkle');
+    Route::get('/istek-talep-list', fn () => view('personel.istektaleplist'))->name('istekTalepList');
+    Route::get('/izin-talep', fn () => view('personel.izintalep'))->name('izinTalep');
+    Route::get('/ogrenci-listele', 'GenelIslemler@ogrenciListelePage')->name('ogrenciListele');
+    Route::get('/personel-listele', fn () => view('personel.personellist'))->name('personelListele');
+    Route::get('/ogrenci-islem-bilgileri/{id??}', 'GenelIslemler@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
+    Route::get('/personel-islem-bilgileri/{id??}', 'GenelIslemler@personelIslemBilgileri')->name('personelIslemBilgileri');
+    Route::get('/bina-goruntule', 'GenelIslemler@binaListele')->name('binaListele');
+    Route::get('/ogrenci-yoklama', 'GenelIslemler@ogrenciYoklama')->name('ogrenciYoklama');
+    
+    Route::get('/aidat-liste/{id??}', 'GenelIslemler@aidatListe')->name('aidatListe');
+
+    Route::get('/pesin-odeme/{id??}',  'GenelIslemler@pesinOdeme')->name('pesinOdeme');
+
+    Route::get('/ogrenci-aidat-gecmisi/{id??}', 'GenelIslemler@aidatAidatGecmisiListe')->name('ogrenciAidatGecmisi');
+    Route::get('/ogrenci-yoklama-gecmisi/{id??}', fn()=>view('personel.ogrenciYoklamaGecmisi'))->name('ogrenciYoklamaGecmisi');
+
+    Route::get('/personel-aidat-gecmisi', fn()=>view('personel.personelAidatGecmisi'))->name('personelAidatGecmisi');
+    Route::get('/personel-istek-onayla/{id??}', 'GenelIslemler@istekTalepOnayla')->name('istekTalepOnayla');
+    Route::get('/personel-istek-reddet/{id??}', 'GenelIslemler@istekTalepReddet')->name('istekTalepReddet');
+
+
+    ## END GENEL GET İSTEKLERİ ##
+
+    Route::group(['as' => 'ogrenci.', 'prefix' => 'ogrenci-islemleri'], function () {
+        Route::post('/ogrenci', 'OgrenciIslemleri\OgrenciEkle@ogrenciEkle')->name('ogrenciEklePost');
+    });
+
+
+    
+    ## ODA İŞLEMLERİ ##
+
+    Route::group(['prefix' => 'oda-islemleri', 'as' => 'odaIslemleri.'], function () {
+
+        ## POST ##
+
+        Route::post('/bina-ekle', 'odaIslemleri@binaEkle')->name('binaEkle');
+        Route::post('/kat-ekle', 'odaIslemleri@katEkle')->name('katEkle');
+        Route::post('/oda-ekle', 'odaIslemleri@odaEkle')->name('odaEkle');
+        Route::post('/yatak-ekle', 'odaIslemleri@yatakEkle')->name('yatakEkle');
+        route::post('/yatak-ogrenci-ekle', 'odaIslemleri@ogrenciEkle')->name('yatakOgrenciEkle');
+        route::post('/yatak-ogrenci-kaldir', 'odaIslemleri@ogrenciYatakKaldir')->name('ogrenciYatakKaldir');
+
+        ## END POST ##
+
+        ##=========================================================================================##
+
+        ## GET ##
+
+        Route::get('/yatak-ogrenci-getir', 'odaIslemleri@ogrenciGetir')->name('yatakOgrenciGetir');
+        Route::get('/bina-getir', 'odaIslemleri@binaGetir')->name('binaGetir');
+        Route::get('/kat-getir/{id??}', 'odaIslemleri@katGetir')->name('katGetir');
+        Route::get('/oda-getir/{id??}', 'odaIslemleri@odaGetir')->name('odaGetir');
+        Route::get('/yatak-getir/{id??}', 'odaIslemleri@yatakGetir')->name('yatakGetir');
+        Route::get('/yatak-kaldir/{id??}', 'odaIslemleri@yatakKaldir')->name('yatakKaldir');
+
+        ## END GET ##
+    });
+
+    ## END ODA İŞLEMLERİ ##
+
+
+
+
+
+
+
+    // Route::get('/personel-maas-goster/{id??}', 'TempTable@personelMaasGoster')->name('personelMaasGoster');
+    // Route::get('/ogrenci-yoklama-goster/{id??}', 'TempTable@ogrenciYoklamaGoster')->name('ogrenciYoklamaGoster');
+
+    // Route::get('/hesap-ayarlari', fn () => view('mudur.accountsettings'))->name('hesapAyarlari');
+    // Route::get('/personel-ekle', fn () => view('mudur.insertpersonel'))->name('personelEkle');
+    // Route::get('/personel-listele', fn () => view('mudur.personellist'))->name('personelListele');
+    // Route::get('/ogrenci-ekle', fn () => view('mudur.insertstudent'))->name('ogrenciEkle');
+    // Route::get('/ogrenci-listele', fn () => view('mudur.studentlist'))->name('ogrenciListele');
+    // Route::get('/istek-talep-list', fn () => view('mudur.istektaleplist'))->name('istekTalepList');
+    // Route::get('/personel-yetkilendirme', 'GenelIslemler@personelYetkiPage')->name('personelYetkilendirme');
+    // Route::get('/gelirgider-tablosu', fn () => view('mudur.gelirGiderTablosu'))->name('gelirGiderTablosu');
 });
 
 ## End Müdür Route İşlemleri ##

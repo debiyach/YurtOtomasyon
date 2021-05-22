@@ -137,19 +137,22 @@
                     <div id="submenu-2" class="collapse submenu" style="">
                         <ul class="nav flex-column">
 
-                            <li class="nav-item">
-                                <a href="{{ route('mudur.ogrenciEkle') }}" class="nav-link @if (Request::segment(2)=='ogrenci-ekle' ) active @endif"><i
-                                        class="fas fa-user-plus"></i>Öğrenci Kayıt</a>
-                            </li>
+                            @if (json_decode(session()->get('personel')->yetki)->ogrenciEkle)
+                                <li class="nav-item">
+                                    <a href="{{ route('mudur.ogrenciEkle') }}" class="nav-link @if (Request::segment(2)=='ogrenci-ekle' ) active @endif"><i class="fas fa-user-plus"></i>Öğrenci Kayıt</a>
+                                </li>
+                            @endif
 
 
                             <li class="nav-item">
                                 <a href="{{ Route('mudur.ogrenciListele') }}" class="nav-link @if (Request::segment(2)=='ogrenci-listele' ) active @endif"><i class="fas fa-clipboard-list"></i>Öğrenci Listesi</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a href="#" class="nav-link @if (Request::segment(2)=='oda-islemleri' ) active @endif"><i class="fas fa-user-plus"></i>Oda İşlemleri</a>
-                            </li>
+                            @if (json_decode(session()->get('personel')->yetki)->binaEkle)
+                                <li class="nav-item">
+                                    <a href="{{ route('mudur.odaSayfasi') }}" class="nav-link @if (Request::segment(2)=='oda-islemleri' ) active @endif"><i class="fas fa-user-plus"></i>Oda İşlemleri</a>
+                                </li>
+                            @endif
 
 
                         </ul>
@@ -191,9 +194,15 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('mudur.gelirGiderTablosu') }}" class="nav-link @if (Request::segment(2)=='istek-talep-list' ) active @endif"><i
-                                class="fas fa-exclamation"></i>Gelir / Gider Tablosu</a>
+                        <a href="{{ route('mudur.binaListele') }}" class="nav-link @if (Request::segment(2)=='izin-talep' ) active @endif"><i
+                                class="far fa-calendar-alt "></i>Bina Görüntüle</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('mudur.ogrenciYoklama') }}" class="nav-link @if (Request::segment(2)=='ogrenci-yoklama' ) active @endif"><i
+                                class="far fa-calendar-alt "></i>Öğrenci Yoklama</a>
+                    </li>
+
 
                     </ul>
             </div>
