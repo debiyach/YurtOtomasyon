@@ -1,20 +1,12 @@
 @extends('layouts.mudur')
 
 @section('content')
-    @include('layouts.components.personel.personelyetkilendirme')
+    @include('layouts.components.personel.personelyetkilendirme2')
 @endsection
 
 @section('script')
 
     <script>
-        if ('{{ json_decode(session()->get('personel')->yetki)->personelYetkiDuzenle }}' != 1) {
-            $('.dashboard-content').remove();
-            writeNot({
-                "type": "error",
-                "message": "Bu sayfayı görüntüleme yetkiniz yok!"
-            });
-        }
-
         $('#accordionExample').hide();
         var item;
 
@@ -27,7 +19,7 @@
 
             $.ajax({
                 type: "get",
-                url: "{{ route('mudur.personelYetkiGetir') }}/" + item,
+                url: "{{ route('personel.personelYetkiGetir') }}/" + item,
 
                 success: function(data) {
                     data = JSON.parse(data);
@@ -55,7 +47,7 @@
                 id: item
             };
 
-            ajaxPostCall('{{ route('mudur.personelSetYetki') }}', data, function(data) {
+            ajaxPostCall('{{ route('personel.personelSetYetki') }}', data, function(data) {
                 writeNot(data);
             });
         });

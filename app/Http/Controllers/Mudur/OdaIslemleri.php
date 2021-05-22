@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Personel;
+namespace App\Http\Controllers\Mudur;
 
 use App\Helpers\Writer;
 use App\Http\Controllers\Controller;

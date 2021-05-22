@@ -2,4 +2,5 @@
 
 @section('content')
     @include('layouts.components.ogrenci.ogrenciekle')
+
 @endsection

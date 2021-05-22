@@ -1,4 +1,4 @@
-@extends('layouts.mudur')
+@extends('layouts.personel')
 
 @section('content')
     <!-- Button trigger modal -->
@@ -245,7 +245,7 @@
 @section('script')
     <script>
         function ogrenciKaldir(id) {
-            ajaxPostCall('{{ route('mudur.odaIslemleri.ogrenciYatakKaldir') }}', {
+            ajaxPostCall('{{ route('personel.odaIslemleri.ogrenciYatakKaldir') }}', {
                 ogrid: id
             }, function(data) {
                 yatakYaz($('#yatakOda2 :selected').val());
@@ -254,13 +254,13 @@
         }
 
         function yatakOgrenciGetir(callback) {
-            $.get('{{ route('mudur.odaIslemleri.yatakOgrenciGetir') }}', function(data) {
+            $.get('{{ route('personel.odaIslemleri.yatakOgrenciGetir') }}', function(data) {
                 callback(data);
             });
         }
         $('#ogrenciYatakEkle').submit(function(e) {
             e.preventDefault();
-            ajaxPostCall('{{ route('mudur.odaIslemleri.yatakOgrenciEkle') }}', $('#ogrenciYatakEkle')
+            ajaxPostCall('{{ route('personel.odaIslemleri.yatakOgrenciEkle') }}', $('#ogrenciYatakEkle')
                 .serialize(),
                 function(data) {
                     yatakYaz($('#yatakOda2 :selected').val());
@@ -288,7 +288,7 @@
 
         function yatakYaz(id) {
             if (id === 'null') return $('#list').html(null);
-            $.get('{{ route('mudur.odaIslemleri.yatakGetir') }}/' + id, function(data) {
+            $.get('{{ route('personel.odaIslemleri.yatakGetir') }}/' + id, function(data) {
                 $('#list').html(data);
             })
         }
@@ -310,7 +310,7 @@
 
         function yatakKatIslem(e, callback) {
             e.preventDefault();
-            $.get('{{ route('mudur.odaIslemleri.odaGetir') }}/' + e.target.value, function(data) {
+            $.get('{{ route('personel.odaIslemleri.odaGetir') }}/' + e.target.value, function(data) {
                 odaOptYaz(data, function(data) {
                     callback(data)
                 });
@@ -333,7 +333,7 @@
 
         $('#yatakEkle').submit(function(e) {
             e.preventDefault();
-            ajaxPostCall('{{ route('mudur.odaIslemleri.yatakEkle') }}', $('#yatakEkle').serialize(), function(
+            ajaxPostCall('{{ route('personel.odaIslemleri.yatakEkle') }}', $('#yatakEkle').serialize(), function(
                 data) {
                 writeNot(data);
             });
@@ -341,7 +341,7 @@
 
         $('#binaEkle').submit(function(e) {
             e.preventDefault();
-            ajaxPostCall('{{ route('mudur.odaIslemleri.binaEkle') }}', $('#binaEkle').serialize(), function(
+            ajaxPostCall('{{ route('personel.odaIslemleri.binaEkle') }}', $('#binaEkle').serialize(), function(
                 data) {
                 writeNot(data);
             });
@@ -350,16 +350,16 @@
 
         $('#katEkle').submit(function(e) {
             e.preventDefault();
-            ajaxPostCall('{{ route('mudur.odaIslemleri.katEkle') }}', $('#katEkle').serialize(), function(
-                data) {
+            ajaxPostCall('{{ route('personel.odaIslemleri.katEkle') }}', $('#katEkle').serialize(), function(
+            data) {
                 writeNot(data);
             });
         });
 
         $('#odaEkle').submit(function(e) {
             e.preventDefault();
-            ajaxPostCall('{{ route('mudur.odaIslemleri.odaEkle') }}', $('#odaEkle').serialize(), function(
-                data) {
+            ajaxPostCall('{{ route('personel.odaIslemleri.odaEkle') }}', $('#odaEkle').serialize(), function(
+            data) {
                 writeNot(data);
             });
         });
@@ -383,7 +383,7 @@
         });
 
         function katGetir(id, callback) {
-            $.get('{{ route('mudur.odaIslemleri.katGetir') }}/' + id, function(data) {
+            $.get('{{ route('personel.odaIslemleri.katGetir') }}/' + id, function(data) {
                 callback(data);
             })
         }
@@ -400,7 +400,7 @@
         }
 
         function binaGetir() {
-            $.get('{{ route('mudur.odaIslemleri.binaGetir') }}', function(data) {
+            $.get('{{ route('personel.odaIslemleri.binaGetir') }}', function(data) {
                 binaOptionYaz(data);
             });
         }
@@ -454,9 +454,6 @@
         $(document).ready(function() {
             binaGetir();
             yatakOgrenciGetir(ogrenciOptAdd);
-            if ({{ $odaId }}) {
-                yatakYaz({{ $odaId }});
-            }
         });
 
     </script>

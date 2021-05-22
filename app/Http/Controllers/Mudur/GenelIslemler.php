@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Personel;
+namespace App\Http\Controllers\Mudur;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;

@@ -2,8 +2,10 @@
 {{-- $binalar => Binalar için, $katlar => Katlar için --}}
 @section('content')
 
-    @include('layouts.components.ogrenci.ogrencilistele')
-
+    <form action="{{ route('mudur.ogrenciYoklamaKaydet') }}" id="yoklama" method="post">
+        @csrf
+        @include('layouts.components.ogrenci.ogrenciYoklama')
+    </form>
 
 
 @endsection
@@ -20,6 +22,14 @@
             alert(this.value);
         });
 
+        // $("#yoklama").submit(function(event) {
+        //     alert("Handler for .submit() called.");
+        //     event.preventDefault();
+        //     console.log($(this).serializeArray());
+        //     return 0;
+        // });
+
+
         var odaNo;
         var table = $('#usersDatatable').DataTable({
             "processing": true,
@@ -27,8 +37,8 @@
             "order": [],
             dom: '<"d-flex justify-content-between"lf>rt<"d-flex justify-content-between"Bip>',
             "lengthMenu": [
-                [10, 15, 25, 50, 100],
-                [10, 15, 25, 50, 100]
+                [10, 15, 25, 50, 100, -1],
+                [10, 15, 25, 50, 100, 'Tümü']
             ],
             "ajax": {
                 url: "{{ route('mudur.datatable.ogrencigetir') }}",
@@ -84,14 +94,11 @@
                 "targets": 9,
                 "data": "id",
                 "mRender": function(data, type, full) {
-                    return '<a class="btn btn-info btn-sm" href={{ route('mudur.ogrenciIslemBilgileri') }}' +
-                        '/' + data + '>' + 'İşlem Bilgileri' + '</a>' +
-                        '<a class="btn btn-warning ml-2 btn-sm" href={{ route('mudur.ogrenciAidatGecmisi') }}' +
-                        '/' + data + '>' + 'Aidat Bilgileir' + '</a>' +
-                        '<a class="btn btn-danger ml-2 btn-sm" href={{ route('mudur.ogrenciYoklamaGecmisi') }}' +
-                        '/' + data + '>' + 'Devamsızlık Bilgileri' + '</a>' +
-                        '<a class="btn btn-success mt-2 btn-sm" href={{ route('mudur.aidatListe') }}' +
-                        '/' + data + '>' + 'Pesin Odeme' + '</a>';
+                    return '<div class="form-check">' +
+                        '<input class="form-check-input" type="radio" id="yoklama' + data +
+                        '" name="yoklama' + data + '" value="devamsiz ' + data + '">' +
+                        '<label for="yoklama' + data + '" class="form-check-label">Devamsız</label>' +
+                        '</div>';
 
                 }
             }],
@@ -162,19 +169,6 @@
                 });
 
 
-                // this.api().columns(8).every(function() {
-                //     var column = this;
-                //     var input = document.createElement("input");
-                //     input.id = "odalar";
-                //     input.className = 'form-control';
-
-                //     $(input).appendTo($(column.footer()).empty())
-                //         .on('change', function() {
-                //             var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                //             column.search(val ? val : '', true, false).draw();
-                //         });
-                // });
 
 
             },

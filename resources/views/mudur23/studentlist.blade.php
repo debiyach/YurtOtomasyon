@@ -1,11 +1,7 @@
 @extends('layouts.mudur')
-{{-- $binalar => Binalar için, $katlar => Katlar için --}}
+
 @section('content')
-
     @include('layouts.components.ogrenci.ogrencilistele')
-
-
-
 @endsection
 
 @section('script')
@@ -13,9 +9,10 @@
     <script>
         $("#odaNo").keyup(function(e) {
             table.draw();
+            alert(this.value);
         });
 
-        $("#katNo").change(function(e) {
+        $("#katNo").keyup(function(e) {
             table.draw();
             alert(this.value);
         });
@@ -31,7 +28,7 @@
                 [10, 15, 25, 50, 100]
             ],
             "ajax": {
-                url: "{{ route('mudur.datatable.ogrencigetir') }}",
+                url: "{{ route('personel.datatable.ogrencigetir') }}",
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
                 },
@@ -84,14 +81,8 @@
                 "targets": 9,
                 "data": "id",
                 "mRender": function(data, type, full) {
-                    return '<a class="btn btn-info btn-sm" href={{ route('mudur.ogrenciIslemBilgileri') }}' +
-                        '/' + data + '>' + 'İşlem Bilgileri' + '</a>' +
-                        '<a class="btn btn-warning ml-2 btn-sm" href={{ route('mudur.ogrenciAidatGecmisi') }}' +
-                        '/' + data + '>' + 'Aidat Bilgileir' + '</a>' +
-                        '<a class="btn btn-danger ml-2 btn-sm" href={{ route('mudur.ogrenciYoklamaGecmisi') }}' +
-                        '/' + data + '>' + 'Devamsızlık Bilgileri' + '</a>' +
-                        '<a class="btn btn-success mt-2 btn-sm" href={{ route('mudur.aidatListe') }}' +
-                        '/' + data + '>' + 'Pesin Odeme' + '</a>';
+                    return '<a class="btn btn-info btn-sm" href={{ route('personel.ogrenciIslemBilgileri') }}' +
+                        '/' + data + '>' + 'İşlem Bilgileri' + '</a>';
 
                 }
             }],
@@ -101,7 +92,7 @@
                 var blok = [];
                 var kat = [];
 
-                var gelenbinalar = @json($binalar);
+                var gelenbinalar;
                 gelenbinalar.forEach(element => {
                     blok.push(element);
                 });

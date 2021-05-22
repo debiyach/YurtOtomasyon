@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Personel\OgrenciIslemleri;
+namespace App\Http\Controllers\Mudur\OgrenciIslemleri;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Personel\OgrenciIslemleri\OgrenciEkle as ReqOgrenciEkle;

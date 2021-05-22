@@ -1,28 +1,28 @@
 @extends('layouts.mudur')
+
 @section('content')
 
-    @include('layouts.components.errors')
-    @include('layouts.components.istektaleplist')
+    @include('layouts.components.ogrenci.ogrenciIslemBilgileri')
+
+    {{-- $islemler olarak erişebilirsin işlemlere --}}
 
 @endsection
-@include('layouts.system.datatableTags')
 
 @section('script')
+
     <script>
         $(document).ready(function() {
-            $('#usersDatatable').DataTable({
+            var table = $('#usersDatatable').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "order": [
-                    [3, "desc"]
-                ],
+                "order": [],
                 dom: '<"d-flex justify-content-between"lf>rt<"d-flex justify-content-between"Bip>',
                 "lengthMenu": [
                     [10, 15, 25, 50, 100],
                     [10, 15, 25, 50, 100]
                 ],
                 "ajax": {
-                    url: "{{ route('mudur.datatable.istekSikayetGetir') }}",
+                    url: "{{ route('mudur.datatable.ogrenciIslemBilgileri') . '/' . Request::segment(3) }}",
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
                     },
@@ -30,70 +30,53 @@
                     type: "POST"
                 },
                 columns: [{
-                        data: 'aciklama'
-                    },
-                    {
-                        data: 'tip'
-                    },
-                    {
-                        data: 'onayDurumu'
+                        data: 'logId'
                     },
                     {
                         data: 'created_at'
-                    },
-
+                    }
                 ],
 
-
-                "columnDefs": [{
-                    "targets": 4,
-                    "data": 'id',
-                    "mRender": function(data, type, full) {
-                        if (full.onayDurumu == 'Bekleniyor') {
-                            return '<a class="btn btn-success btn-sm" href={{ route('mudur.istekTalepOnayla') }}' +
-                                '/' + data + '>' + 'Onayla' + '</a>' +
-                                '<a class="btn ml-4 btn-danger  btn-sm " href={{ route('mudur.istekTalepReddet') }}' +
-                                '/' + data + '>' + 'Onaylama' + '</a>';
-                        } else {
-                            return '<btn class="btn btn-warning btn-sm btn-block">' +
-                                'TAMAMLANDI' + '</btn>';
-
-                        }
-                    }
-                }],
-
-
                 initComplete: function() {
-                    var Tur = ['Istek', 'Şikayet', 'Arıza Bildirimi', 'Izin']
+                    var islemler = [];
 
-                    this.api().columns(1).every(function() {
+                    var islemcesitleri = @json($islemler);
+                    islemcesitleri.forEach(element => {
+                        islemler.push(element);
+                    });
+
+
+                    this.api().columns(0).every(function() {
                         var column = this;
-                        var array = Tur;
+                        var array = islemler;
                         var input = document.createElement("select");
-                        input.id = "tur";
+                        input.id = "islemler";
                         input.className = 'form-control';
-
 
                         var option = document.createElement("option");
                         option.value = '';
                         option.text = 'Tümü';
                         input.appendChild(option);
 
+
                         for (let i = 0; i < array.length; i++) {
                             var option = document.createElement("option");
-                            option.value = array[i];
-                            option.text = array[i];
+                            option.value = array[i].id;
+                            option.text = array[i].tip;
                             input.appendChild(option);
                         }
 
                         //var input = document.createElement('input');
                         $(input).appendTo($(column.footer()).empty())
                             .on('change', function() {
-                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                var val = $.fn.dataTable.util.escapeRegex($(this)
+                                    .val());
 
                                 column.search(val ? val : '', true, false).draw();
                             });
                     });
+
+
 
                 },
 
@@ -121,7 +104,15 @@
                     }
                 ]
             });
+
+            $('#usersDatatable tbody').on('click', 'button', function() {
+                var data = table.row($(this).parents('tr')).data();
+                alert(data[0] + "'s salary is: " + data[5]);
+            });
         });
 
     </script>
+
 @endsection
+
+@include('layouts.system.datatableTags')

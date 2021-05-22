@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Personel\Datatables;
+namespace App\Http\Controllers\Mudur\Datatables;
 
 use App\Http\Controllers\Controller;
 use App\Models\Katlar;

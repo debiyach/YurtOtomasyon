@@ -26,7 +26,7 @@ Route::group(['middleware' => 'mudur', 'as' => 'mudur.', 'prefix' => 'mudur'], f
     Route::get('/cikis-yap', 'LoginController@personelLogout')->name('logout');
     
 
-Route::group(['namespace' => 'Personel'], function () {
+Route::group(['namespace' => 'Mudur'], function () {
 
     Route::group(['namespace' => 'Datatables', 'as' => 'datatable.'], function () {
 
