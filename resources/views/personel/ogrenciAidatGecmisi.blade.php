@@ -41,7 +41,12 @@
             columns: [{
                     data: 'faturaNo',
                     name: 'faturaNo'
-                }, {
+                },
+                {
+                    data: 'aciklama',
+                    name: 'aciklama'
+                },
+                {
                     data: 'yatirilan',
                     name: 'yatirilan'
                 },
@@ -53,59 +58,144 @@
 
             initComplete: function() {
 
+                var veriler = @json($veri);
+                //console.log(veriler);
+
+                this.api().columns(0).every(function() {
+                    var column = this;
+                    var array = veriler;
+                    var input = document.createElement("select");
+                    input.id = "taksit";
+                    input.className = 'form-control';
+
+                    var option = document.createElement("option");
+                    option.value = '';
+                    option.text = 'Tümü';
+                    input.appendChild(option);
+
+                    console.log(array);
+
+                    for (let i = 0; i < array.length; i++) {
+                        var option = document.createElement("option");
+                        option.value = array[i].id;
+                        option.text = (i + 1) + '. Ay Fatura No ' + array[i].id;
+                        input.appendChild(option);
+                    }
+
+                    //var input = document.createElement('input');
+                    $(input).appendTo($(column.footer()).empty())
+                        .on('change', function() {
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                            column.search(val ? val : '', true, false).draw();
+                        });
+                });
+
+
+            },
+
+
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Turkish.json"
+            },
+            buttons: [{
+                    extend: 'excel',
+                    text: 'Excel',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                },
+                {
+                    extend: 'csv',
+                    text: 'CSV'
+                },
+                {
+                    extend: 'copy',
+                    text: 'Kopyala'
+                },
+                {
+                    extend: 'print',
+                    text: 'Yazdır'
+                }
+            ]
+        });
+
+        var table = $('#taksitler').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            dom: '<"d-flex justify-content-between"lf>rt<"d-flex justify-content-between"Bip>',
+            "lengthMenu": [
+                [10, 15, 25, 50, 100],
+                [10, 15, 25, 50, 100]
+            ],
+            "ajax": {
+                url: "{{ route('personel.datatable.aidatListesi') . '/' . Request::segment(3) }}",
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
+                },
+                data: function(d) {
+                    d.katNo = $("#katNo").val();
+                },
+                type: "GET"
+            },
+            columns: [{
+                    data: 'mevcutAy',
+                    name: 'mevcutAy'
+                },
+                {
+                    data: 'durum',
+                    name: 'durum'
+                },
+                {
+                    data: 'yatirilacak',
+                    name: 'yatirilacak'
+                }
+            ],
+
+            initComplete: function() {
+
                 //console.log(blok);
 
-                //var blok = ['1', '2']
+                var tur = [{
+                        'id': 1,
+                        'tur': 'Tamamlanan Taksitler'
+                    },
+                    {
+                        'id': 0,
+                        'tur': 'Devam Eden Taksitler'
+                    }
+                ]
                 //var kat = ['1', '2', '3', '4'];
 
-                // this.api().columns(6).every(function() {
-                //     var column = this;
-                //     var array = blok;
-                //     var input = document.createElement("select");
-                //     input.id = "blok";
-                //     input.className = 'form-control';
+                this.api().columns(1).every(function() {
+                    var column = this;
+                    var array = tur;
+                    var input = document.createElement("select");
+                    input.id = "blok";
+                    input.className = 'form-control';
 
-                //     var option = document.createElement("option");
-                //     option.value = '';
-                //     option.text = 'Tümü';
-                //     input.appendChild(option);
-
-
-                //     for (let i = 0; i < array.length; i++) {
-                //         var option = document.createElement("option");
-                //         option.value = array[i].id;
-                //         option.text = array[i].binaAdi;
-                //         input.appendChild(option);
-                //     }
-
-                //     //var input = document.createElement('input');
-                //     $(input).appendTo($(column.footer()).empty())
-                //         .on('change', function() {
-                //             var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                //             column.search(val ? val : '', true, false).draw();
-                //         });
-                // });
+                    var option = document.createElement("option");
+                    option.value = '';
+                    option.text = 'Tümü';
+                    input.appendChild(option);
 
 
-                // this.api().columns(8).every(function() {
-                //     var that = this;
-                //     var sonuc;
+                    for (let i = 0; i < array.length; i++) {
+                        var option = document.createElement("option");
+                        option.value = array[i].id;
+                        option.text = array[i].tur;
+                        input.appendChild(option);
+                    }
 
-                //     odaNo = this.value;
+                    //var input = document.createElement('input');
+                    $(input).appendTo($(column.footer()).empty())
+                        .on('change', function() {
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
 
-                //     $('input', this.footer()).on('change', function() {
-                //         sonuc = this.value;
-                //         alert(sonuc);
-                //         if (that.search() !== this.value) {
-                //             that
-                //                 .search(this.value)
-                //                 .draw();
-                //         }
-                //     });
-
-                // });
-
+                            column.search(val ? val : '', true, false).draw();
+                        });
+                });
 
 
             },

@@ -91,30 +91,17 @@
             ],
 
             "columnDefs": [{
-                    "targets": 9,
-                    "data": "id",
-                    "mRender": function(data, type, full) {
-                        return '<div class="form-check">' +
-                            '<input class="form-check-input" type="radio" id="yoklama' + data +
-                            '" name="yoklama' + data + '" value="izinli ' + data + '">' +
-                            '<label for="yoklama' + data + '" class="form-check-label">İzinli</label>' +
-                            '</div>'
+                "targets": 9,
+                "data": "id",
+                "mRender": function(data, type, full) {
+                    return '<div class="form-check">' +
+                        '<input class="form-check-input" type="radio" id="yoklama' + data +
+                        '" name="yoklama' + data + '" value="devamsiz ' + data + '">' +
+                        '<label for="yoklama' + data + '" class="form-check-label">Devamsız</label>' +
+                        '</div>';
 
-                    }
-                },
-                {
-                    "targets": 10,
-                    "data": "id",
-                    "mRender": function(data, type, full) {
-                        return '<div class="form-check">' +
-                            '<input class="form-check-input" type="radio" id="yoklama' + data +
-                            '" name="yoklama' + data + '" value="devamsiz ' + data + '">' +
-                            '<label for="yoklama' + data + '" class="form-check-label">Devamsız</label>' +
-                            '</div>';
-
-                    }
                 }
-            ],
+            }],
 
 
             initComplete: function() {

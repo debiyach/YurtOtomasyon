@@ -1,6 +1,7 @@
 @extends('layouts.personel')
 @section('content')
 
+    @include('layouts.components.errors')
     @include('layouts.components.istektaleplist')
 
 @endsection
@@ -12,7 +13,9 @@
             $('#usersDatatable').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "order": [],
+                "order": [
+                    [3, "desc"]
+                ],
                 dom: '<"d-flex justify-content-between"lf>rt<"d-flex justify-content-between"Bip>',
                 "lengthMenu": [
                     [10, 15, 25, 50, 100],
@@ -44,18 +47,24 @@
 
                 "columnDefs": [{
                     "targets": 4,
-                    "data": "id",
+                    "data": 'id',
                     "mRender": function(data, type, full) {
-                        return '<a class="btn btn-success btn-sm" href={{ route('personel.ogrenciIslemBilgileri') }}' +
-                            '/' + data + '>' + 'Onayla' + '</a>' +
-                            '<a class="btn ml-4 btn-warning  btn-sm " href={{ route('personel.ogrenciIslemBilgileri') }}' +
-                            '/' + data + '>' + 'Değerlendirmeye Al' + '</a>';
+                        if (full.onayDurumu == 'Bekleniyor') {
+                            return '<a class="btn btn-success btn-sm" href={{ route('personel.istekTalepOnayla') }}' +
+                                '/' + data + '>' + 'Onayla' + '</a>' +
+                                '<a class="btn ml-4 btn-danger  btn-sm " href={{ route('personel.istekTalepReddet') }}' +
+                                '/' + data + '>' + 'Onaylama' + '</a>';
+                        } else {
+                            return '<btn class="btn btn-warning btn-sm btn-block">' +
+                                'TAMAMLANDI' + '</btn>';
+
+                        }
                     }
                 }],
 
 
                 initComplete: function() {
-                    var Tur = ['Istek', 'Şikayet', 'Arıza Bildirimi']
+                    var Tur = ['Istek', 'Şikayet', 'Arıza Bildirimi', 'Izin']
 
                     this.api().columns(1).every(function() {
                         var column = this;

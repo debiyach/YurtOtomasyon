@@ -119,4 +119,24 @@ class TempTable extends Controller
             ->toJson();
 
     }
+
+    // öğrenci aidat listesi 
+    public function aidatListesi($id)
+    {
+
+        $users = Aidat::where('ogrenciId', $id);
+        return DataTables::eloquent($users)
+        ->editColumn('durum', function (Aidat $user) {
+            if($user->durum==1){
+                return 'Tamamlandı';
+            }else{
+                return 'Devam Ediyor';
+            }
+        })
+        ->editColumn('created_at', function (Aidat $user) {
+            return $user->created_at->format('d-m-Y') ?? '';
+        })
+            ->toJson();
+
+    }
 }

@@ -65,6 +65,8 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
             Route::post('/ogrenci-aidat/{id??}', 'TempTable@ogrenciAidatGoruntule')->name('ogrenciAidatGoruntule');
             Route::post('/ogrenci-yoklama-goster/{id??}', 'TempTable@ogrenciYoklamaGoster')->name('ogrenciYoklamaGoster');
 
+            Route::get('/ogrenci-yoklama-goster/{id??}', 'TempTable@aidatListesi')->name('aidatListesi');
+
             Route::post('/personel-islem-bilgileri/{id??}', 'TempTable@personelIslemBilgileri')->name('personelIslemBilgileri');
         });
 
@@ -82,6 +84,7 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::post('/bina-goruntu-getir', 'GenelIslemler@binaGetir')->name('binaGetir');
 
         Route::post('/ogrenci-yoklama', 'GenelIslemler@ogrenciYoklamaKaydet')->name('ogrenciYoklamaKaydet');
+        Route::post('/aidat-ode', 'GenelIslemler@pesinOde')->name('pesinOde');
 
 
         ## END GENEL POST İSTEKLERİ ##
@@ -110,15 +113,22 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         Route::get('/personel-islem-bilgileri/{id??}', 'GenelIslemler@personelIslemBilgileri')->name('personelIslemBilgileri');
         Route::get('/bina-goruntule', 'GenelIslemler@binaListele')->name('binaListele');
         Route::get('/ogrenci-yoklama', 'GenelIslemler@ogrenciYoklama')->name('ogrenciYoklama');
+        
+        Route::get('/aidat-liste/{id??}', 'GenelIslemler@aidatListe')->name('aidatListe');
+
+        Route::get('/pesin-odeme/{id??}',  'GenelIslemler@pesinOdeme')->name('pesinOdeme');
 
         
 
         
         
-        Route::get('/ogrenci-aidat-gecmisi/{id??}', fn()=>view('personel.ogrenciAidatGecmisi'))->name('ogrenciAidatGecmisi');
+        Route::get('/ogrenci-aidat-gecmisi/{id??}', 'GenelIslemler@aidatAidatGecmisiListe')->name('ogrenciAidatGecmisi');
         Route::get('/ogrenci-yoklama-gecmisi/{id??}', fn()=>view('personel.ogrenciYoklamaGecmisi'))->name('ogrenciYoklamaGecmisi');
 
         Route::get('/personel-aidat-gecmisi', fn()=>view('personel.personelAidatGecmisi'))->name('personelAidatGecmisi');
+        Route::get('/personel-istek-onayla/{id??}', 'GenelIslemler@istekTalepOnayla')->name('istekTalepOnayla');
+        Route::get('/personel-istek-reddet/{id??}', 'GenelIslemler@istekTalepReddet')->name('istekTalepReddet');
+
 
 
 

@@ -89,7 +89,9 @@
                         '<a class="btn btn-warning ml-2 btn-sm" href={{ route('personel.ogrenciAidatGecmisi') }}' +
                         '/' + data + '>' + 'Aidat Bilgileir' + '</a>' +
                         '<a class="btn btn-danger ml-2 btn-sm" href={{ route('personel.ogrenciYoklamaGecmisi') }}' +
-                        '/' + data + '>' + 'Devamsızlık Bilgileri' + '</a>';
+                        '/' + data + '>' + 'Devamsızlık Bilgileri' + '</a>' +
+                        '<a class="btn btn-success mt-2 btn-sm" href={{ route('personel.aidatListe') }}' +
+                        '/' + data + '>' + 'Pesin Odeme' + '</a>';
 
                 }
             }],

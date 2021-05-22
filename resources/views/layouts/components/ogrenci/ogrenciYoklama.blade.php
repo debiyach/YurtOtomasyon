@@ -40,7 +40,6 @@
                         <th>Kat</th>
                         <th>Oda No</th>
                         <th>İzinli</th>
-                        <th>Devamsız</th>
                     </tr>
                 </thead>
                 <tfoot>

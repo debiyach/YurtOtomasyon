@@ -8,11 +8,14 @@ use App\Http\Requests\Personel\IzinTalep;
 use App\Http\Requests\Personel\PersonelEkle;
 use App\Mail\SendPasswordMail;
 use App\Models\Binalar;
+use App\Models\Aidat;
 use App\Models\IslemCesitleri;
 use App\Models\Katlar;
+use App\Models\OgrenciAidatGecmisi;
 use App\Models\Odalar;
 use App\Models\Yataklar;
 use App\Models\Yoklama;
+use App\Models\Ogrenciisteksikayet;
 use App\Models\Personel;
 use App\Models\Ogrenci;
 use App\Models\PersonelIslemKayit;
@@ -173,20 +176,43 @@ class GenelIslemler extends Controller
         if(count($bilgi)==3){
             return back()->with('error','hata var');
         }
-
+        
         foreach ($sonuc as $row ) {
             $deger = explode(" ",$row);
             $yoklama = new Yoklama;
             $yoklama->kurumId = session()->get('personel')->kurumId;
             $yoklama->ogrenciId = $deger[1];
             $yoklama->created_at = $tarih;
+
+            $yoklama->aciklama = ''.$tarih.' tarihinde '. $personelisim.' tarafından alınan yoklamada devamsız kayıt edildiniz.';
+            $yoklama->yokla = 0;
+
+            $gelendeger=[];
             if ($deger[0]=='izinli') {
+
                 $yoklama->yokla = 1;
                 $yoklama->aciklama = ''.$tarih.' tarihinde '.$personelisim.' tarafından alınan yoklamada izinli kayıt edildiniz.';
+            
             }else{
-                $yoklama->yokla = 0;
-                $yoklama->aciklama = ''.$tarih.' tarihinde '. $personelisim.' tarafından alınan yoklamada devamsız kayıt edildiniz.';
+
+                $kontrol = Ogrenciisteksikayet::where('ogrenciId',$deger[1])->where('tip','İzin')->where('onayDurumu','Kabul Edildi')->get();
+                if($kontrol){
+                    foreach ($kontrol as $row => $item) {
+                        
+                        if($tarih >= $item->izinBaslangic && $tarih <= $item->izinBitis){
+                            $yoklama->aciklama = ''.$tarih.' tarihinde '.$personelisim.' tarafından alınan yoklamada izinli kayıt edildiniz.';
+                            $yoklama->yokla = 1;
+                        }else{
+                            $yoklama->aciklama = ''.$tarih.' tarihinde '. $personelisim.' tarafından alınan yoklamada devamsız kayıt edildiniz.';
+                            $yoklama->yokla = 0;
+                        }
+                    }
+                }
+                
+                // $yoklama->yokla = 0;
+                // $yoklama->aciklama = ''.$tarih.' tarihinde '. $personelisim.' tarafından alınan yoklamada devamsız kayıt edildiniz.';
             }
+
             $result = $yoklama->save();
         }
         
@@ -195,5 +221,82 @@ class GenelIslemler extends Controller
         
     }
 
+    public function aidatListe($id){
+        $data['aidats'] = Aidat::where('ogrenciId', $id)->where('yatirilacak','>',0)->get();
+        return view('personel.aidatListe', $data);
+    }
+
+    public function aidatAidatGecmisiListe($id){
+        $data['veri'] = Aidat::where('ogrenciId',$id)->get();
+        return view('personel.ogrenciAidatGecmisi', $data);
+    }
+
+    public function pesinOdeme($id){
+        $data['aidat'] = Aidat::find($id);
+        return view('personel.pesinOdeme',$data);
+    }
+
+    public function pesinOde(Request $request){
+        $personel['ad'] = session()->get('personel')->ad;
+        $personel['soyad'] = session()->get('personel')->soyad;
+        $gecmis = new OgrenciAidatGecmisi;
+        $yatir = Aidat::find($request->aidatId);
+        //$kalanTaksit = ($yatir->yatirilacak == $request->para) ? 1 : 0;
+        $yatir->yatirilacak = $yatir->yatirilacak - $request->para;
+        $yatir->yatirilan += $request->para;
+        if($yatir->yatirilacak == 0){
+            $yatir->durum = 1;
+            $gecmis->aciklama = ''.$request->aidatId.' Numaralı Fatura için  '.$personel['ad'].' '.$personel['soyad'].' gözetiminde peşin '.$request->para.' ucret yatırılmış ve '.$yatir->mevcutAy.'. taksit ödemesi tamamlanmıştır';
+        }else{
+            $yatir->durum = 0;
+            $gecmis->aciklama = ''.$request->aidatId.' Numaralı Fatura için  '.$personel['ad'].' '.$personel['soyad'].' gözetiminde peşin '.$request->para.' ucret yatırılmış ve  geriye ödenmesi gereken '.$yatir->yatirilacak.' tutarında ucret kalmıştır.';
+
+        }
+        //$yatir->durum = $kalanTaksit;
+        $yatir->updated_at = now();
+        //$ogrenci = Ogrenci::find($yatir->ogrenciId);
+        //$ogrenci->aidat -= $request->para;
+
+        $gecmis->ogrenciId = $yatir->ogrenciId;
+        $gecmis->kurumId = $yatir->kurumId;
+        $gecmis->faturaNo = $request->aidatId;
+        $gecmis->yatirilan = $request->para;
+        $gecmis->created_at = now();
+        $gecmis->updated_at = now();
+
+
+        $result = $yatir->save() && $gecmis->save();
+
+        return $result ? redirect()->route('personel.aidatListe',$yatir->ogrenciId)->withErrors(['Ödeme işleminiz gerçekleşti']) : redirect()->route('personel.aidatListe',$yatir->ogrenciId)->withErrors(['Ödeme işleminiz sırasında hata alındı']);
+    }
+
+    public function istekTalepOnayla($id){
+
+        $istek = Ogrenciisteksikayet::find($id);
+        $baslangicTarihi = date('Y-m-d',strtotime($istek->izinBaslangic));
+        $bitisTarihi = date('Y-m-d',strtotime($istek->izinBitis));
+        
+        // $simdi = date('Y-m-d',strtotime("2021-05-15"));
+
+        // if($simdi > $baslangicTarihi && $simdi < $bitisTarihi){
+        //     return 'Baslangic = '. $baslangicTarihi.'<br>'. 'Bitis Tarihi = '.$bitisTarihi.'<br>'.' simdiki zaman = '. $simdi;
+        // }else{
+        //     return 'Baslangic = '. $baslangicTarihi.'<br>'. 'Bitis Tarihi = '.$bitisTarihi.'<br>'.' simdiki zaman = '. $simdi .'bu nasıl çalışıyor aq';
+        // }   
+
+        $istek->onayDurumu = "Kabul Edildi";
+        $result = $istek->save();
+        return $result ? redirect()->route('personel.istekTalepList')->withErrors(['İşlem Başarıyla Onaylandı']) : redirect()->route('personel.istekTalepList',$yatir->ogrenciId)->withErrors(['İşlem sırasında bir sorunla karşılaşıldı.']);
+    }
+
+    public function istekTalepReddet($id){
+        $istek = Ogrenciisteksikayet::find($id);
+        $baslangicTarihi = date('Y-m-d',strtotime($istek->izinBaslangic));
+        $bitisTarihi = date('Y-m-d',strtotime($istek->izinBitis));
+        
+        $istek->onayDurumu = "Reddedildi";
+        $result = $istek->save();
+        return $result ? redirect()->route('personel.istekTalepList')->withErrors(['İşlem Başarıyla Reddedildi']) : redirect()->route('personel.istekTalepList',$yatir->ogrenciId)->withErrors(['İşlem sırasında bir sorunla karşılaşıldı.']);
+    }
 
 }
