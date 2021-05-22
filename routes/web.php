@@ -19,10 +19,14 @@ Route::get('personel/d', fn () => view('test'));
 ## Müdür Route İşlemleri ##
 
 Route::group(['middleware' => 'mudur', 'as' => 'mudur.', 'prefix' => 'mudur'], function () {
+    
     Route::get('/', function () {
         return view('mudur.index');
     })->name('index');
     Route::get('/cikis-yap', 'LoginController@personelLogout')->name('logout');
+    
+
+Route::group(['namespace' => 'Personel'], function () {
 
     Route::group(['namespace' => 'Datatables', 'as' => 'datatable.'], function () {
 
@@ -143,6 +147,7 @@ Route::group(['middleware' => 'mudur', 'as' => 'mudur.', 'prefix' => 'mudur'], f
     // Route::get('/istek-talep-list', fn () => view('mudur.istektaleplist'))->name('istekTalepList');
     // Route::get('/personel-yetkilendirme', 'GenelIslemler@personelYetkiPage')->name('personelYetkilendirme');
     // Route::get('/gelirgider-tablosu', fn () => view('mudur.gelirGiderTablosu'))->name('gelirGiderTablosu');
+    });
 });
 
 ## End Müdür Route İşlemleri ##
