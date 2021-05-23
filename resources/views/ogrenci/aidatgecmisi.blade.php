@@ -8,7 +8,41 @@
 
 @section('script')
 
-    <script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.0.1/jquery.payment.min.js">
+    </script>
+    <script type="text/javascript">
+        var tarih;
+        $(function() {
+
+            $('input[name="tarih"]').daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: 'Clear'
+                }
+            });
+
+            $('input[name="tarih"]').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format(
+                    'MM/DD/YYYY'));
+                tarih = $('#tarih').val();
+                console.log(tarih);
+                table.draw();
+            });
+
+            $('input[name="tarih"]').on('cancel.daterangepicker', function(ev, picker) {
+                $(this).val('');
+                tarih = '';
+                table.draw();
+            });
+
+
+
+        });
+
         var table = $('#usersDatatable').DataTable({
             "processing": true,
             "serverSide": true,
@@ -21,12 +55,13 @@
                 [10, 15, 25, 50, 100]
             ],
             "ajax": {
-                url: "{{ route('ogrenci.aidatGoruntule') . '/' . session()->get('ogrenci')->id }}",
+                url: "{{ route('ogrenci.aidatGoruntule') }}",
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
                 },
                 data: function(d) {
-                    d.katNo = $("#katNo").val();
+                    d.katNo = $("#katNo").val();                    
+                    d.tarih = tarih;
                 },
                 type: "GET"
             },
@@ -51,7 +86,6 @@
             initComplete: function() {
 
                 var veriler = @json($veri);
-                //console.log(veriler);
 
 
 
@@ -66,8 +100,6 @@
                     option.value = '';
                     option.text = 'Tümü';
                     input.appendChild(option);
-
-                    console.log(array);
 
                     for (let i = 0; i < array.length; i++) {
                         var option = document.createElement("option");
@@ -114,7 +146,7 @@
             ]
         });
 
-        var table = $('#taksitler').DataTable({
+        var table2 = $('#taksitler').DataTable({
             "processing": true,
             "serverSide": true,
             "order": [],
@@ -124,12 +156,13 @@
                 [10, 15, 25, 50, 100]
             ],
             "ajax": {
-                url: "{{ route('ogrenci.aidatListesi') . '/' . session()->get('ogrenci')->id }}",
+                url: "{{ route('ogrenci.aidatListesi') }}",
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}', // Bu alanı elleme
                 },
                 data: function(d) {
                     d.katNo = $("#katNo").val();
+                    d.id = {{ session()->get('ogrenci')->id }};
                 },
                 type: "GET"
             },
@@ -149,7 +182,6 @@
 
             initComplete: function() {
 
-                //console.log(blok);
 
                 var tur = [{
                         'id': 1,
@@ -222,7 +254,6 @@
 
         $('#usersDatatable tbody').on('click', 'button', function() {
             var data = table.row($(this).parents('tr')).data();
-            alert(data[0] + "'s salary is: " + data[5]);
         });
         $(document).ready(function() {
             table.draw();
@@ -230,7 +261,6 @@
 
         $('#taksitler tbody').on('click', 'button', function() {
             var data = table.row($(this).parents('tr')).data();
-            alert(data[0] + "'s salary is: " + data[5]);
         });
         $(document).ready(function() {
             table.draw();

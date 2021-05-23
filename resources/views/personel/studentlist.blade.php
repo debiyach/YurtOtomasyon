@@ -17,7 +17,6 @@
 
         $("#katNo").change(function(e) {
             table.draw();
-            alert(this.value);
         });
 
         var odaNo;
@@ -84,13 +83,13 @@
                 "targets": 9,
                 "data": "id",
                 "mRender": function(data, type, full) {
-                    return '<a class="btn btn-info btn-sm" href={{ route('personel.ogrenciIslemBilgileri') }}' +
+                    return '<a class="btn btn-info btn-sm col-lg-12" href={{ route('personel.ogrenciIslemBilgileri') }}' +
                         '/' + data + '>' + 'İşlem Bilgileri' + '</a>' +
-                        '<a class="btn btn-warning ml-2 btn-sm" href={{ route('personel.ogrenciAidatGecmisi') }}' +
-                        '/' + data + '>' + 'Aidat Bilgileir' + '</a>' +
-                        '<a class="btn btn-danger ml-2 btn-sm" href={{ route('personel.ogrenciYoklamaGecmisi') }}' +
+                        '<a class="btn btn-warning mt-2 btn-sm col-lg-12" href={{ route('personel.ogrenciAidatGecmisi') }}' +
+                        '/' + data + '>' + 'Aidat Bilgileri' + '</a>' +
+                        '<a class="btn btn-danger mt-2 btn-sm col-lg-12" href={{ route('personel.ogrenciYoklamaGecmisi') }}' +
                         '/' + data + '>' + 'Devamsızlık Bilgileri' + '</a>' +
-                        '<a class="btn btn-success mt-2 btn-sm" href={{ route('personel.aidatListe') }}' +
+                        '<a class="btn btn-success mt-2 btn-sm  col-lg-12" href={{ route('personel.aidatListe') }}' +
                         '/' + data + '>' + 'Pesin Odeme' + '</a>';
 
                 }
@@ -151,7 +150,6 @@
 
                     $('input', this.footer()).on('change', function() {
                         sonuc = this.value;
-                        alert(sonuc);
                         if (that.search() !== this.value) {
                             that
                                 .search(this.value)
@@ -160,22 +158,6 @@
                     });
 
                 });
-
-
-                // this.api().columns(8).every(function() {
-                //     var column = this;
-                //     var input = document.createElement("input");
-                //     input.id = "odalar";
-                //     input.className = 'form-control';
-
-                //     $(input).appendTo($(column.footer()).empty())
-                //         .on('change', function() {
-                //             var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                //             column.search(val ? val : '', true, false).draw();
-                //         });
-                // });
-
 
             },
 
@@ -207,7 +189,6 @@
 
         $('#usersDatatable tbody').on('click', 'button', function() {
             var data = table.row($(this).parents('tr')).data();
-            alert(data[0] + "'s salary is: " + data[5]);
         });
         $(document).ready(function() {
             table.draw();

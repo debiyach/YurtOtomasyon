@@ -51,4 +51,10 @@ class Personel extends Model
     protected $table = 'personel';
     protected $fillable = ['ad','soyad','telNo','apiToken','yetki'];
     use HasFactory;
+
+
+    public function personelToKurum()
+    {
+        return $this->hasOne('\App\Models\Kurum', 'id', 'kurumId');
+    }
 }

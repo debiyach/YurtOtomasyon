@@ -34,14 +34,14 @@ Route::group(['namespace' => 'Mudur'], function () {
         Route::post('/get-student', 'TempTable@getStudents')->name('ogrencigetir');
         Route::post('/get-personel', 'TempTable@getPersonels')->name('personelgetir');
         Route::post('/get-istek-sikayet', 'TempTable@getIstekSikayet')->name('istekSikayetGetir'); //isteksiyaet
-        Route::post('/ogrenci-islem-bilgileri/{id??}', 'TempTable@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
-        Route::post('/ogrenci-aidat/{id??}', 'TempTable@ogrenciAidatGoruntule')->name('ogrenciAidatGoruntule');
+        Route::post('/ogrenci-islem-bilgileri', 'TempTable@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
+        Route::post('/ogrenci-aidat', 'TempTable@ogrenciAidatGoruntule')->name('ogrenciAidatGoruntule');
         
-        Route::post('/ogrenci-yoklama-goster/{id??}', 'TempTable@ogrenciYoklamaGoster')->name('ogrenciYoklamaGoster');
+        Route::post('/ogrenci-yoklama-goster', 'TempTable@ogrenciYoklamaGoster')->name('ogrenciYoklamaGoster');
 
         Route::get('/ogrenci-yoklama-goster/{id??}', 'TempTable@aidatListesi')->name('aidatListesi');
 
-        Route::post('/personel-islem-bilgileri/{id??}', 'TempTable@personelIslemBilgileri')->name('personelIslemBilgileri');
+        Route::post('/personel-islem-bilgileri', 'TempTable@personelIslemBilgileri')->name('personelIslemBilgileri');
 
     });
 
@@ -176,13 +176,13 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
             Route::post('/get-student', 'TempTable@getStudents')->name('ogrencigetir');
             Route::post('/get-personel', 'TempTable@getPersonels')->name('personelgetir');
             Route::post('/get-istek-sikayet', 'TempTable@getIstekSikayet')->name('istekSikayetGetir'); //isteksiyaet
-            Route::post('/ogrenci-islem-bilgileri/{id??}', 'TempTable@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
-            Route::post('/ogrenci-aidat/{id??}', 'TempTable@ogrenciAidatGoruntule')->name('ogrenciAidatGoruntule');
-            Route::post('/ogrenci-yoklama-goster/{id??}', 'TempTable@ogrenciYoklamaGoster')->name('ogrenciYoklamaGoster');
+            Route::post('/ogrenci-islem-bilgileri', 'TempTable@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
+            Route::post('/ogrenci-aidat', 'TempTable@ogrenciAidatGoruntule')->name('ogrenciAidatGoruntule');
+            Route::post('/ogrenci-yoklama-goster', 'TempTable@ogrenciYoklamaGoster')->name('ogrenciYoklamaGoster');
 
             Route::get('/ogrenci-yoklama-goster/{id??}', 'TempTable@aidatListesi')->name('aidatListesi');
 
-            Route::post('/personel-islem-bilgileri/{id??}', 'TempTable@personelIslemBilgileri')->name('personelIslemBilgileri');
+            Route::post('/personel-islem-bilgileri', 'TempTable@personelIslemBilgileri')->name('personelIslemBilgileri');
         });
 
         ## END DATATABLES ##
@@ -319,8 +319,8 @@ Route::group(['middleware' => 'ogrenci', 'as' => 'ogrenci.', 'prefix' => 'ogrenc
         
 
         // Get Method
-        Route::get('/aidat-goruntule/{id??}', 'TempTable@aidatGoruntule')->name('aidatGoruntule');
-        Route::get('/aidat-listele/{id??}', 'TempTable@aidatListesi')->name('aidatListesi');
+        Route::get('/aidat-goruntule', 'TempTable@aidatGoruntule')->name('aidatGoruntule');
+        Route::get('/aidat-listele', 'TempTable@aidatListesi')->name('aidatListesi');
         Route::get('/aidat-odeme/{id??}', 'GenelIslemler@aidatOdeme')->name('aidatOdeme');
         Route::get('/aidat-liste', 'GenelIslemler@aidatListe')->name('aidatListele');
         Route::get('/aidat-gecmisi','GenelIslemler@aidatGecmisi')->name('aidatGecmis'); 

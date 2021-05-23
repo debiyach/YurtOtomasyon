@@ -22,7 +22,7 @@ class LoginController extends Controller
 
         // Eğer form doğruysa
 
-        $personel = Personel::where('mail','=',$request->email)->first(); // mail adresinin varlığını kontrol ediyoruz.
+        $personel = Personel::where('mail','=',$request->email)->with('personelToKurum')->first(); // mail adresinin varlığını kontrol ediyoruz.
         if ($personel) if(Hash::check($request->password,$personel->sifre)){ // şifreleri kontrol ediyoruz.
             $request->session()->put('personel',$personel); // sessiona atıyoruz.
             Logs::personelLog(\App\Helpers\Writer::LogIn);
@@ -59,7 +59,7 @@ class LoginController extends Controller
 
         // Eğer form doğruysa
 
-        $ogrenci = Ogrenci::where('mail','=',$request->email)->first(); // mail adresinin varlığını kontrol ediyoruz.
+        $ogrenci = Ogrenci::where('mail','=',$request->email)->with('ogrenciToKurum')->first(); // mail adresinin varlığını kontrol ediyoruz.
         if ($ogrenci){
             if(Hash::check($request->password,$ogrenci->sifre)){ // şifreleri kontrol ediyoruz.
                 $request->session()->put('ogrenci',$ogrenci); // sessiona atıyoruz.

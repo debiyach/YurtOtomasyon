@@ -107,7 +107,7 @@
                             <li class="nav-item">
                             <li class="nav-item">
                                 <div class="baslik">Kurum</div>
-                                <div>{{ session()->get('ogrenci')->kurumId }}</div>
+                                <div>{{ session()->get('ogrenci')->ogrenciToKurum->kurumAdi}}</div>
                             </li>
                             </li>
 

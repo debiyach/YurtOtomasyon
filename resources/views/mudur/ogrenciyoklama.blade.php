@@ -19,15 +19,7 @@
 
         $("#katNo").change(function(e) {
             table.draw();
-            alert(this.value);
         });
-
-        // $("#yoklama").submit(function(event) {
-        //     alert("Handler for .submit() called.");
-        //     event.preventDefault();
-        //     console.log($(this).serializeArray());
-        //     return 0;
-        // });
 
 
         var odaNo;
@@ -158,7 +150,6 @@
 
                     $('input', this.footer()).on('change', function() {
                         sonuc = this.value;
-                        alert(sonuc);
                         if (that.search() !== this.value) {
                             that
                                 .search(this.value)
@@ -201,7 +192,6 @@
 
         $('#usersDatatable tbody').on('click', 'button', function() {
             var data = table.row($(this).parents('tr')).data();
-            alert(data[0] + "'s salary is: " + data[5]);
         });
         $(document).ready(function() {
             table.draw();

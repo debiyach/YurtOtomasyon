@@ -47,7 +47,6 @@
             //var deger = this.attr('checked');
             var durum = $(this).is(':checked');
             var deger = $(this).attr('id');
-            //alert(deger + ' ' + durum + ' adlı kullanıcı' + item);
 
             var data = {
                 durum: durum,

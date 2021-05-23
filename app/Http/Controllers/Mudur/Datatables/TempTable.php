@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Mudur\Datatables;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Katlar;
 use App\Models\Odalar;
@@ -19,9 +20,17 @@ use Yajra\DataTables\Facades\DataTables;
 class TempTable extends Controller
 {
 
-    public function ogrenciYoklamaGoster($id = null)
+    public function ogrenciYoklamaGoster(Request $request)
     {
-        $users = Yoklama::where('kurumId', session()->get('personel')->kurumId)->where('ogrenciId', $id);
+        $users = Yoklama::where('kurumId', session()->get('personel')->kurumId);
+
+        if($request->has('id')) $users->where('ogrenciId', $request->id);
+
+        if($request->has('tarih') && !empty($request->tarih)){
+            $tarih = explode(' - ', $request->tarih);
+            $users->whereBetween('created_at', [ Helper::firstMonthToDate($tarih[0]),  Helper::firstMonthToDate($tarih[1])]);
+        }
+        
         return DataTables::eloquent($users)
         ->editColumn('yokla', function (Yoklama $user) {
             if($user->yokla){
@@ -36,9 +45,16 @@ class TempTable extends Controller
             ->toJson();
     }
 
-    public function ogrenciIslemBilgileri($id = null)
+    public function ogrenciIslemBilgileri(Request $request)
     {
-        $users = Ogrencilog::where('kurumId', session()->get('personel')->kurumId)->where('ogrenciId', $id);
+        $users = Ogrencilog::where('kurumId', session()->get('personel')->kurumId);
+        if($request->has('id')) $users->where('ogrenciId', $request->id);
+
+        if($request->has('tarih') && !empty($request->tarih)){
+            $tarih = explode(' - ', $request->tarih);
+            $users->whereBetween('created_at', [ Helper::firstMonthToDate($tarih[0]),  Helper::firstMonthToDate($tarih[1])]);
+        }
+        
         return DataTables::eloquent($users)
             ->editColumn('logId', function (Ogrencilog $user) {
                 return $user->ogrenciToLog->tip ?? '';
@@ -49,9 +65,16 @@ class TempTable extends Controller
             ->toJson();
     }
 
-    public function personelIslemBilgileri($id = null)
+    public function personelIslemBilgileri(Request $request)
     {
-        $users = PersonelIslemKayit::where('kurumId', session()->get('personel')->kurumId)->where('personelId', $id);
+        $users = PersonelIslemKayit::where('kurumId', session()->get('personel')->kurumId);
+        if($request->has('id')) $users->where('personelId', $request->id);
+
+        if($request->has('tarih') && !empty($request->tarih)){
+            $tarih = explode(' - ', $request->tarih);
+            $users->whereBetween('created_at', [ Helper::firstMonthToDate($tarih[0]),  Helper::firstMonthToDate($tarih[1])]);
+        }
+
         return DataTables::eloquent($users)
             ->editColumn('logId', function (PersonelIslemKayit $user) {
                 return $user->personelToLog->tip ?? '';
@@ -108,6 +131,10 @@ class TempTable extends Controller
     public function getIstekSikayet(Request $request)
     {
         $data = OgrenciIstekSikayet::where('kurumId', session()->get('personel')->kurumId);
+        if($request->has('tarih') && !empty($request->tarih)){
+            $tarih = explode(' - ', $request->tarih);
+            $data->whereBetween('created_at', [ Helper::firstMonthToDate($tarih[0]),  Helper::firstMonthToDate($tarih[1])]);
+        }
         return Datatables::of($data)
         ->editColumn('created_at', function (OgrenciIstekSikayet $user) {
             return $user->created_at->format('d-m-Y H:i:s') ?? '';
@@ -116,9 +143,17 @@ class TempTable extends Controller
     }
     
     //Öğrenci Aidat Görüntüleme
-    public function ogrenciAidatGoruntule($id = null)
+    public function ogrenciAidatGoruntule(Request $request)
     {
-        $users = OgrenciAidatGecmisi::where('kurumId', session()->get('personel')->kurumId)->where('ogrenciId', $id);
+        $users = OgrenciAidatGecmisi::where('kurumId', session()->get('personel')->kurumId);
+
+        if($request->has('id')) $users->where('ogrenciId', $request->id);
+
+        if($request->has('tarih') && !empty($request->tarih)){
+            $tarih = explode(' - ', $request->tarih);
+            $users->whereBetween('created_at', [ Helper::firstMonthToDate($tarih[0]),  Helper::firstMonthToDate($tarih[1])]);
+        }
+
         return DataTables::eloquent($users)
         ->editColumn('created_at', function (OgrenciAidatGecmisi $user) {
             return $user->created_at->format('d-m-Y H:i:s') ?? '';

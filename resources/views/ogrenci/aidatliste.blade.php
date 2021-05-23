@@ -48,7 +48,6 @@
 
         $("#credit").submit(function(e) {
             e.preventDefault();
-            alert($(this).serialize());
         });
 
     </script>

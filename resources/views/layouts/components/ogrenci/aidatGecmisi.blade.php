@@ -15,6 +15,11 @@
                     <th rowspan="1" colspan="1">
                         <select>
                     </th>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        <input type="text" class="form-control" name="tarih" id="tarih" autocomplete="off">
+                    </th>
                 </tfoot>
             </table>
         </div>

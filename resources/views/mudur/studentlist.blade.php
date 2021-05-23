@@ -9,15 +9,46 @@
 @endsection
 
 @section('script')
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-    <script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.0.1/jquery.payment.min.js">
+</script>
+<script type="text/javascript">
+    var tarih;
+    $(function() {
+
+        $('input[name="tarih"]').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+
+        $('input[name="tarih"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format(
+                'MM/DD/YYYY'));
+            tarih = $('#tarih').val();
+            table.draw();
+        });
+
+        $('input[name="tarih"]').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+            tarih = '';
+            table.draw();
+        });
+
+
+
+    });
+    
         $("#odaNo").keyup(function(e) {
             table.draw();
         });
 
         $("#katNo").change(function(e) {
             table.draw();
-            alert(this.value);
         });
 
         var odaNo;
@@ -84,13 +115,13 @@
                 "targets": 9,
                 "data": "id",
                 "mRender": function(data, type, full) {
-                    return '<a class="btn btn-info btn-sm" href={{ route('mudur.ogrenciIslemBilgileri') }}' +
+                    return '<a class="btn btn-info btn-sm mb-2 col-12" href={{ route('mudur.ogrenciIslemBilgileri') }}' +
                         '/' + data + '>' + 'İşlem Bilgileri' + '</a>' +
-                        '<a class="btn btn-warning ml-2 btn-sm" href={{ route('mudur.ogrenciAidatGecmisi') }}' +
+                        '<a class="btn btn-warning btn-sm mb-2 col-12" href={{ route('mudur.ogrenciAidatGecmisi') }}' +
                         '/' + data + '>' + 'Aidat Bilgileir' + '</a>' +
-                        '<a class="btn btn-danger ml-2 btn-sm" href={{ route('mudur.ogrenciYoklamaGecmisi') }}' +
+                        '<a class="btn btn-danger btn-sm mb-2 col-12" href={{ route('mudur.ogrenciYoklamaGecmisi') }}' +
                         '/' + data + '>' + 'Devamsızlık Bilgileri' + '</a>' +
-                        '<a class="btn btn-success mt-2 btn-sm" href={{ route('mudur.aidatListe') }}' +
+                        '<a class="btn btn-success btn-sm mb-2 col-12" href={{ route('mudur.aidatListe') }}' +
                         '/' + data + '>' + 'Pesin Odeme' + '</a>';
 
                 }
@@ -151,7 +182,6 @@
 
                     $('input', this.footer()).on('change', function() {
                         sonuc = this.value;
-                        alert(sonuc);
                         if (that.search() !== this.value) {
                             that
                                 .search(this.value)
@@ -207,7 +237,6 @@
 
         $('#usersDatatable tbody').on('click', 'button', function() {
             var data = table.row($(this).parents('tr')).data();
-            alert(data[0] + "'s salary is: " + data[5]);
         });
         $(document).ready(function() {
             table.draw();
