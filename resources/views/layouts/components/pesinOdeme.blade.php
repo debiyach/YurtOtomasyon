@@ -5,9 +5,10 @@
 
     <h3>Pesin Ödeme</h3>
 
-    <form method="POST" id="credit" action="{{ route('personel.pesinOde') }}">
-        @csrf
-        <input type="hidden" name="aidatId" value="{{ $aidat->id }}">
+    <form method="POST" id="credit" @if (session()->get('personel')->tip == 'Personel') action="{{ route('personel.pesinOde') }}">
+@else
+    action="{{ route('mudur.pesinOde') }}"> @endif @csrf <input type="hidden"
+        name="aidatId" value="{{ $aidat->id }}">
 
         <div class="form-group">
             <label for="aciklama">Yatırılacak Tutar</label>

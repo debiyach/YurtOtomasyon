@@ -36,6 +36,7 @@ Route::group(['namespace' => 'Mudur'], function () {
         Route::post('/get-istek-sikayet', 'TempTable@getIstekSikayet')->name('istekSikayetGetir'); //isteksiyaet
         Route::post('/ogrenci-islem-bilgileri/{id??}', 'TempTable@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
         Route::post('/ogrenci-aidat/{id??}', 'TempTable@ogrenciAidatGoruntule')->name('ogrenciAidatGoruntule');
+        
         Route::post('/ogrenci-yoklama-goster/{id??}', 'TempTable@ogrenciYoklamaGoster')->name('ogrenciYoklamaGoster');
 
         Route::get('/ogrenci-yoklama-goster/{id??}', 'TempTable@aidatListesi')->name('aidatListesi');
@@ -67,13 +68,13 @@ Route::group(['namespace' => 'Mudur'], function () {
 
     Route::get('/oda-islemleri', 'OdaIslemleri@odaSayfasi')->name('odaSayfasi');
     Route::get('/direk-oda/{id??}', 'OdaIslemleri@direkOda')->name('direkOda');
-    Route::get('/hesap-ayarlari', fn () => view('personel.accountsettings'))->name('hesapAyarlari');
-    Route::get('/ogrenci-ekle', fn () => view('personel.insertstudent'))->name('ogrenciEkle');
-    Route::get('/personel-ekle', fn () => view('personel.insertpersonel'))->name('personelEkle');
-    Route::get('/istek-talep-list', fn () => view('personel.istektaleplist'))->name('istekTalepList');
-    Route::get('/izin-talep', fn () => view('personel.izintalep'))->name('izinTalep');
+    Route::get('/hesap-ayarlari', fn () => view('mudur.accountsettings'))->name('hesapAyarlari');
+    Route::get('/ogrenci-ekle', fn () => view('mudur.insertstudent'))->name('ogrenciEkle');
+    Route::get('/personel-ekle', fn () => view('mudur.insertpersonel'))->name('personelEkle');
+    Route::get('/istek-talep-list', fn () => view('mudur.istektaleplist'))->name('istekTalepList');
+    Route::get('/izin-talep', fn () => view('mudur.izintalep'))->name('izinTalep');
     Route::get('/ogrenci-listele', 'GenelIslemler@ogrenciListelePage')->name('ogrenciListele');
-    Route::get('/personel-listele', fn () => view('personel.personellist'))->name('personelListele');
+    Route::get('/personel-listele', fn () => view('mudur.personellist'))->name('personelListele');
     Route::get('/ogrenci-islem-bilgileri/{id??}', 'GenelIslemler@ogrenciIslemBilgileri')->name('ogrenciIslemBilgileri');
     Route::get('/personel-islem-bilgileri/{id??}', 'GenelIslemler@personelIslemBilgileri')->name('personelIslemBilgileri');
     Route::get('/bina-goruntule', 'GenelIslemler@binaListele')->name('binaListele');
@@ -84,9 +85,10 @@ Route::group(['namespace' => 'Mudur'], function () {
     Route::get('/pesin-odeme/{id??}',  'GenelIslemler@pesinOdeme')->name('pesinOdeme');
 
     Route::get('/ogrenci-aidat-gecmisi/{id??}', 'GenelIslemler@aidatAidatGecmisiListe')->name('ogrenciAidatGecmisi');
-    Route::get('/ogrenci-yoklama-gecmisi/{id??}', fn()=>view('personel.ogrenciYoklamaGecmisi'))->name('ogrenciYoklamaGecmisi');
+    
+    Route::get('/ogrenci-yoklama-gecmisi/{id??}', 'GenelIslemler@ogrenciYoklamaGecmisi')->name('ogrenciYoklamaGecmisi');
 
-    Route::get('/personel-aidat-gecmisi', fn()=>view('personel.personelAidatGecmisi'))->name('personelAidatGecmisi');
+    Route::get('/personel-aidat-gecmisi', fn()=>view('mudur.personelAidatGecmisi'))->name('personelAidatGecmisi');
     Route::get('/personel-istek-onayla/{id??}', 'GenelIslemler@istekTalepOnayla')->name('istekTalepOnayla');
     Route::get('/personel-istek-reddet/{id??}', 'GenelIslemler@istekTalepReddet')->name('istekTalepReddet');
 
@@ -236,7 +238,8 @@ Route::group(['middleware' => 'personel', 'as' => 'personel.', 'prefix' => 'pers
         
         
         Route::get('/ogrenci-aidat-gecmisi/{id??}', 'GenelIslemler@aidatAidatGecmisiListe')->name('ogrenciAidatGecmisi');
-        Route::get('/ogrenci-yoklama-gecmisi/{id??}', fn()=>view('personel.ogrenciYoklamaGecmisi'))->name('ogrenciYoklamaGecmisi');
+
+        Route::get('/ogrenci-yoklama-gecmisi/{id??}', 'GenelIslemler@ogrenciYoklamaGecmisi')->name('ogrenciYoklamaGecmisi');
 
         Route::get('/personel-aidat-gecmisi', fn()=>view('personel.personelAidatGecmisi'))->name('personelAidatGecmisi');
         Route::get('/personel-istek-onayla/{id??}', 'GenelIslemler@istekTalepOnayla')->name('istekTalepOnayla');

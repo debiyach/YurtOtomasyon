@@ -32,20 +32,20 @@ class GenelIslemler extends Controller
     public function personelIslemBilgileri()
     {
         $data['islemler'] = IslemCesitleri::whereIn('tur',[2,3])->get();
-        return view('personel.personelIslemBilgileri', $data);
+        return view('mudur.personelIslemBilgileri', $data);
     }
 
     public function ogrenciIslemBilgileri($id = null)
     {
         $data['islemler'] = IslemCesitleri::whereIn('tur',[1,3])->get();
-        return view('personel.ogrenciIslemBilgileri', $data);
+        return view('mudur.ogrenciIslemBilgileri', $data);
     }
 
     public function ogrenciListelePage()
     {
         $data['katlar'] = Katlar::where('kurumId', session()->get('personel')->kurumId)->get();
         $data['binalar'] = Binalar::where('kurumId', session()->get('personel')->kurumId)->get();
-        return view('personel.studentlist', $data);
+        return view('mudur.studentlist', $data);
     }
 
     public function personelSetYetki(Request $request)
@@ -70,7 +70,7 @@ class GenelIslemler extends Controller
         $data['personels'] = Personel::where('tip', '=', 'Personel')
             ->where('kurumId', session()->get('personel')->kurumId)
             ->get();
-        return view('personel.personelYetkilendirme', $data);
+        return view('mudur.personelYetkilendirme', $data);
     }
 
     public function personelYetkiGetir($id = null)
@@ -98,7 +98,7 @@ class GenelIslemler extends Controller
             $personel->evAdresi = $request->evAdresi;
             $personel->foto = $this->putFile($request, 'resim', '/personel/profil');
             $personel->tip = "Personel";
-            $personel->maas = json_encode([]);
+            $personel->maas = $request->maas;
             $personel->izin = 0;
             $personel->aktif = 1;
             $personel->created_at = now();
@@ -142,7 +142,7 @@ class GenelIslemler extends Controller
 
     public function binaListele(){
         $data['binalar'] = Binalar::where('kurumId',session()->get('personel')->kurumId)->get();
-        return view('personel.binaGoruntule',$data);
+        return view('mudur.binaGoruntule',$data);
     }
 
     public function binaGetir(Request $request){
@@ -158,7 +158,7 @@ class GenelIslemler extends Controller
     public function ogrenciYoklama(){
         $data['katlar'] = Katlar::where('kurumId', session()->get('personel')->kurumId)->get();
         $data['binalar'] = Binalar::where('kurumId', session()->get('personel')->kurumId)->get();
-        return view('personel.ogrenciyoklama', $data);
+        return view('mudur.ogrenciyoklama', $data);
     }
 
     public function ogrenciYoklamaKaydet(Request $request){
@@ -223,17 +223,17 @@ class GenelIslemler extends Controller
 
     public function aidatListe($id){
         $data['aidats'] = Aidat::where('ogrenciId', $id)->where('yatirilacak','>',0)->get();
-        return view('personel.aidatListe', $data);
+        return view('mudur.aidatListe', $data);
     }
 
     public function aidatAidatGecmisiListe($id){
         $data['veri'] = Aidat::where('ogrenciId',$id)->get();
-        return view('personel.ogrenciAidatGecmisi', $data);
+        return view('mudur.ogrenciAidatGecmisi', $data);
     }
 
     public function pesinOdeme($id){
         $data['aidat'] = Aidat::find($id);
-        return view('personel.pesinOdeme',$data);
+        return view('mudur.pesinOdeme',$data);
     }
 
     public function pesinOde(Request $request){
@@ -267,7 +267,7 @@ class GenelIslemler extends Controller
 
         $result = $yatir->save() && $gecmis->save();
 
-        return $result ? redirect()->route('personel.aidatListe',$yatir->ogrenciId)->withErrors(['Ödeme işleminiz gerçekleşti']) : redirect()->route('personel.aidatListe',$yatir->ogrenciId)->withErrors(['Ödeme işleminiz sırasında hata alındı']);
+        return $result ? redirect()->route('mudur.aidatListe',$yatir->ogrenciId)->withErrors(['Ödeme işleminiz gerçekleşti']) : redirect()->route('mudur.aidatListe',$yatir->ogrenciId)->withErrors(['Ödeme işleminiz sırasında hata alındı']);
     }
 
     public function istekTalepOnayla($id){
@@ -286,7 +286,7 @@ class GenelIslemler extends Controller
 
         $istek->onayDurumu = "Kabul Edildi";
         $result = $istek->save();
-        return $result ? redirect()->route('personel.istekTalepList')->withErrors(['İşlem Başarıyla Onaylandı']) : redirect()->route('personel.istekTalepList',$yatir->ogrenciId)->withErrors(['İşlem sırasında bir sorunla karşılaşıldı.']);
+        return $result ? redirect()->route('mudur.istekTalepList')->withErrors(['İşlem Başarıyla Onaylandı']) : redirect()->route('mudur.istekTalepList',$yatir->ogrenciId)->withErrors(['İşlem sırasında bir sorunla karşılaşıldı.']);
     }
 
     public function istekTalepReddet($id){
@@ -296,7 +296,12 @@ class GenelIslemler extends Controller
         
         $istek->onayDurumu = "Reddedildi";
         $result = $istek->save();
-        return $result ? redirect()->route('personel.istekTalepList')->withErrors(['İşlem Başarıyla Reddedildi']) : redirect()->route('personel.istekTalepList',$yatir->ogrenciId)->withErrors(['İşlem sırasında bir sorunla karşılaşıldı.']);
+        return $result ? redirect()->route('mudur.istekTalepList')->withErrors(['İşlem Başarıyla Reddedildi']) : redirect()->route('mudur.istekTalepList',$yatir->ogrenciId)->withErrors(['İşlem sırasında bir sorunla karşılaşıldı.']);
+    }
+
+    public function ogrenciYoklamaGecmisi($id){
+        $data['veri'] = Yoklama::where('ogrenciId',$id)->get();
+        return view('mudur.ogrenciYoklamaGecmisi',$data);
     }
 
 }

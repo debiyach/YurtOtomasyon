@@ -6,7 +6,10 @@
                 @foreach ($odalar as $oda)
 
                     @if ($kat->id == $oda->katId)
-                        <a href="{{ route('personel.direkOda') . '/' . $oda->id }}" class="oda">
+                        <a @if (session()->get('personel')->tip == 'Personel') href="{{ route('personel.direkOda') . '/' . $oda->id }}"
+                        @else
+                            href="{{ route('mudur.direkOda') . '/' . $oda->id }}" @endif
+                            class="oda">
                             <span class="odaNo">No {{ $oda->odaNo }}</span>
                             <div class="yataklar">
                                 @foreach ($yataklar as $yatak)

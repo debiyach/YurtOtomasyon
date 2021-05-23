@@ -17,13 +17,13 @@ class OdaIslemleri extends Controller
     public function odaSayfasi()
     {
         $data['odaId'] = 'null';
-        return view('personel.odaSayfasi',$data);
+        return view('mudur.odaSayfasi',$data);
     }
 
     public function direkOda($id = null)
     {   
         $data['odaId'] = $id ?? 'null';
-        return view('personel.odaSayfasi',$data);
+        return view('mudur.odaSayfasi',$data);
     }
 
 
@@ -85,7 +85,7 @@ class OdaIslemleri extends Controller
                                 <h4>Boş Yatak</h4>
                                 <p class="text-secondary mb-1">Yatak Adı : ' . $yatak->yatakAdi . '</p>
                                 <p class="text-muted font-size-sm">Yatak No : ' . $yatak->yatakNo . '</p>
-                                <button onclick="deleteBed(\'' . route('personel.odaIslemleri.yatakKaldir') . '/' . $yatak->id . '\')" class="btn delete-bed btn-outline-danger">Kaldır</button>
+                                <button onclick="deleteBed(\'' . route('mudur.odaIslemleri.yatakKaldir') . '/' . $yatak->id . '\')" class="btn delete-bed btn-outline-danger">Kaldır</button>
                                 <button onclick="addBed(' . $yatak->id . ')" class="btn ogrenci-ekle btn-outline-success">Ekle</button>
                             </div>
                         </div>

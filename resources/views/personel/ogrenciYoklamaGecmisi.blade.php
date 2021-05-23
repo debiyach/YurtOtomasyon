@@ -39,66 +39,61 @@
                 type: "POST"
             },
             columns: [{
-                data: 'created_at',
-                name: 'created_at'
-            }],
+                    data: 'yokla',
+                    name: 'yokla'
+                },
+                {
+                    data: 'aciklama',
+                    name: 'aciklama'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
+                }
+            ],
 
             initComplete: function() {
 
                 //console.log(blok);
 
-                //var blok = ['1', '2']
-                //var kat = ['1', '2', '3', '4'];
+                var tur = [{
+                        'id': 0,
+                        'ad': 'Devamsiz'
+                    },
+                    {
+                        'id': 1,
+                        'ad': 'İzinli'
+                    }
+                ]
 
-                // this.api().columns(6).every(function() {
-                //     var column = this;
-                //     var array = blok;
-                //     var input = document.createElement("select");
-                //     input.id = "blok";
-                //     input.className = 'form-control';
+                this.api().columns(0).every(function() {
+                    var column = this;
+                    var array = tur;
+                    var input = document.createElement("select");
+                    input.id = "tur";
+                    input.className = 'form-control';
 
-                //     var option = document.createElement("option");
-                //     option.value = '';
-                //     option.text = 'Tümü';
-                //     input.appendChild(option);
-
-
-                //     for (let i = 0; i < array.length; i++) {
-                //         var option = document.createElement("option");
-                //         option.value = array[i].id;
-                //         option.text = array[i].binaAdi;
-                //         input.appendChild(option);
-                //     }
-
-                //     //var input = document.createElement('input');
-                //     $(input).appendTo($(column.footer()).empty())
-                //         .on('change', function() {
-                //             var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                //             column.search(val ? val : '', true, false).draw();
-                //         });
-                // });
+                    var option = document.createElement("option");
+                    option.value = '';
+                    option.text = 'Tümü';
+                    input.appendChild(option);
 
 
-                // this.api().columns(8).every(function() {
-                //     var that = this;
-                //     var sonuc;
+                    for (let i = 0; i < array.length; i++) {
+                        var option = document.createElement("option");
+                        option.value = array[i].id;
+                        option.text = array[i].ad;
+                        input.appendChild(option);
+                    }
 
-                //     odaNo = this.value;
+                    //var input = document.createElement('input');
+                    $(input).appendTo($(column.footer()).empty())
+                        .on('change', function() {
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
 
-                //     $('input', this.footer()).on('change', function() {
-                //         sonuc = this.value;
-                //         alert(sonuc);
-                //         if (that.search() !== this.value) {
-                //             that
-                //                 .search(this.value)
-                //                 .draw();
-                //         }
-                //     });
-
-                // });
-
-
+                            column.search(val ? val : '', true, false).draw();
+                        });
+                });
 
             },
 

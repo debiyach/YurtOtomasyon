@@ -98,7 +98,7 @@ class GenelIslemler extends Controller
             $personel->evAdresi = $request->evAdresi;
             $personel->foto = $this->putFile($request, 'resim', '/personel/profil');
             $personel->tip = "Personel";
-            $personel->maas = json_encode([]);
+            $personel->maas = $request->maas;
             $personel->izin = 0;
             $personel->aktif = 1;
             $personel->created_at = now();
@@ -297,6 +297,11 @@ class GenelIslemler extends Controller
         $istek->onayDurumu = "Reddedildi";
         $result = $istek->save();
         return $result ? redirect()->route('personel.istekTalepList')->withErrors(['İşlem Başarıyla Reddedildi']) : redirect()->route('personel.istekTalepList',$yatir->ogrenciId)->withErrors(['İşlem sırasında bir sorunla karşılaşıldı.']);
+    }
+
+    public function ogrenciYoklamaGecmisi($id){
+        $data['veri'] = Yoklama::where('ogrenciId',$id)->get();
+        return view('personel.ogrenciYoklamaGecmisi',$data);
     }
 
 }

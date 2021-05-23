@@ -22,7 +22,9 @@
         var table = $('#usersDatatable').DataTable({
             "processing": true,
             "serverSide": true,
-            "order": [],
+            "order": [
+                [3, "desc"]
+            ],
             dom: '<"d-flex justify-content-between"lf>rt<"d-flex justify-content-between"Bip>',
             "lengthMenu": [
                 [10, 15, 25, 50, 100],
