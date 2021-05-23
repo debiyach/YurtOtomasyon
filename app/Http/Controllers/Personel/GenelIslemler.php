@@ -31,7 +31,7 @@ class GenelIslemler extends Controller
 {
     public function personelIslemBilgileri()
     {
-        $data['islemler'] = IslemCesitleri::whereIn('tur',[2,3])->get();
+        $data['islemler'] = IslemCesitleri::get();
         return view('personel.personelIslemBilgileri', $data);
     }
 
