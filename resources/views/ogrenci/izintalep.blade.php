@@ -12,7 +12,6 @@
 
 
     <script type="text/javascript">
-
         $(function() {
 
             $('input[name="tarih"]').daterangepicker({
@@ -23,7 +22,8 @@
             });
 
             $('input[name="tarih"]').on('apply.daterangepicker', function(ev, picker) {
-                $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+                $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format(
+                    'MM/DD/YYYY'));
             });
 
             $('input[name="tarih"]').on('cancel.daterangepicker', function(ev, picker) {
@@ -31,6 +31,7 @@
             });
 
         });
-        </script>   
+
+    </script>
 
 @endsection

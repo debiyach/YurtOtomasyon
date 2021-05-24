@@ -4,7 +4,7 @@
 
 <div class="col-md-6 offset-md-3">
 
-    <form method="POST" action="{{ route('personel.izinTalepPost') }}">
+    <form method="POST" action="{{ route('ogrenci.izinTalepPost') }}">
         @csrf
         <div class="form-group">
             <label for="aciklama">Açıklama</label>
