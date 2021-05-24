@@ -1,5 +1,3 @@
-@php(dd(session()->get('personel')))
-
 <!doctype html>
 <html>
 

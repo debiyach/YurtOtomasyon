@@ -77,7 +77,7 @@
                             <li class="nav-item">
                             <li class="nav-item">
                                 <div class="baslik">Yetki</div>
-                                <div>Müdür</div>
+                                <div>Personel</div>
                             </li>
                             </li>
                             <li class="nav-item">
