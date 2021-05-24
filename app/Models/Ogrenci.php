@@ -90,5 +90,10 @@ class Ogrenci extends Model
         return $this->hasOne('\App\Models\Yataklar', 'id', 'yatakNo');
     }
 
+    public function ogrenciToKurum()
+    {
+        return $this->hasOne('\App\Models\Kurum', 'id', 'kurumId');
+    }
+
     use HasFactory;
 }

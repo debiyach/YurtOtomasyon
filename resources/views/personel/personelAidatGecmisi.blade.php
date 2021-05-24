@@ -11,12 +11,10 @@
     <script>
         $("#odaNo").keyup(function(e) {
             table.draw();
-            alert(this.value);
         });
 
         $("#katNo").keyup(function(e) {
             table.draw();
-            alert(this.value);
         });
 
         var table = $('#usersDatatable').DataTable({
@@ -93,7 +91,6 @@
 
                     $('input', this.footer()).on('change', function() {
                         sonuc = this.value;
-                        alert(sonuc);
                         if (that.search() !== this.value) {
                             that
                                 .search(this.value)
@@ -149,7 +146,6 @@
 
         $('#usersDatatable tbody').on('click', 'button', function() {
             var data = table.row($(this).parents('tr')).data();
-            alert(data[0] + "'s salary is: " + data[5]);
         });
         $(document).ready(function() {
             table.draw();

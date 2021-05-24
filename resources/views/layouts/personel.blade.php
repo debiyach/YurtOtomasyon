@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html>
 
 <head>
     <!-- Required meta tags -->
@@ -83,7 +83,7 @@
                             <li class="nav-item">
                             <li class="nav-item">
                                 <div class="baslik">Kurum</div>
-                                <div>{{ session()->get('personel')->kurumId }}</div>
+                                <div>{{ session()->get('personel')->personelToKurum->kurumAdi }}</div>
                             </li>
                             </li>
 

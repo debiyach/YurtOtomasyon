@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ogrenci;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Aidat;
 use App\Models\OgrenciAidatGecmisi;
@@ -11,10 +12,19 @@ use Yajra\DataTables\Facades\DataTables;
 
 class TempTable extends Controller
 {
-    public function aidatGoruntule($id = null)
+    public function aidatGoruntule(Request $request)
     {
 
-        $users = OgrenciAidatGecmisi::where('kurumId', session()->get('ogrenci')->kurumId)->where('ogrenciId', $id);
+        $users = OgrenciAidatGecmisi::where('kurumId', session()->get('ogrenci')->kurumId);
+
+        if($request->has('katNo')) $users->where('faturaNo', $request->katNo);
+
+        if($request->has('id')) $users->where('ogrenciId',$request->id);
+
+        if($request->has('tarih') && !empty($request->tarih)){
+            $tarih = explode(' - ', $request->tarih);
+            $users->whereBetween('created_at', [ Helper::firstMonthToDate($tarih[0]),  Helper::firstMonthToDate($tarih[1])]);
+        }
         return DataTables::eloquent($users)
         ->editColumn('created_at', function (OgrenciAidatGecmisi $user) {
             return $user->created_at->format('d-m-Y H:i:s') ?? '';
@@ -23,10 +33,17 @@ class TempTable extends Controller
 
     }
 
-    public function aidatListesi($id = null)
+    public function aidatListesi(Request $request)
     {
 
-        $users = Aidat::where('kurumId', session()->get('ogrenci')->kurumId)->where('ogrenciId', $id);
+        $users = Aidat::where('kurumId', session()->get('ogrenci')->kurumId);
+        if($request->has('id')) $users->where('ogrenciId',$request->id);
+
+        if($request->has('tarih') && !empty($request->tarih)){
+            $tarih = explode(' - ', $request->tarih);
+            $users->whereBetween('sonOdemeTarihi', [ Helper::firstMonthToDate($tarih[0]),  Helper::firstMonthToDate($tarih[1])]);
+        }
+
         return DataTables::eloquent($users)
         ->editColumn('durum', function (Aidat $user) {
             if($user->durum==1){
@@ -43,9 +60,15 @@ class TempTable extends Controller
     }
 
 
-    public function ogrenciYoklamaGoster()
+    public function ogrenciYoklamaGoster(Request $request)
     {
+       
+
         $users = Yoklama::where('kurumId', session()->get('ogrenci')->kurumId)->where('ogrenciId', session()->get('ogrenci')->id);
+        if($request->has('tarih') && !empty($request->tarih)){
+            $tarih = explode(' - ', $request->tarih);
+            $users->whereBetween('created_at', [ Helper::firstMonthToDate($tarih[0]),  Helper::firstMonthToDate($tarih[1])]);
+        }
         return DataTables::eloquent($users)
         ->editColumn('yokla', function (Yoklama $user) {
             if($user->yokla){
